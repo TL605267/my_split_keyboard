@@ -496,7 +496,7 @@
       "gencad": "",
       "idf": "",
       "netlist": "",
-      "plot": "new_kbd_gerber_smaller/",
+      "plot": "../gerber/",
       "pos_files": "",
       "specctra_dsn": "kbd.dsn",
       "step": "",
