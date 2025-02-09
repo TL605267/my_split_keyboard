@@ -66,16 +66,20 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 	def get_fp_list(self, fp_val):
 		return [(fp.GetReference(), fp) for fp in self.board.GetFootprints() if fp.GetValue() == fp_val]
 
-	def get_existing_track(self, netname): #TODO put the start point track at top
-		s_offset = VECTOR2I(69500000, 59062500)
+	def gen_led_track(self, netname, s_offset = VECTOR2I_MM(0,0)): #TODO put the start point track at top
+		s_list = []
 		for t in self.board.GetTracks():
 			if t.GetNetname() == netname:
 				sx = round(ToMM((t.GetStart()-s_offset).x), 1)
 				sy = round(ToMM((t.GetStart()-s_offset).y), 1)
 				ex = round(ToMM((t.GetEnd()  -s_offset).x), 1)
 				ey = round(ToMM((t.GetEnd()  -s_offset).y), 1)
-				format_code = f"self.add_track(padk_pos + VECTOR2I_MM({sx:>5.1f}, {sy:>5.1f}), padk_pos + VECTOR2I_MM({ex:>5.1f}, {ey:>5.1f}), B_Cu)"
-				print(format_code)
+				if (sx != ex): # remove led via connection
+					s_list.append((sx, sy, ex, ey))
+		s_list_sorted = sorted(s_list, key=lambda x: x[0])	
+		for s in s_list_sorted:
+			format_code = f"self.add_track(offset + VECTOR2I_MM({s[0]:>5.1f}, {s[1]:>5.1f}), offset + VECTOR2I_MM({s[2]:>5.1f}, {s[3]:>5.1f}), B_Cu)"
+			print(format_code)
 		
 	# place switches and leds
 	def place_sw(self):
@@ -105,10 +109,11 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 			sw_col = int(idx[1])
 			sw_pos = self.board.FindFootprintByReference('SW'+idx).GetPosition()
 			led_pos = sw_pos + VECTOR2I_MM(0, -4.7)
-			if  (sw_col == 0 or sw_col == 2 or sw_col == 4): 
-				self.place_fp(led_pos, led_fp, 180)
-			elif(sw_col == 1 or sw_col == 3 or sw_col == 5): 
-				self.place_fp(led_pos, led_fp, 0)
+			if  (sw_col < 6): 
+				if (sw_row == 0 or sw_row == 2):
+					self.place_fp(led_pos, led_fp, 180)
+				elif (sw_row == 1 or sw_row == 3):
+					self.place_fp(led_pos, led_fp, 0)
 			elif(sw_col == 6):
 				self.place_fp(led_pos, led_fp, -23)
 			else: # 7
@@ -138,15 +143,16 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 			led_pos = led_fp.GetPosition()
 			for i in range(4): 
 				via_pos = led_pos + VECTOR2I_MM(via_offset_x[i], 0)
-				self.add_via(via_pos, 0.3, 0.4)
 				led1_pos = led_pos + VECTOR2I_MM(via_offset_x[i], -0.5)
 				led2_pos = led_pos + VECTOR2I_MM(via_offset_x[i], 0.5)
 				if (i%2 == 0):
 					self.add_track(led1_pos, via_pos, pcbnew.F_Cu)
-					self.add_track(led2_pos, via_pos, pcbnew.B_Cu)
+					self.add_via(via_pos, 0.3, 0.4)
+					self.add_track(via_pos, led2_pos, pcbnew.B_Cu)
 				else:
 					self.add_track(led1_pos, via_pos, pcbnew.B_Cu)
-					self.add_track(led2_pos, via_pos, pcbnew.F_Cu)
+					self.add_via(via_pos, 0.3, 0.4)
+					self.add_track(via_pos, led2_pos, pcbnew.F_Cu)
 	
 	# connect switch pad1 on both sides
 	def connect_pad1(self):
@@ -210,17 +216,76 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 			self.add_track(padk_pos + VECTOR2I_MM( 55.1, -10.0), padk_pos + VECTOR2I_MM( 75.0, -10.0), B_Cu)
 			self.add_track(padk_pos + VECTOR2I_MM( 75.0, -10.0), padk_pos + VECTOR2I_MM( 76.0,  -9.0), B_Cu)
 
+	def connect_leds(self):
+		# for leds in row0
+		for sw in [fp for fp in self.board.GetFootprints() if (fp.GetValue() == 'SW_Push' and fp.GetReference().endswith('0'))]: 
+			offset = sw.GetPosition() - self.sw0_pos
+			# POWER RAIL TOP PAD
+			self.add_track(offset + VECTOR2I_MM( 63.3,  54.5), offset + VECTOR2I_MM( 64.4,  53.4), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 64.4,  53.4), offset + VECTOR2I_MM( 81.2,  53.4), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 81.2,  53.4), offset + VECTOR2I_MM( 82.3,  54.5), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 82.3,  54.5), offset + VECTOR2I_MM( 92.4,  44.4), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 92.4,  44.4), offset + VECTOR2I_MM(100.2,  44.4), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(100.2,  44.4), offset + VECTOR2I_MM(101.3,  45.5), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(101.3,  45.5), offset + VECTOR2I_MM(104.9,  41.9), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(104.9,  41.9), offset + VECTOR2I_MM(119.2,  41.9), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(119.2,  41.9), offset + VECTOR2I_MM(120.3,  43.0), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(120.3,  43.0), offset + VECTOR2I_MM(136.8,  43.0), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(136.8,  43.0), offset + VECTOR2I_MM(139.3,  45.5), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(155.8,  45.5), offset + VECTOR2I_MM(139.3,  45.5), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(158.3,  48.0), offset + VECTOR2I_MM(155.8,  45.5), B_Cu)
+			# POWER RAIL BOTTOM PAD
+			self.add_track(offset + VECTOR2I_MM( 56.7,  56.1), offset + VECTOR2I_MM( 57.8,  57.2), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 57.8,  57.2), offset + VECTOR2I_MM( 74.6,  57.2), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 74.6,  57.2), offset + VECTOR2I_MM( 75.7,  56.1), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 75.7,  56.1), offset + VECTOR2I_MM( 76.8,  57.2), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 76.8,  57.2), offset + VECTOR2I_MM( 84.0,  57.2), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 84.0,  57.2), offset + VECTOR2I_MM( 87.9,  53.3), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 87.9,  53.1), offset + VECTOR2I_MM( 88.3,  52.7), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 88.3,  52.7), offset + VECTOR2I_MM( 93.9,  47.1), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 93.9,  47.1), offset + VECTOR2I_MM( 94.7,  47.1), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 94.7,  47.1), offset + VECTOR2I_MM( 95.8,  48.2), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 95.8,  48.2), offset + VECTOR2I_MM(103.3,  48.2), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(103.3,  48.2), offset + VECTOR2I_MM(105.5,  46.0), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(105.5,  46.0), offset + VECTOR2I_MM(112.3,  46.0), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(112.3,  46.0), offset + VECTOR2I_MM(113.7,  44.6), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(113.7,  44.6), offset + VECTOR2I_MM(115.1,  46.0), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(115.1,  46.0), offset + VECTOR2I_MM(131.6,  46.0), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(131.6,  46.0), offset + VECTOR2I_MM(132.7,  47.1), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(132.7,  47.1), offset + VECTOR2I_MM(134.2,  48.6), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(134.2,  48.6), offset + VECTOR2I_MM(150.7,  48.6), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(150.7,  48.6), offset + VECTOR2I_MM(151.7,  49.6), B_Cu)
+			# LEDx0
+			self.add_track(offset + VECTOR2I_MM( 63.9,  56.1), offset + VECTOR2I_MM( 63.3,  56.1), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 65.5,  54.5), offset + VECTOR2I_MM( 63.9,  56.1), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 75.7,  54.5), offset + VECTOR2I_MM( 65.5,  54.5), B_Cu)
+			# LEDx1
+			self.add_track(offset + VECTOR2I_MM( 82.3,  56.1), offset + VECTOR2I_MM( 82.4,  56.1), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 82.4,  56.1), offset + VECTOR2I_MM( 93.0,  45.5), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 93.0,  45.5), offset + VECTOR2I_MM( 94.7,  45.5), B_Cu)
+			# LEDx2
+			self.add_track(offset + VECTOR2I_MM(101.3,  47.1), offset + VECTOR2I_MM(101.9,  47.1), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(101.9,  47.1), offset + VECTOR2I_MM(106.0,  43.0), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(106.0,  43.0), offset + VECTOR2I_MM(113.7,  43.0), B_Cu)
+			# LEDx3
+			self.add_track(offset + VECTOR2I_MM(120.3,  44.6), offset + VECTOR2I_MM(121.2,  45.5), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(121.2,  45.5), offset + VECTOR2I_MM(132.7,  45.5), B_Cu)
+			# LEDx4
+			self.add_track(offset + VECTOR2I_MM(139.3,  47.1), offset + VECTOR2I_MM(140.2,  48.0), B_Cu)
+			self.add_track(offset + VECTOR2I_MM(140.2,  48.0), offset + VECTOR2I_MM(151.7,  48.0), B_Cu)
+	
 	# Do all the things
 	def Run(self):
 		self.remove_old_tracks()
 		self.place_sw()
 		self.place_led()
 		self.place_diode()
-		self.place_via()
 		self.connect_pad1()
 		self.connect_diode_and_sw()
 		self.connect_sw_col()
 		self.connect_rows()
+		self.connect_leds()
+		self.place_via()
 		pcbnew.Refresh()
 		pcbnew.SaveBoard(self.filename, self.board)
 		
@@ -229,7 +294,15 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 def main():
 	plugin = kbd_place_n_route()
 	plugin.load_board()
-	#plugin.get_existing_track('ROW0')
+	'''
+	print('# POWER RAIL TOP PAD')
+	plugin.gen_led_track('+5V')
+	print('# POWER RAIL BOTTOM PAD')
+	plugin.gen_led_track('GND')
+	for i in range(5):
+		print(f'# LEDx{i}')
+		plugin.gen_led_track(f'Net-(LED0{i}-DIN)')
+	'''
 	plugin.Run()
 
 if __name__ == "__main__":
