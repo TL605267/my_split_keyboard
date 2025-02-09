@@ -100,6 +100,10 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 				sw_orienation = 60
 			# place switches
 			self.place_fp(self.sw0_pos+sw_offset, sw_fp, sw_orienation)
+			sw_fp.Reference().SetTextPos(self.sw0_pos+sw_offset + VECTOR2I_MM(4.4, 7.1))
+			for item in sw_fp.GraphicalItems():
+				if type(item) == pcbnew.PCB_TEXT:
+					item.SetPosition(self.sw0_pos+sw_offset+VECTOR2I_MM(-4.4,7.1))
 
 	# place LEDs
 	def place_led(self):
@@ -114,6 +118,7 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 					self.place_fp(led_pos, led_fp, 180)
 				elif (sw_row == 1 or sw_row == 3):
 					self.place_fp(led_pos, led_fp, 0)
+				led_fp.Reference().SetTextPos(led_pos + VECTOR2I_MM(0, 2.3))
 			elif(sw_col == 6):
 				self.place_fp(led_pos, led_fp, -23)
 			else: # 7
@@ -135,6 +140,8 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 			# place diode in between switches
 			d_pos = VECTOR2I((sw_pos_l_x + sw_pos_r_x)>>1, min(sw_pos_l_y, sw_pos_r_y))
 			self.place_fp(d_pos, d_fp, 90)
+			d_fp.Reference().SetTextPos(d_pos + VECTOR2I_MM(0, 2.4))
+			d_fp.Reference().SetTextAngleDegrees(180)
 
 	# place vias
 	def place_via(self):
@@ -239,10 +246,8 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 			self.add_track(offset + VECTOR2I_MM( 57.8,  57.2), offset + VECTOR2I_MM( 74.6,  57.2), B_Cu)
 			self.add_track(offset + VECTOR2I_MM( 74.6,  57.2), offset + VECTOR2I_MM( 75.7,  56.1), B_Cu)
 			self.add_track(offset + VECTOR2I_MM( 75.7,  56.1), offset + VECTOR2I_MM( 76.8,  57.2), B_Cu)
-			self.add_track(offset + VECTOR2I_MM( 76.8,  57.2), offset + VECTOR2I_MM( 84.0,  57.2), B_Cu)
-			self.add_track(offset + VECTOR2I_MM( 84.0,  57.2), offset + VECTOR2I_MM( 87.9,  53.3), B_Cu)
-			self.add_track(offset + VECTOR2I_MM( 87.9,  53.1), offset + VECTOR2I_MM( 88.3,  52.7), B_Cu)
-			self.add_track(offset + VECTOR2I_MM( 88.3,  52.7), offset + VECTOR2I_MM( 93.9,  47.1), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 76.8,  57.2), offset + VECTOR2I_MM( 83.8,  57.2), B_Cu)
+			self.add_track(offset + VECTOR2I_MM( 83.8,  57.2), offset + VECTOR2I_MM( 94.0, 47.03), B_Cu)
 			self.add_track(offset + VECTOR2I_MM( 93.9,  47.1), offset + VECTOR2I_MM( 94.7,  47.1), B_Cu)
 			self.add_track(offset + VECTOR2I_MM( 94.7,  47.1), offset + VECTOR2I_MM( 95.8,  48.2), B_Cu)
 			self.add_track(offset + VECTOR2I_MM( 95.8,  48.2), offset + VECTOR2I_MM(103.3,  48.2), B_Cu)
@@ -280,10 +285,10 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 		self.place_sw()
 		self.place_led()
 		self.place_diode()
-		self.connect_pad1()
 		self.connect_diode_and_sw()
-		self.connect_sw_col()
 		self.connect_rows()
+		self.connect_pad1()
+		self.connect_sw_col()
 		self.connect_leds()
 		self.place_via()
 		pcbnew.Refresh()
