@@ -10180,7 +10180,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4cbbc294-6253-45b7-8ad3-a2a8f32c82b4")
-		(property "Reference" "U2"
+		(property "Reference" "SR_LEFT1"
 			(at 63.1541 66.04 0)
 			(effects
 				(font
@@ -10276,7 +10276,7 @@
 		(instances
 			(project ""
 				(path "/1dbf748e-8163-44a2-a238-31b19fe70046"
-					(reference "U2")
+					(reference "SR_LEFT1")
 					(unit 1)
 				)
 			)
@@ -11996,7 +11996,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "70efa84c-39bb-480d-af51-769a6c8e2e3e")
-		(property "Reference" "U4"
+		(property "Reference" "SR_RIGHT1"
 			(at 127.9241 66.04 0)
 			(effects
 				(font
@@ -12092,7 +12092,7 @@
 		(instances
 			(project "new_kbd_right_hand"
 				(path "/1dbf748e-8163-44a2-a238-31b19fe70046"
-					(reference "U4")
+					(reference "SR_RIGHT1")
 					(unit 1)
 				)
 			)
@@ -13595,7 +13595,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a7865df2-ed1e-4399-b3c5-92bc38954a3c")
-		(property "Reference" "RN1"
+		(property "Reference" "RN_RIGHT1"
 			(at 90.17 62.2299 0)
 			(effects
 				(font
@@ -13691,7 +13691,7 @@
 		(instances
 			(project "kbd"
 				(path "/1dbf748e-8163-44a2-a238-31b19fe70046"
-					(reference "RN1")
+					(reference "RN_RIGHT1")
 					(unit 1)
 				)
 			)
@@ -15217,7 +15217,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e00655a8-50f2-47df-8f9e-d1618849edd2")
-		(property "Reference" "RN2"
+		(property "Reference" "RN_LEFT1"
 			(at 24.13 62.2299 0)
 			(effects
 				(font
@@ -15313,7 +15313,7 @@
 		(instances
 			(project ""
 				(path "/1dbf748e-8163-44a2-a238-31b19fe70046"
-					(reference "RN2")
+					(reference "RN_LEFT1")
 					(unit 1)
 				)
 			)
