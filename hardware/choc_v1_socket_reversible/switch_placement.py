@@ -292,14 +292,18 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 				# power rail - left
 				virtical_track_length = 3*self.sw_y_spc - (9.0-3.8)
 				track_points = []
-				self.add_track(offset + VECTOR2I_MM(-3.3, -5.5), offset + VECTOR2I_MM(-5.0, -5.5))	
-				self.add_track(offset + VECTOR2I_MM(-5.0, -5.5), offset + VECTOR2I_MM(-6.7, -3.8))	
-				self.add_track(offset + VECTOR2I_MM(-6.7, -3.8), offset + VECTOR2I_MM(-6.7, -3.8 + virtical_track_length)) 
+				track_points.append((offset + VECTOR2I_MM(-3.3, -5.5), F_Cu))	
+				track_points.append((offset + VECTOR2I_MM(-5.0, -5.5), F_Cu))	
+				track_points.append((offset + VECTOR2I_MM(-6.7, -3.8), F_Cu)) 
+				track_points.append((offset + VECTOR2I_MM(-6.7, -3.8 + virtical_track_length), F_Cu)) 
+				self.add_tracks(track_points)
 				# power rail - right
 				virtical_track_length = 3*self.sw_y_spc - (7.3-0.5)
 				track_points = []
-				self.add_track(offset + VECTOR2I_MM(3.3, -3.9), offset + VECTOR2I_MM(6.7, -0.5))
-				self.add_track(offset + VECTOR2I_MM( 6.7, -0.5), offset + VECTOR2I_MM(6.7, -0.5 + virtical_track_length))
+				track_points.append((offset + VECTOR2I_MM( 3.3, -3.9), F_Cu))
+				track_points.append((offset + VECTOR2I_MM( 6.7, -0.5), F_Cu))
+				track_points.append((offset + VECTOR2I_MM( 6.7, -0.5 + virtical_track_length), F_Cu))
+				self.add_tracks(track_points)
 			else:
 				# power rail - left
 				self.add_track(offset + VECTOR2I_MM(-3.3, -5.6), offset + VECTOR2I_MM(-6.7, -9.0))	
@@ -308,11 +312,11 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 				# led dout -> led din
 				virtical_track_length = self.sw_y_spc - 2.6
 				track_points = []
-				track_points.append((offset + VECTOR2I_MM(-3.3, -5.5), B_Cu))
-				track_points.append((offset + VECTOR2I_MM(-1.9, -6.9), B_Cu))
-				track_points.append((offset + VECTOR2I_MM( 2.1, -6.9),   -1)) # via
-				track_points.append((offset + VECTOR2I_MM( 2.1, -6.9-virtical_track_length), F_Cu))
-				track_points.append((offset + VECTOR2I_MM( 3.3,-22.5), F_Cu)) 
+				track_points.append(((offset + VECTOR2I_MM(-3.3, -5.5), B_Cu)))
+				track_points.append(((offset + VECTOR2I_MM(-1.9, -6.9), B_Cu)))
+				track_points.append(((offset + VECTOR2I_MM( 2.1, -6.9),   -1))) # via
+				track_points.append(((offset + VECTOR2I_MM( 2.1, -6.9-virtical_track_length), F_Cu)))
+				track_points.append(((offset + VECTOR2I_MM( 3.3,-22.5), F_Cu))) 
 				self.add_tracks(track_points)
 			
 	# Do all the things
