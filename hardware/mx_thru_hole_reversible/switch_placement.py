@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import os,sys, pcbnew
-from pcbnew import wxPoint, wxPointMM, wxSize, VECTOR2I, VECTOR2I_MM, FromMM, ToMM, F_Cu, B_Cu, LoadBoard
+from pcbnew import wxPoint, wxPointMM, wxSize, VECTOR2I, VECTOR2I_MM, FromMM, ToMM, F_Cu, B_Cu, LoadBoard, Save
 
 #filename = sys.argv[1]
 filename = [file for file in os.listdir('.') if file.endswith('.kicad_pcb')][0]
