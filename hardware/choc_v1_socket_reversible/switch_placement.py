@@ -10,14 +10,20 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 		self.sw0_pos = VECTOR2I_MM(60,60)
 		self.sw_x_spc = 19 # 17.5 #19.05
 		self.sw_y_spc = 17 #19.05
+		self.fp_dict = {} # footpint dictionary
 
 	def load_board(self):
 		# Load the board file
 		if not hasattr(self, 'board'):
 			self.filename = [file for file in os.listdir('.') if file.endswith('.kicad_pcb')][0]
 			self.board = pcbnew.LoadBoard(self.filename)
-		self.board_footprint_list = self.board.GetFootprints()
-		self.board_footprint = {fp.GetReference(): fp for fp in self.board_footprint_list}
+		for fp in self.board.GetFootprints():
+			self.fp_dict[fp.GetReference()]= {
+				'fp': fp,
+				'val': fp.GetValue(),
+				#'pos': fp.GetPosition(), # position is not updated after placement
+				'ref_inst': fp.Reference()
+			}
 			
 	def remove_old_tracks(self):
 		# Remove all existing tracks from the board
@@ -73,9 +79,9 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 		qy = oy + sin(angle_rad) * (px - ox) + cos(angle_rad) * (py - oy)
 		return qx, qy
 
-	def get_fp_list(self, fp_val):
-		# Get a list of footprints with a specific value
-		return [fp for fp in self.board_footprint_list if fp.GetValue() == fp_val]
+	def get_fp_ref_list(self, fp_val):
+		# Get a list of footprint references with a specific value
+		return [key for key, value in self.fp_dict.items() if value['val'] == fp_val]
 
 	def gen_led_track(self, netname, s_offset = VECTOR2I_MM(0,0)): #TODO put the start point track at top
 		# Generate LED track code
@@ -95,9 +101,9 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 		
 	def place_sw(self):
 		# Place switches on the board
-		for sw_fp in self.get_fp_list('SW_Push'): 
-			sw_row = int(sw_fp.GetReference()[2])
-			sw_col = int(sw_fp.GetReference()[3])
+		for sw_ref in self.get_fp_ref_list('SW_Push'): 
+			sw_row = int(sw_ref[2])
+			sw_col = int(sw_ref[3])
 			sw_orienation = 0
 			if(sw_col < 6): # 4 fingers
 				sw_offset = VECTOR2I_MM(self.sw_x_spc*sw_col, self.sw_y_spc*sw_row + self.col_offsets[sw_col])
@@ -110,58 +116,56 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 				sw_offset = VECTOR2I_MM(self.sw_x_spc*5+23.8, self.sw_y_spc*3+19.8)
 				sw_orienation = 60
 			# place switches
-			self.place_fp(self.sw0_pos+sw_offset, sw_fp, sw_orienation)
-			sw_fp.Reference().SetTextPos(self.sw0_pos+sw_offset + VECTOR2I_MM(4.4, 7.1))
-			for item in sw_fp.GraphicalItems():
+			self.place_fp(self.sw0_pos+sw_offset, self.fp_dict[sw_ref]['fp'], sw_orienation)
+			self.fp_dict[sw_ref]['ref_inst'].SetTextPos(self.sw0_pos+sw_offset + VECTOR2I_MM(4.4, 7.1))
+			for item in self.fp_dict[sw_ref]['fp'].GraphicalItems(): #TODO store graphical items in dict
 				if type(item) == pcbnew.PCB_TEXT:
 					item.SetPosition(self.sw0_pos+sw_offset+VECTOR2I_MM(-4.4,7.1))
 
 	def place_led(self):
 		# Place LEDs on the board
-		for led_fp in self.get_fp_list('SK6812MINI'):
-			idx = led_fp.GetReference()[-2:]
+		for led_ref in self.get_fp_ref_list('SK6812MINI'):
+			idx = led_ref[-2:]
 			sw_row = int(idx[0])
 			sw_col = int(idx[1])
-			sw_pos = self.board_footprint['SW'+idx].GetPosition()
+			sw_pos = self.fp_dict['SW'+idx]['fp'].GetPosition()
 			led_pos = sw_pos + VECTOR2I_MM(0, -4.7)
+			led_orientation = 0
 			if  (sw_col < 6): 
-				'''
-				self.place_fp(led_pos, led_fp, 180)
-				'''
+				#self.fp_dict[led_ref]['ref_inst'].SetTextPos(led_pos + VECTOR2I_MM(0, 2.3))
+				#TODO separate thumb cluster placement
 				if (sw_col == 0 or sw_col == 3 or sw_col == 5):
-					self.place_fp(led_pos, led_fp, 180)
+					led_orientation = 180
 				else: # col1/2/5
-					self.place_fp(led_pos, led_fp, 0)
-				led_fp.Reference().SetTextPos(led_pos + VECTOR2I_MM(0, 2.3))
+					led_orientation = 0
 			elif(sw_col == 6):
-				self.place_fp(led_pos, led_fp, -23)
+				led_orientation = -23
 			else: # 7
-				self.place_fp(led_pos, led_fp, 60)
+				led_orientation = 60
+			self.place_fp(led_pos, self.fp_dict[led_ref]['fp'], led_orientation)
 
 	def place_diode(self):
 		# Place diodes on the board
-		for d_fp in self.get_fp_list('BAV70'):
+		for d_ref in self.get_fp_ref_list('BAV70'):
 			# get left switch position
-			sw_ref_l = 'SW'+d_fp.GetReference()[1:3]
-			sw_fp_l = self.board_footprint[sw_ref_l]
-			sw_pos_l_x = sw_fp_l.GetPosition().x
-			sw_pos_l_y = sw_fp_l.GetPosition().y
+			sw_ref_l = 'SW'+d_ref[1:3]
+			sw_pos_l_x = self.fp_dict[sw_ref_l]['fp'].GetPosition().x
+			sw_pos_l_y = self.fp_dict[sw_ref_l]['fp'].GetPosition().y
 			# get right switch position
-			sw_ref_r = 'SW'+d_fp.GetReference()[3:5]
-			sw_fp_r = self.board_footprint[sw_ref_r]
-			sw_pos_r_x = sw_fp_r.GetPosition().x
-			sw_pos_r_y = sw_fp_r.GetPosition().y
+			sw_ref_r = 'SW'+d_ref[3:5]
+			sw_pos_r_x = self.fp_dict[sw_ref_r]['fp'].GetPosition().x
+			sw_pos_r_y = self.fp_dict[sw_ref_r]['fp'].GetPosition().y
 			# place diode in between switches
 			d_pos = VECTOR2I((sw_pos_l_x + sw_pos_r_x)>>1, min(sw_pos_l_y, sw_pos_r_y))
-			self.place_fp(d_pos, d_fp, 90)
-			d_fp.Reference().SetTextPos(d_pos + VECTOR2I_MM(0, 2.4))
-			d_fp.Reference().SetTextAngleDegrees(180)
+			self.place_fp(d_pos, self.fp_dict[d_ref]['fp'], 90)
+			self.fp_dict[d_ref]['ref_inst'].SetTextPos(d_pos + VECTOR2I_MM(0, 2.4))
+			self.fp_dict[d_ref]['ref_inst'].SetTextAngleDegrees(180)
 
-	def place_via(self):
+	def place_via_for_led(self):
 		# Place vias on the board
 		via_offset_x = [-3.3-0.3, -3.3+0.3, 3.3-0.3, 3.3+0.3]
-		for led_fp in self.get_fp_list('SK6812MINI'):
-			led_pos = led_fp.GetPosition()
+		for led_ref in self.get_fp_ref_list('SK6812MINI'):
+			led_pos = self.fp_dict[led_ref]['fp'].GetPosition()
 			for i in range(4): 
 				via_pos  = led_pos + VECTOR2I_MM(via_offset_x[i], 0)
 				led1_pos = led_pos + VECTOR2I_MM(via_offset_x[i], -0.5)
@@ -174,11 +178,18 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 					self.add_track(led1_pos, via_pos, B_Cu)
 					self.add_via(via_pos, 0.3, 0.4)
 					self.add_track(via_pos, led2_pos, F_Cu)
-	
+
+	#TODO def connect_thumb_cluster(self):
+	#rotate thumb keys and connect
+
+	def place_shift_register_and_resistor(self):
+		for fp_ref in self.get_fp_ref_list('74HC165'):
+			self.place_fp(VECTOR2I_MM(10, 10), self.fp_dict[fp_ref]['fp'], 0)
+
 	def connect_pad1(self):
 		# Connect switch pad1 on both F_Cu and B_Cu layer
-		for sw_fp in self.get_fp_list('SW_Push'): 
-			sw_pos = sw_fp.GetPosition()
+		for sw_ref in self.get_fp_ref_list('SW_Push'): 
+			sw_pos = self.fp_dict[sw_ref]['fp'].GetPosition()
 			# pad1
 			self.add_tracks([	
 				(sw_pos+(VECTOR2I_MM( 3.3, 6.0)), B_Cu), 
@@ -188,15 +199,22 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 
 	def connect_diode_and_sw(self):
 		# Connect diode and switches pad2 on both F_cu and B_Cu layer
-		for d_fp in self.get_fp_list('BAV70'):
+		for d_ref in self.get_fp_ref_list('BAV70'):
 			# each diode is named in the format of DXXYY, 
 			# where YY is the left switch and YY is the right switch
 			# connect diode to the switch on its left
-			sw_ref_l = 'SW'+d_fp.GetReference()[1:3]
-			sw_fp_l = self.board_footprint[sw_ref_l]
-			sw_pos_l = sw_fp_l.GetPosition()
-			sw_l_pad2_y = [p for p in sw_fp_l.Pads() if p.GetNumber() == '2'][0].GetCenter().y
-			d_p1_pos = d_fp.FindPadByNumber('1').GetCenter()
+			sw_ref_l = 'SW'+d_ref[1:3]
+			sw_pos_l = self.fp_dict[sw_ref_l]['fp'].GetPosition()
+			# Get pad2 y coordinate. 
+			# There are two pad 2 on the switch footprint, 
+			# but one of them is flipped to the back side for reverse mount. 
+			# therefore their y coordinate is the same, we can use either one
+			for pad in self.fp_dict[sw_ref_l]['fp'].Pads():
+				if pad.GetNumber() == '2':
+					sw_l_pad2_y = pad.GetCenter().y
+					break
+			#sw_l_pad2_y = [p for p in self.fp_dict[sw_ref_l]['fp'].Pads() if p.GetNumber() == '2'][0].GetCenter().y
+			d_p1_pos = self.fp_dict[d_ref]['fp'].FindPadByNumber('1').GetCenter()
 			# Added hard-coded track to connect diode to the switch
 			self.add_tracks([
 				(VECTOR2I(d_p1_pos.x, sw_l_pad2_y), F_Cu),
@@ -206,11 +224,14 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 				(sw_pos_l+VECTOR2I_MM(-8.2, 3.6)  , B_Cu)
 			])
 			# connect diode to the switch on its right
-			sw_ref_r = 'SW'+d_fp.GetReference()[3:5]
-			sw_fp_r = self.board_footprint[sw_ref_r]
-			sw_pos_r = sw_fp_r.GetPosition()
-			sw_r_pad2_y = [p for p in sw_fp_r.Pads() if p.GetNumber() == '2'][0].GetCenter().y
-			d_p2_pos = d_fp.FindPadByNumber('2').GetCenter()
+			sw_ref_r = 'SW'+d_ref[3:5]
+			sw_pos_r = self.fp_dict[sw_ref_r]['fp'].GetPosition()
+			for pad in self.fp_dict[sw_ref_r]['fp'].Pads():
+				if pad.GetNumber() == '2':
+					sw_r_pad2_y = pad.GetCenter().y
+					break
+			#sw_r_pad2_y = [p for p in sw_fp_r.Pads() if p.GetNumber() == '2'][0].GetCenter().y
+			d_p2_pos = self.fp_dict[d_ref]['fp'].FindPadByNumber('2').GetCenter()
 			# Added hard-coded track to connect diode to the switch
 			self.add_tracks([
 				(d_p2_pos                         , B_Cu),
@@ -229,9 +250,9 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 
 	def connect_rows(self):
 		# Connect rows
-		for diode_fp in self.get_fp_list('BAV70'): 
-			if diode_fp.GetReference().endswith('1'): # left most col
-				padk_pos = diode_fp.FindPadByNumber('3').GetCenter() # offset
+		for diode_ref in self.get_fp_ref_list('BAV70'): 
+			if diode_ref.endswith('1'): # left most col
+				padk_pos = self.fp_dict[diode_ref]['fp'].FindPadByNumber('3').GetCenter() # offset
 				# the following code is auto generated by gen_led_track
 				self.add_track(padk_pos + VECTOR2I_MM(  0.0,   0.0), padk_pos + VECTOR2I_MM(  1.0,  -1.0), B_Cu)
 				self.add_track(padk_pos + VECTOR2I_MM(  1.0,  -1.0), padk_pos + VECTOR2I_MM( 13.9,  -1.0), B_Cu)
@@ -245,10 +266,10 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 
 	def connect_leds_by_col(self):
 		# Connect LEDs by column
-		for sw_fp in self.get_fp_list('SW_Push'):
-			sw_col = int(sw_fp.GetReference()[-1])
-			sw_row = int(sw_fp.GetReference()[-2])
-			offset = sw_fp.GetPosition()
+		for sw_ref in self.get_fp_ref_list('SW_Push'):
+			sw_col = int(sw_ref[-1])
+			sw_row = int(sw_ref[-2])
+			offset = self.fp_dict[sw_ref]['fp'].GetPosition()
 			if sw_row == 0: # top row
 				# power rail - left
 				virtical_track_length = 3*self.sw_y_spc - (9.0-3.8)
@@ -289,11 +310,12 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 		self.place_led()
 		self.place_diode()
 		self.connect_diode_and_sw()
+		#self.connect_thumb_cluster()
 		self.connect_rows()
 		self.connect_pad1()
 		self.connect_sw_col()
 		self.connect_leds_by_col()
-		self.place_via()
+		self.place_via_for_led()
 		pcbnew.Refresh()
 		pcbnew.SaveBoard(self.filename, self.board)
 		
