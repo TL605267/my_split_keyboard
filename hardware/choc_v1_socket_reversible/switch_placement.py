@@ -64,6 +64,9 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 		via.SetDrill(FromMM(drill)) # defaults 0.4mm, 0.8mm
 		via.SetWidth(FromMM(width))
 		self.board.Add(via)
+	
+	def is_thumb_cluster(self, ref):
+		return (ref[-1] == '6' or ref[-1] == '7')
 
 	def place_fp(self, pos, fp, orientation):
 		# Place a footprint on the board
@@ -161,85 +164,132 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 			self.fp_dict[d_ref]['ref_inst'].SetTextPos(d_pos + VECTOR2I_MM(0, 2.4))
 			self.fp_dict[d_ref]['ref_inst'].SetTextAngleDegrees(180)
 
-	def place_via_for_led(self):
+	def place_via_for_led(self): 
 		# Place vias on the board
-		via_offset_x = [-3.3-0.3, -3.3+0.3, 3.3-0.3, 3.3+0.3]
+		via_pad_offset = 0.3
 		for led_ref in self.get_fp_ref_list('SK6812MINI'):
-			led_pos = self.fp_dict[led_ref]['fp'].GetPosition()
-			for i in range(4): 
-				via_pos  = led_pos + VECTOR2I_MM(via_offset_x[i], 0)
-				led1_pos = led_pos + VECTOR2I_MM(via_offset_x[i], -0.5)
-				led2_pos = led_pos + VECTOR2I_MM(via_offset_x[i], 0.5)
-				if (i%2 == 0):
-					self.add_track(led1_pos, via_pos, F_Cu)
-					self.add_via(via_pos, 0.3, 0.4)
-					self.add_track(via_pos, led2_pos, B_Cu)
-				else:
-					self.add_track(led1_pos, via_pos, B_Cu)
-					self.add_via(via_pos, 0.3, 0.4)
-					self.add_track(via_pos, led2_pos, F_Cu)
+			if not self.is_thumb_cluster(led_ref): # skip thumb cluster
+				led_pos = self.fp_dict[led_ref]['fp'].GetPosition()
+				# FIXME not sure why all pad.getlayer reurns F.Cu
+				for pad in self.fp_dict[led_ref]['fp'].Pads():
+					#print(led_ref, pad.GetNumber(), pad.GetLayer(), pad.IsOnLayer(F_Cu), pad.GetNetname())
+					#skip GND net since it will be connected by copper pour
+					if pad.IsOnLayer(F_Cu) and pad.GetNetname() != 'GND':
+						pad_pos = pad.GetCenter()
+						if   pad.GetNumber() == '1': # LED DIN
+							# place via in the middle
+							via_pos = VECTOR2I(pad_pos.x, led_pos.y)
+						elif pad.GetNumber() == '3': # LED DOUT
+							# place via in a bit left
+							via_pos = VECTOR2I(pad_pos.x - FromMM(via_pad_offset), led_pos.y)
+						elif pad.GetNumber() == '4': # +5V Net
+							# place via in a bit right
+							via_pos = VECTOR2I(pad_pos.x + FromMM(via_pad_offset), led_pos.y)
+
+						track_start = VECTOR2I(via_pos.x, pad_pos.y)
+						track_end   = VECTOR2I(via_pos.x, led_pos.y*2-pad_pos.y) # reflect
+						self.add_track(track_start, via_pos, F_Cu)
+						self.add_via(via_pos, 0.3, 0.4)
+						self.add_track(track_end  , via_pos, B_Cu)
 
 	#TODO def connect_thumb_cluster(self):
 	#rotate thumb keys and connect
+	def place_mcu(self):
+		for mcu_ref in self.get_fp_ref_list('CH582'):
+			self.place_fp(VECTOR2I_MM(168, 48), self.fp_dict[mcu_ref]['fp'], 0)
+
+	def place_connector(self):
+		# Place connectors on the board
+		for conn_ref in self.get_fp_ref_list('Conn_01x12_MountingPin'):
+			if 'LEFT' in conn_ref: # place and flip the left connector back
+				self.fp_dict[conn_ref]['fp'].Flip(self.fp_dict[conn_ref]['fp'].GetPosition(), False)
+				self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), self.fp_dict[conn_ref]['fp'], -45)
+			else: # place the right connector
+				self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), self.fp_dict[conn_ref]['fp'], 135)
+
+	def place_via_for_connector(self):
+		# Place vias on the board
+		for conn_ref in self.get_fp_ref_list('Conn_01x12_MountingPin'):
+			if 'RIGHT' in conn_ref: # doesn't metter left or right, just pick on to get the pad position
+				for pad in self.fp_dict[conn_ref]['fp'].Pads():
+					# skip mounting pad, GND and unconnected pad
+					if pad.GetNumber() != 'MP' and pad.GetNumber() != '11' and pad.GetNumber != '12': 
+						self.add_tracks([
+							(pad.GetCenter(), F_Cu),
+							(pad.GetCenter()+VECTOR2I_MM(1.6, -1.6), -1), #via
+							(pad.GetCenter(), B_Cu)
+						])
 
 	def place_shift_register_and_resistor(self):
-		for fp_ref in self.get_fp_ref_list('74HC165'):
-			self.place_fp(VECTOR2I_MM(10, 10), self.fp_dict[fp_ref]['fp'], 0)
+		for sr_ref in self.get_fp_ref_list('74HC165'):
+			if 'LEFT' in sr_ref:
+				self.fp_dict[sr_ref]['fp'].Flip(self.fp_dict[sr_ref]['fp'].GetPosition(), False) # flip back
+				self.place_fp(self.sw0_pos + VECTOR2I_MM(119, 52), self.fp_dict[sr_ref]['fp'], 0)
+			else:
+				self.place_fp(self.sw0_pos + VECTOR2I_MM(114, 52), self.fp_dict[sr_ref]['fp'], 180)
+		for r_ref in self.get_fp_ref_list('R_Pack08'):
+			if 'LEFT' in r_ref:
+				self.fp_dict[r_ref]['fp'].Flip(self.fp_dict[r_ref]['fp'].GetPosition(), False)
+				self.place_fp(self.sw0_pos + VECTOR2I_MM(127.8  , 52), self.fp_dict[r_ref]['fp'], 0)
+			else:
+				self.place_fp(self.sw0_pos + VECTOR2I_MM(126, 52), self.fp_dict[r_ref]['fp'], 180)
 
 	def connect_pad1(self):
 		# Connect switch pad1 on both F_Cu and B_Cu layer
 		for sw_ref in self.get_fp_ref_list('SW_Push'): 
-			sw_pos = self.fp_dict[sw_ref]['fp'].GetPosition()
-			# pad1
-			self.add_tracks([	
-				(sw_pos+(VECTOR2I_MM( 3.3, 6.0)), B_Cu), 
-				(sw_pos+(VECTOR2I_MM( 1.5, 4.0)), B_Cu),
-				(sw_pos+(VECTOR2I_MM(-2.2, 4.0)), -1  ) #Via
-			])
+			if not self.is_thumb_cluster(sw_ref): # skip thumb cluster
+				sw_pos = self.fp_dict[sw_ref]['fp'].GetPosition()
+				# pad1
+				self.add_tracks([	
+					(sw_pos+(VECTOR2I_MM( 3.3, 6.0)), B_Cu), 
+					(sw_pos+(VECTOR2I_MM( 1.5, 4.0)), B_Cu),
+					(sw_pos+(VECTOR2I_MM(-2.2, 4.0)), -1  ) #Via
+				])
 
 	def connect_diode_and_sw(self):
 		# Connect diode and switches pad2 on both F_cu and B_Cu layer
 		for d_ref in self.get_fp_ref_list('BAV70'):
-			# each diode is named in the format of DXXYY, 
-			# where YY is the left switch and YY is the right switch
-			# connect diode to the switch on its left
-			sw_ref_l = 'SW'+d_ref[1:3]
-			sw_pos_l = self.fp_dict[sw_ref_l]['fp'].GetPosition()
-			# Get pad2 y coordinate. 
-			# There are two pad 2 on the switch footprint, 
-			# but one of them is flipped to the back side for reverse mount. 
-			# therefore their y coordinate is the same, we can use either one
-			for pad in self.fp_dict[sw_ref_l]['fp'].Pads():
-				if pad.GetNumber() == '2':
-					sw_l_pad2_y = pad.GetCenter().y
-					break
-			#sw_l_pad2_y = [p for p in self.fp_dict[sw_ref_l]['fp'].Pads() if p.GetNumber() == '2'][0].GetCenter().y
-			d_p1_pos = self.fp_dict[d_ref]['fp'].FindPadByNumber('1').GetCenter()
-			# Added hard-coded track to connect diode to the switch
-			self.add_tracks([
-				(VECTOR2I(d_p1_pos.x, sw_l_pad2_y), F_Cu),
-				(d_p1_pos                         , F_Cu),
-				(sw_pos_l+VECTOR2I_MM( 5.8, 2.0)  , B_Cu),
-				(sw_pos_l+VECTOR2I_MM(-6.5, 2.0)  , B_Cu),
-				(sw_pos_l+VECTOR2I_MM(-8.2, 3.6)  , B_Cu)
-			])
-			# connect diode to the switch on its right
-			sw_ref_r = 'SW'+d_ref[3:5]
-			sw_pos_r = self.fp_dict[sw_ref_r]['fp'].GetPosition()
-			for pad in self.fp_dict[sw_ref_r]['fp'].Pads():
-				if pad.GetNumber() == '2':
-					sw_r_pad2_y = pad.GetCenter().y
-					break
-			#sw_r_pad2_y = [p for p in sw_fp_r.Pads() if p.GetNumber() == '2'][0].GetCenter().y
-			d_p2_pos = self.fp_dict[d_ref]['fp'].FindPadByNumber('2').GetCenter()
-			# Added hard-coded track to connect diode to the switch
-			self.add_tracks([
-				(d_p2_pos                         , B_Cu),
-				(VECTOR2I(d_p2_pos.x, sw_r_pad2_y), B_Cu),
-				(sw_pos_r+VECTOR2I_MM(-6.5, 2.0)  , B_Cu),
-				(sw_pos_r+VECTOR2I_MM( 8.2, 2.0)  ,   -1), # via
-				(sw_pos_r+VECTOR2I_MM( 8.2, 3.6)  , F_Cu)
-			])
+			if not self.is_thumb_cluster(d_ref): # skip thumb cluster
+				# each diode is named in the format of DXXYY, 
+				# where YY is the left switch and YY is the right switch
+				# connect diode to the switch on its left
+				sw_ref_l = 'SW'+d_ref[1:3]
+				sw_pos_l = self.fp_dict[sw_ref_l]['fp'].GetPosition()
+				# Get pad2 y coordinate. 
+				# There are two pad 2 on the switch footprint, 
+				# but one of them is flipped to the back side for reverse mount. 
+				# therefore their y coordinate is the same, we can use either one
+				for pad in self.fp_dict[sw_ref_l]['fp'].Pads():
+					if pad.GetNumber() == '2':
+						sw_l_pad2_y = pad.GetCenter().y
+						break
+				#sw_l_pad2_y = [p for p in self.fp_dict[sw_ref_l]['fp'].Pads() if p.GetNumber() == '2'][0].GetCenter().y
+				d_p1_pos = self.fp_dict[d_ref]['fp'].FindPadByNumber('1').GetCenter()
+				# Added hard-coded track to connect diode to the switch
+				self.add_tracks([
+					(VECTOR2I(d_p1_pos.x, sw_l_pad2_y), F_Cu),
+					(d_p1_pos                         , F_Cu),
+					(sw_pos_l+VECTOR2I_MM( 5.8, 2.0)  , B_Cu),
+					(sw_pos_l+VECTOR2I_MM(-6.5, 2.0)  , B_Cu),
+					(sw_pos_l+VECTOR2I_MM(-8.2, 3.6)  , B_Cu)
+				])
+				# connect diode to the switch on its right
+				sw_ref_r = 'SW'+d_ref[3:5]
+				sw_pos_r = self.fp_dict[sw_ref_r]['fp'].GetPosition()
+				for pad in self.fp_dict[sw_ref_r]['fp'].Pads():
+					if pad.GetNumber() == '2':
+						sw_r_pad2_y = pad.GetCenter().y
+						break
+				#sw_r_pad2_y = [p for p in sw_fp_r.Pads() if p.GetNumber() == '2'][0].GetCenter().y
+				d_p2_pos = self.fp_dict[d_ref]['fp'].FindPadByNumber('2').GetCenter()
+				# Added hard-coded track to connect diode to the switch
+				self.add_tracks([
+					(d_p2_pos                         , B_Cu),
+					(VECTOR2I(d_p2_pos.x, sw_r_pad2_y), B_Cu),
+					(sw_pos_r+VECTOR2I_MM(-6.5, 2.0)  , B_Cu),
+					(sw_pos_r+VECTOR2I_MM( 8.2, 2.0)  ,   -1), # via
+					(sw_pos_r+VECTOR2I_MM( 8.2, 3.6)  , F_Cu)
+				])
 		
 	def connect_sw_col(self):
 		# Connect column pads from top to bottom
@@ -267,39 +317,62 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 	def connect_leds_by_col(self):
 		# Connect LEDs by column
 		for sw_ref in self.get_fp_ref_list('SW_Push'):
-			sw_col = int(sw_ref[-1])
-			sw_row = int(sw_ref[-2])
-			offset = self.fp_dict[sw_ref]['fp'].GetPosition()
-			if sw_row == 0: # top row
-				# power rail - left
-				virtical_track_length = 3*self.sw_y_spc - (9.0-3.8)
-				self.add_tracks([
-					(offset + VECTOR2I_MM(-3.3, -5.5), F_Cu),	
-					(offset + VECTOR2I_MM(-5.0, -5.5), F_Cu),	
-					(offset + VECTOR2I_MM(-6.7, -3.8), F_Cu), 
-					(offset + VECTOR2I_MM(-6.7, -3.8 + virtical_track_length), F_Cu) 
-				])
-				# power rail - right
-				virtical_track_length = 3*self.sw_y_spc - (7.3-0.5)
-				self.add_tracks([
-					(offset + VECTOR2I_MM( 3.3, -3.9), F_Cu),
-					(offset + VECTOR2I_MM( 6.7, -0.5), F_Cu),
-					(offset + VECTOR2I_MM( 6.7, -0.5 + virtical_track_length), F_Cu)
-				])
+			if not self.is_thumb_cluster(sw_ref): # skip thumb cluster
+				sw_col = int(sw_ref[-1])
+				sw_row = int(sw_ref[-2])
+				offset = self.fp_dict[sw_ref]['fp'].GetPosition()
+				if sw_row == 0: # top row
+					# power rail - left
+					virtical_track_length = 3*self.sw_y_spc - (9.0-3.8)
+					self.add_tracks([
+						(offset + VECTOR2I_MM(-3.3, -5.5), F_Cu),	
+						(offset + VECTOR2I_MM(-5.0, -5.5), F_Cu),	
+						(offset + VECTOR2I_MM(-6.7, -3.8), F_Cu), 
+						(offset + VECTOR2I_MM(-6.7, -3.8 + virtical_track_length), F_Cu) 
+					])
+					# power rail - right
+					virtical_track_length = 3*self.sw_y_spc - (7.3-0.5)
+					self.add_tracks([
+						(offset + VECTOR2I_MM( 3.3, -3.9), F_Cu),
+						(offset + VECTOR2I_MM( 6.7, -0.5), F_Cu),
+						(offset + VECTOR2I_MM( 6.7, -0.5 + virtical_track_length), F_Cu)
+					])
+				else:
+					# power rail - left
+					self.add_track(offset + VECTOR2I_MM(-3.3, -5.6), offset + VECTOR2I_MM(-6.7, -9.0))	
+					# power rail - right
+					self.add_track(offset + VECTOR2I_MM(3.3, -3.9), offset + VECTOR2I_MM(6.7, -7.3))
+					# led dout -> led din
+					virtical_track_length = self.sw_y_spc - 2.6
+					self.add_tracks([
+						(offset + VECTOR2I_MM(-3.3, -5.5), B_Cu),
+						(offset + VECTOR2I_MM(-1.9, -6.9), B_Cu),
+						(offset + VECTOR2I_MM( 2.1, -6.9),   -1), # via
+						(offset + VECTOR2I_MM( 2.1, -6.9-virtical_track_length), F_Cu),
+						(offset + VECTOR2I_MM( 3.3,-22.5), F_Cu)
+					])
+				
+	def connect_shift_register_and_resistor(self):
+		for r_ref in self.get_fp_ref_list('R_Pack08'):
+			pad9_pos  = self.fp_dict[r_ref]['fp'].FindPadByNumber( '9').GetCenter()
+			pad16_pos = self.fp_dict[r_ref]['fp'].FindPadByNumber('16').GetCenter()
+			if 'LEFT' in r_ref: # left hand componments are placed in the back
+				self.add_track(pad9_pos, pad16_pos, B_Cu)
 			else:
-				# power rail - left
-				self.add_track(offset + VECTOR2I_MM(-3.3, -5.6), offset + VECTOR2I_MM(-6.7, -9.0))	
-				# power rail - right
-				self.add_track(offset + VECTOR2I_MM(3.3, -3.9), offset + VECTOR2I_MM(6.7, -7.3))
-				# led dout -> led din
-				virtical_track_length = self.sw_y_spc - 2.6
-				self.add_tracks([
-					(offset + VECTOR2I_MM(-3.3, -5.5), B_Cu),
-					(offset + VECTOR2I_MM(-1.9, -6.9), B_Cu),
-					(offset + VECTOR2I_MM( 2.1, -6.9),   -1), # via
-					(offset + VECTOR2I_MM( 2.1, -6.9-virtical_track_length), F_Cu),
-					(offset + VECTOR2I_MM( 3.3,-22.5), F_Cu)
-				])
+				self.add_track(pad9_pos, pad16_pos, F_Cu)
+				# also connects left and right
+				for pad in self.fp_dict[r_ref]['fp'].Pads():
+					#print(pad.GetNumber())
+					if pad.GetNumber().isdigit() and int(pad.GetNumber()) < 9: # pad 1-8
+						pad_pos = pad.GetCenter()
+						if int(pad.GetNumber()) %2 == 0 : #2/4/6/8
+							self.add_track(pad_pos, pad_pos + VECTOR2I_MM(0.9, 0), B_Cu)
+							self.add_via(pad_pos + VECTOR2I_MM(0.9, 0), 0.3, 0.4)
+							self.add_track(pad_pos + VECTOR2I_MM(0.9, 0), pad_pos, F_Cu)
+						else: #1/3/5/7
+							self.add_track(pad_pos, pad_pos + VECTOR2I_MM(-0.9, 0), B_Cu)
+							self.add_via(pad_pos + VECTOR2I_MM(-0.9, 0), 0.3, 0.4)
+							self.add_track(pad_pos + VECTOR2I_MM(-0.9, 0), pad_pos, F_Cu)
 			
 	# Do all the things
 	def Run(self):
@@ -308,14 +381,19 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 		self.remove_old_tracks()
 		self.place_sw()
 		self.place_led()
+		self.place_via_for_led()
 		self.place_diode()
+		self.place_mcu()
+		self.place_shift_register_and_resistor()
+		self.place_connector()
+		self.place_via_for_connector()
 		self.connect_diode_and_sw()
 		#self.connect_thumb_cluster()
 		self.connect_rows()
 		self.connect_pad1()
 		self.connect_sw_col()
 		self.connect_leds_by_col()
-		self.place_via_for_led()
+		self.connect_shift_register_and_resistor()
 		pcbnew.Refresh()
 		pcbnew.SaveBoard(self.filename, self.board)
 		
@@ -333,6 +411,8 @@ def main():
 		plugin.gen_led_track(f'Net-(LED0{i}-DIN)')
 	'''
 	plugin.Run()
-
+	#plugin.load_board()
+	#plugin.remove_old_tracks()
+	#plugin.place_via_for_led()
 if __name__ == "__main__":
 	main()
