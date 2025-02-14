@@ -224,7 +224,9 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 			if 'RIGHT' in conn_ref: # doesn't metter left or right, just pick one to get the pad position
 				for pad in self.fp_dict[conn_ref]['fp'].Pads():
 					# skip mounting pad, GND and unconnected pad
-					if pad.GetNumber() != 'MP' and pad.GetNumber() != '11' and pad.GetNumber != '12': 
+					# TODO change to GND and unconnected
+					if pad.GetNetname() != 'GND' and 'unconnected' not in pad.GetNetname():
+					#if pad.GetNumber() != 'MP' and pad.GetNumber() != '11' and pad.GetNumber != '12': 
 						self.add_tracks([
 							(pad.GetCenter(), F_Cu),
 							(pad.GetCenter()+VECTOR2I_MM(1.6, -1.6), -1), #via
@@ -418,15 +420,37 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 		mounting_hole.SetOrientation(0)
 		mounting_hole.SetFPID(pcbnew.FPID("MountingHole"))
 		self.board.Add(mounting_hole)
-
-	def place_cupper_pour(self): #TODO
+	'''	
+	# Define a function to create and add a zone
+	def create_zone(self, points, layer, net_name):
+    # Create the zone container
+		zone = pcbnew.ZONE(self.board)
+		zone.SetLayer(layer)  # Set the layer
+    # Create the polygon and add points to it
+		polygon = pcbnew.SHAPE_POLY_SET()
+		for point in points:
+			polygon.Append(point)
+		zone.Outline().AddPolygon(polygon)  # Add the polygon points
+		zone.SetIsFilled(True)  # Set the zone as filled
+		
+		# Set the net (GND in this case)
+		net_code = self.board.GetNetcodeFromNetname(net_name)
+		zone.SetNetCode(net_code)
+		
+		# Add the zone to the board
+		self.board.Add(zone)
+		
+	def place_copper_pour(self): #TODO
 		# Place copper pour on the board
-		copper_pour = pcbnew.ZONE_CONTAINER(self.board)
-		copper_pour.SetPosition(VECTOR2I_MM(0, 0))
-		copper_pour.SetOrientation(0)
-		copper_pour.SetFPID(pcbnew.FPID("CopperPour"))
-		self.board.Add(copper_pour)
-
+		points = [
+			VECTOR2I_MM( 30, 30),
+			VECTOR2I_MM(200, 30),
+			VECTOR2I_MM(200,150),
+			VECTOR2I_MM( 30,150)
+		]
+		self.create_zone(points, F_Cu, 'GND')
+		self.create_zone(points, B_Cu, 'GND')
+	'''
 	# Do all the things
 	def Run(self):
 		# Execute the plugin
@@ -449,6 +473,7 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 		self.connect_leds_by_col()
 		self.connect_shift_register_and_resistor()
 		self.place_edge_cut()
+		#self.place_copper_pour()
 		pcbnew.Refresh()
 		pcbnew.SaveBoard(self.filename, self.board)
 		
