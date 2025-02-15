@@ -5,17 +5,17 @@
       "Application": "Pcbnew",
       "Version": "8.0.8-8.0.8-0~ubuntu22.04.1"
     },
-    "CreationDate": "2025-01-26T03:04:04-06:00"
+    "CreationDate": "2025-02-14T18:00:16-06:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
-      "Name": "kbd",
-      "GUID": "6b62642e-6b69-4636-9164-5f7063625858",
+      "Name": "choc_v1_socket_reversible",
+      "GUID": "63686f63-5f76-4315-9f73-6f636b65745f",
       "Revision": "rev?"
     },
     "Size": {
-      "X": 139.6,
-      "Y": 109.05
+      "X": 143.9,
+      "Y": 103.729
     },
     "LayerNumber": 2,
     "BoardThickness": 1.6,
@@ -28,53 +28,53 @@
       "PadToTrack": 0.1,
       "TrackToTrack": 0.1,
       "MinLineWidth": 0.2,
-      "TrackToRegion": 0.5,
-      "RegionToRegion": 0.5
+      "TrackToRegion": 0.1,
+      "RegionToRegion": 0.1
     }
   ],
   "FilesAttributes": [
     {
-      "Path": "kbd-F_Cu.gbr",
+      "Path": "choc_v1_socket_reversible-F_Cu.gbr",
       "FileFunction": "Copper,L1,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "kbd-B_Cu.gbr",
+      "Path": "choc_v1_socket_reversible-B_Cu.gbr",
       "FileFunction": "Copper,L2,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "kbd-F_Paste.gbr",
+      "Path": "choc_v1_socket_reversible-F_Paste.gbr",
       "FileFunction": "SolderPaste,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "kbd-B_Paste.gbr",
+      "Path": "choc_v1_socket_reversible-B_Paste.gbr",
       "FileFunction": "SolderPaste,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "kbd-F_Silkscreen.gbr",
+      "Path": "choc_v1_socket_reversible-F_Silkscreen.gbr",
       "FileFunction": "Legend,Top",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "kbd-B_Silkscreen.gbr",
+      "Path": "choc_v1_socket_reversible-B_Silkscreen.gbr",
       "FileFunction": "Legend,Bot",
       "FilePolarity": "Positive"
     },
     {
-      "Path": "kbd-F_Mask.gbr",
+      "Path": "choc_v1_socket_reversible-F_Mask.gbr",
       "FileFunction": "SolderMask,Top",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "kbd-B_Mask.gbr",
+      "Path": "choc_v1_socket_reversible-B_Mask.gbr",
       "FileFunction": "SolderMask,Bot",
       "FilePolarity": "Negative"
     },
     {
-      "Path": "kbd-Edge_Cuts.gbr",
+      "Path": "choc_v1_socket_reversible-Edge_Cuts.gbr",
       "FileFunction": "Profile",
       "FilePolarity": "Positive"
     }
