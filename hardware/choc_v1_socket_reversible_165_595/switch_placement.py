@@ -168,6 +168,7 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 				# place diode in between switches
 				d_pos = sw_pos_t + VECTOR2I_MM(-7.5, 8.2)
 				self.place_fp(d_pos, self.fp_dict[d_ref]['fp'], 180)
+				self.fp_dict[d_ref]['pos'] = d_pos
 				self.fp_dict[d_ref]['fp'].Flip(d_pos, False)
 				self.fp_dict[d_ref]['ref_inst'].SetTextPos(d_pos + VECTOR2I_MM(0, 2.4))
 				self.fp_dict[d_ref]['ref_inst'].SetTextAngleDegrees(180)
@@ -215,31 +216,15 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 				if pad.IsOnLayer(F_Cu):
 					self.d_dict[diode_ref][pad.GetNumber()] = pad.GetCenter()
 			# place via for diode
-			# COL
-			self.d_dict[diode_ref]['via_col'] = (self.d_dict[diode_ref]['3']+self.d_dict[diode_ref]['6'])/2
-			self.add_track(self.d_dict[diode_ref]['1'], self.d_dict[diode_ref]['4'], B_Cu)	
-			self.add_track(self.d_dict[diode_ref]['3'], self.d_dict[diode_ref]['6'], F_Cu)	
-			self.add_via((self.d_dict[diode_ref]['3']+self.d_dict[diode_ref]['6'])/2, 0.3, 0.4)
-			# D*A
-			self.d_dict[diode_ref]['via_a'] = (self.d_dict[diode_ref]['1'] + self.d_dict[diode_ref]['6'])/2 + VECTOR2I_MM(0, -0.65)
-			self.add_track(self.d_dict[diode_ref]['1'], self.d_dict[diode_ref]['via_a'], F_Cu)
-			self.add_via(self.d_dict[diode_ref]['via_a'], 0.3, 0.4)
-			self.add_track(self.d_dict[diode_ref]['via_a'], self.d_dict[diode_ref]['6'], B_Cu)
-			# D*B
-			self.d_dict[diode_ref]['via_b'] = (self.d_dict[diode_ref]['1'] + self.d_dict[diode_ref]['6'])/2
-			self.add_track(self.d_dict[diode_ref]['2'], self.d_dict[diode_ref]['via_b'], F_Cu)
-			self.add_via(self.d_dict[diode_ref]['via_b'], 0.3, 0.4)
-			self.add_track(self.d_dict[diode_ref]['via_b'], self.d_dict[diode_ref]['5'], B_Cu)
-			# D*D
-			self.d_dict[diode_ref]['via_d'] = (self.d_dict[diode_ref]['3'] + self.d_dict[diode_ref]['4'])/2
-			self.add_track(self.d_dict[diode_ref]['5'], self.d_dict[diode_ref]['via_d'], F_Cu)
-			self.add_via(self.d_dict[diode_ref]['via_d'], 0.3, 0.4)
-			self.add_track(self.d_dict[diode_ref]['via_d'], self.d_dict[diode_ref]['2'], B_Cu)
-			# D*C
-			self.d_dict[diode_ref]['via_c'] = (self.d_dict[diode_ref]['3'] + self.d_dict[diode_ref]['4'])/2 + VECTOR2I_MM(0, 0.65)
-			self.add_track(self.d_dict[diode_ref]['4'], self.d_dict[diode_ref]['via_c'], F_Cu)
-			self.add_via(self.d_dict[diode_ref]['via_c'], 0.3, 0.4)
-			self.add_track(self.d_dict[diode_ref]['via_c'], self.d_dict[diode_ref]['3'], B_Cu)
+			for i in range(-2, 3):
+				self.add_via(self.fp_dict[diode_ref]['pos']+VECTOR2I_MM(0,i*0.65), 0.3, 0.4)
+			for i in ['1', '2', '3']:
+				self.add_track(self.d_dict[diode_ref][i], self.d_dict[diode_ref][i]+VECTOR2I_MM( 0.95,-0.65), F_Cu)	
+				self.add_track(self.d_dict[diode_ref][i], self.d_dict[diode_ref][i]+VECTOR2I_MM( 0.95, 0.65), B_Cu)	
+			for i in ['4', '5', '6']:
+				self.add_track(self.d_dict[diode_ref][i], self.d_dict[diode_ref][i]+VECTOR2I_MM(-0.95, 0.65), F_Cu)	
+				self.add_track(self.d_dict[diode_ref][i], self.d_dict[diode_ref][i]+VECTOR2I_MM(-0.95,-0.65), B_Cu)	
+
 	#TODO def connect_thumb_cluster(self):
 	#rotate thumb keys and connect
 	def place_mcu(self):
@@ -413,16 +398,7 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 				sw_col = int(sw_ref[-1])
 				sw_row = int(sw_ref[-2])
 				offset = self.fp_dict[sw_ref]['fp'].GetPosition()
-				if sw_row == 0: # top row
-					continue
-					# power rail - right
-					virtical_track_length = 3*self.sw_y_spc - (7.3-0.5)
-					self.add_tracks([
-						(offset + VECTOR2I_MM( 3.3, -3.9), F_Cu),
-						(offset + VECTOR2I_MM( 6.7, -0.5), F_Cu),
-						(offset + VECTOR2I_MM( 6.7, -0.5 + virtical_track_length), F_Cu)
-					])
-				else:
+				if sw_row != 0: # top row
 					# power rail - left
 					self.add_tracks([
 						(offset+VECTOR2I_MM(-3.3, -5.5), F_Cu),
@@ -433,8 +409,6 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 						(offset+VECTOR2I_MM(-4.4,-21.4), F_Cu),
 						(offset+VECTOR2I_MM(-3.3,-22.5), F_Cu),
 					])
-					# power rail - right
-					#self.add_track(offset + VECTOR2I_MM(3.3, -3.9), offset + VECTOR2I_MM(6.7, -7.3))
 					# led dout -> led din
 					if sw_col %2 == 0: # even column
 						self.add_tracks([
@@ -453,20 +427,6 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 							(offset+VECTOR2I_MM( 2.1,-21.4), F_Cu),
 							(offset+VECTOR2I_MM( 3.3,-22.5), F_Cu),
 						])
-						
-						
-					'''
-					virtical_track_length = self.sw_y_spc - 2.6
-					self.add_tracks([
-						(offset + VECTOR2I_MM(-3.3, -5.5), B_Cu),
-						(offset + VECTOR2I_MM(-3.3, -6.9), B_Cu),
-						(offset + VECTOR2I_MM(-1.7, -8.5), B_Cu),
-						(offset + VECTOR2I_MM(-1.9, -6.9), B_Cu),
-						(offset + VECTOR2I_MM( 2.1, -6.9),   -1), # via
-						(offset + VECTOR2I_MM( 2.1, -6.9-virtical_track_length), F_Cu),
-						(offset + VECTOR2I_MM( 3.3,-22.5), F_Cu)
-					])
-					'''
 				
 	def connect_shift_register_and_resistor(self):
 		for r_ref in self.get_fp_ref_list('R_Pack08'):
@@ -499,9 +459,9 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 		# get bottom left corner x coordinate (column 0)
 		left_edge_x = self.sw0_pos.x - FromMM(10)
 		# get bottom left corner x coordinate (column 0)
-		lower_left_y = self.fp_dict['SW30']['fp'].GetPosition().y + FromMM(10)
+		lower_left_y = self.fp_dict['SW30']['fp'].GetPosition().y + FromMM(15)
 		# get lower right y coordinate (column 7)
-		lower_right_y = self.fp_dict['SW36']['fp'].GetPosition().y + FromMM(10)
+		lower_right_y = self.fp_dict['SW36']['fp'].GetPosition().y + FromMM(15)
 		edge_cut_tracks = [
 			VECTOR2I(right_edge_x, upper_edge_y ),
 			VECTOR2I( left_edge_x, upper_edge_y ),
