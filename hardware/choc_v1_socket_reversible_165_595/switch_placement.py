@@ -354,37 +354,33 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 				# ROW0
 				sw_r0_ref = 'SW0'+d_ref[-1]
 				self.add_tracks([
-					(self.fp_dict[d_ref]['pad']['F.Cu']['1'], F_Cu),
-					(self.fp_dict[d_ref]['pad']['F.Cu']['1']+VECTOR2I_MM(0,-15), F_Cu),
+					(self.fp_dict[d_ref]['pad']['F.Cu']['1']+VECTOR2I_MM(0.95,-0.65), F_Cu),
+					(self.fp_dict[d_ref]['pad']['F.Cu']['1']+VECTOR2I_MM(0.95,-48.4), F_Cu),
 					(self.fp_dict[sw_r0_ref]['pad']['F.Cu']['1'], F_Cu)
 				])
 				# ROW1
-				self.add_track(
-					self.fp_dict[d_ref]['pad']['F.Cu']['2'],
-					self.fp_dict[d_ref]['pad']['F.Cu']['2']+VECTOR2I_MM(3.8,-2.6),
-					F_Cu
-				)
-				# ROW2
+				sw_r1_ref = 'SW1'+d_ref[-1]
 				self.add_tracks([
-					(self.fp_dict[d_ref]['pad']['F.Cu']['4'], F_Cu),
-					(self.fp_dict[d_ref]['pad']['F.Cu']['4']+VECTOR2I_MM(-0.95,0.65), F_Cu),
-					(self.fp_dict[d_ref]['pad']['F.Cu']['4']+VECTOR2I_MM(-0.95,0.65)+VECTOR2I_MM(0,4.2), F_Cu),
-					(self.fp_dict[d_ref]['pad']['F.Cu']['4']+VECTOR2I_MM(-0.95,0.65)+VECTOR2I_MM(0,4.2)+VECTOR2I_MM(4.3,4.3), F_Cu),
-					(self.fp_dict[d_ref]['pad']['F.Cu']['4']+VECTOR2I_MM(-0.95,0.65)+VECTOR2I_MM(0,4.2)+VECTOR2I_MM(4.3,4.3)+VECTOR2I_MM(0,4), F_Cu),
+					(self.fp_dict[d_ref]['pad']['F.Cu']['1']+VECTOR2I_MM(0.95, 0), F_Cu),
+					(self.fp_dict[d_ref]['pad']['F.Cu']['1']+VECTOR2I_MM(1.35,-0.4), F_Cu),
+					(self.fp_dict[d_ref]['pad']['F.Cu']['1']+VECTOR2I_MM(1.35,-31.8), F_Cu),
+					(self.fp_dict[sw_r1_ref]['pad']['F.Cu']['1'], F_Cu)
 				])
-				# ROW3
+				# ROW2
+				sw_r2_ref = 'SW2'+d_ref[-1]
 				self.add_tracks([
 					(self.fp_dict[d_ref]['pad']['F.Cu']['5'], F_Cu),
-					(self.fp_dict[d_ref]['pad']['F.Cu']['5']+VECTOR2I_MM(-1.9,1.3), F_Cu),
-					(self.fp_dict[d_ref]['pad']['F.Cu']['5']+VECTOR2I_MM(-1.9,1.3)+VECTOR2I_MM(0,20.2), F_Cu),
-					(self.fp_dict[d_ref]['pad']['F.Cu']['5']+VECTOR2I_MM(-1.9,1.3)+VECTOR2I_MM(0,20.2)+VECTOR2I_MM(5.25,5.25), F_Cu),
-					(self.fp_dict[d_ref]['pad']['F.Cu']['5']+VECTOR2I_MM(-1.9,1.3)+VECTOR2I_MM(0,20.2)+VECTOR2I_MM(5.25,5.25)+VECTOR2I_MM(0,4), F_Cu),
+					(self.fp_dict[d_ref]['pad']['F.Cu']['5']+VECTOR2I_MM( 0.6,-0.2), F_Cu),
+					(self.fp_dict[d_ref]['pad']['F.Cu']['5']+VECTOR2I_MM( 0.6,-2.8), F_Cu),
+					(self.fp_dict[d_ref]['pad']['F.Cu']['5']+VECTOR2I_MM(-0.2,-3.4), F_Cu),
+					(self.fp_dict[d_ref]['pad']['F.Cu']['5']+VECTOR2I_MM(-0.2,-15.7), F_Cu),
+					(self.fp_dict[sw_r2_ref]['pad']['F.Cu']['1'], F_Cu)
 				])
-				# GND
+				# ROW3
+				sw_r3_ref = 'SW3'+d_ref[-1]
 				self.add_tracks([
-					(self.fp_dict[d_ref]['pad']['F.Cu']['3'], F_Cu),
-					(self.fp_dict[d_ref]['pad']['F.Cu']['3']+VECTOR2I_MM(-0.95,0.65), F_Cu),
-					(self.fp_dict[d_ref]['pad']['F.Cu']['3']+VECTOR2I_MM(-0.95,0.65)+VECTOR2I_MM(0,33), F_Cu),
+					(self.fp_dict[d_ref]['pad']['F.Cu']['4']+VECTOR2I_MM(0.2,0), F_Cu),
+					(self.fp_dict[sw_r3_ref]['pad']['F.Cu']['1'], F_Cu)
 				])
 
 	def connect_sw_col(self):
@@ -418,6 +414,7 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 				sw_row = int(sw_ref[-2])
 				offset = self.fp_dict[sw_ref]['fp'].GetPosition()
 				if sw_row == 0: # top row
+					continue
 					# power rail - right
 					virtical_track_length = 3*self.sw_y_spc - (7.3-0.5)
 					self.add_tracks([
@@ -429,23 +426,47 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 					# power rail - left
 					self.add_tracks([
 						(offset+VECTOR2I_MM(-3.3, -5.5), F_Cu),
-						(offset+VECTOR2I_MM(-1.7, -7.1), F_Cu),
-						(offset+VECTOR2I_MM(-1.7,-15.8), F_Cu),
-						(offset+VECTOR2I_MM(-2.2,-16.3), F_Cu),
-						(offset+VECTOR2I_MM(-2.2,-21.6), F_Cu),
+						(offset+VECTOR2I_MM(-3.3, -6.9), F_Cu),
+						(offset+VECTOR2I_MM(-1.7, -8.5), F_Cu),
+						(offset+VECTOR2I_MM(-1.7,-14.7), F_Cu),
+						(offset+VECTOR2I_MM(-4.4,-17.4), F_Cu),
+						(offset+VECTOR2I_MM(-4.4,-21.4), F_Cu),
 						(offset+VECTOR2I_MM(-3.3,-22.5), F_Cu),
 					])
 					# power rail - right
-					self.add_track(offset + VECTOR2I_MM(3.3, -3.9), offset + VECTOR2I_MM(6.7, -7.3))
+					#self.add_track(offset + VECTOR2I_MM(3.3, -3.9), offset + VECTOR2I_MM(6.7, -7.3))
 					# led dout -> led din
+					if sw_col %2 == 0: # even column
+						self.add_tracks([
+							(offset+VECTOR2I_MM( 3.3, -5.5), F_Cu),
+							(offset+VECTOR2I_MM( 3.3,-10.2), F_Cu),
+							(offset+VECTOR2I_MM( 3.3,-10.2), F_Cu),
+							(offset+VECTOR2I_MM(-3.3,-16.8), F_Cu),
+							(offset+VECTOR2I_MM(-3.3,-20.9), F_Cu),
+						])
+					else: # odd column
+						self.add_tracks([
+							(offset+VECTOR2I_MM(-3.3, -3.9), F_Cu),
+							(offset+VECTOR2I_MM(-2.1, -5.1), F_Cu),
+							(offset+VECTOR2I_MM(-2.1, -6.5), F_Cu),
+							(offset+VECTOR2I_MM( 2.1,-10.8), F_Cu),
+							(offset+VECTOR2I_MM( 2.1,-21.4), F_Cu),
+							(offset+VECTOR2I_MM( 3.3,-22.5), F_Cu),
+						])
+						
+						
+					'''
 					virtical_track_length = self.sw_y_spc - 2.6
 					self.add_tracks([
 						(offset + VECTOR2I_MM(-3.3, -5.5), B_Cu),
+						(offset + VECTOR2I_MM(-3.3, -6.9), B_Cu),
+						(offset + VECTOR2I_MM(-1.7, -8.5), B_Cu),
 						(offset + VECTOR2I_MM(-1.9, -6.9), B_Cu),
 						(offset + VECTOR2I_MM( 2.1, -6.9),   -1), # via
 						(offset + VECTOR2I_MM( 2.1, -6.9-virtical_track_length), F_Cu),
 						(offset + VECTOR2I_MM( 3.3,-22.5), F_Cu)
 					])
+					'''
 				
 	def connect_shift_register_and_resistor(self):
 		for r_ref in self.get_fp_ref_list('R_Pack08'):
@@ -557,9 +578,9 @@ class kbd_place_n_route(pcbnew.ActionPlugin):
 		self.connect_rows()
 		self.connect_pad1()
 		self.connect_pad2()
-		#self.connect_diode_and_sw()
+		self.connect_diode_and_sw()
 		#self.connect_sw_col()
-		#self.connect_leds_by_col()
+		self.connect_leds_by_col()
 		self.connect_shift_register_and_resistor()
 		self.place_edge_cut()
 		#self.place_copper_pour()
