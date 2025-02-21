@@ -3951,6 +3951,12 @@
 		(uuid "005e58ae-0127-4049-8fea-842c14b78a0a")
 	)
 	(junction
+		(at 170.18 127)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "00dd0193-7c5b-4834-a473-0a66ab9e48e5")
+	)
+	(junction
 		(at 205.74 111.76)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3979,6 +3985,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "0d8bf00e-e4b6-46c9-9a5b-9d9f8e1ff0f7")
+	)
+	(junction
+		(at 152.4 127)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1351e5c9-78bf-4055-a46a-e1efd9ec656a")
 	)
 	(junction
 		(at 217.17 73.66)
@@ -4011,12 +4023,6 @@
 		(uuid "1ca29a07-1253-4749-b88a-feca4a8a449e")
 	)
 	(junction
-		(at 152.4 162.56)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "1fbee5ef-0094-4537-b48f-53818dce3310")
-	)
-	(junction
 		(at 219.71 50.8)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4027,6 +4033,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "22eca716-2245-47b7-9f41-84aa9b8cd92a")
+	)
+	(junction
+		(at 170.18 129.54)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2420cd4f-f82c-4f59-8439-cef847dd6555")
 	)
 	(junction
 		(at 223.52 147.32)
@@ -4053,16 +4065,16 @@
 		(uuid "2d84b6cc-0c96-4a84-9511-27820be40d92")
 	)
 	(junction
+		(at 170.18 93.98)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "2e142971-4a4e-4bb5-abb7-4e9b91078ecf")
+	)
+	(junction
 		(at 232.41 60.96)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "2f7c6ffe-034d-4a57-b207-c19efea263f1")
-	)
-	(junction
-		(at 152.4 111.76)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "30682bd9-ccdb-4741-b9e9-6ca659b7dc9c")
 	)
 	(junction
 		(at 97.79 120.65)
@@ -4089,10 +4101,16 @@
 		(uuid "35b52307-04d1-458a-beb7-9d0ab7646836")
 	)
 	(junction
-		(at 152.4 127)
+		(at 170.18 109.22)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "36d95768-6c16-4fe6-a561-56e77402156e")
+		(uuid "37b93bec-e798-4a3d-9b57-16662db401d3")
+	)
+	(junction
+		(at 152.4 144.78)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "383ce747-efd2-45df-ae22-9fd0b19323d2")
 	)
 	(junction
 		(at 205.74 127)
@@ -4107,6 +4125,12 @@
 		(uuid "393aeb31-d6da-4e5c-aba6-2bef16c33885")
 	)
 	(junction
+		(at 152.4 93.98)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3b11d433-cfc0-4f7c-8cbb-57fa8c4292a9")
+	)
+	(junction
 		(at 217.17 60.96)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4119,10 +4143,16 @@
 		(uuid "3cf9cda7-6e7a-4e67-96ab-b9deac6ef81e")
 	)
 	(junction
+		(at 170.18 144.78)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3facf762-8ccf-422c-8119-7088b0f16267")
+	)
+	(junction
 		(at 152.4 147.32)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "41e6521f-a2c9-4385-bd29-3a933caa2c38")
+		(uuid "406b98bf-2f3e-4f0a-92e9-52e66fe113b6")
 	)
 	(junction
 		(at 39.37 105.41)
@@ -4137,10 +4167,10 @@
 		(uuid "43f63193-055c-4188-859d-a8de1f3cac86")
 	)
 	(junction
-		(at 170.18 93.98)
+		(at 152.4 162.56)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "4d1f8268-4ee9-4447-b324-bdf48f3196ae")
+		(uuid "4f73e150-e43b-47f3-9a27-e35fc4fe3ae1")
 	)
 	(junction
 		(at 241.3 147.32)
@@ -4209,12 +4239,6 @@
 		(uuid "66197d00-a9a0-46d3-a85a-b68e054a8ff8")
 	)
 	(junction
-		(at 152.4 129.54)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "6a8c62a9-ffbf-4d14-805f-756478355372")
-	)
-	(junction
 		(at 171.45 35.56)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4225,12 +4249,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6c9f5e86-ba47-4dc8-aa59-488c0459ab49")
-	)
-	(junction
-		(at 170.18 147.32)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "6ead8e36-05cb-4813-b76e-c6d348b0450d")
 	)
 	(junction
 		(at 143.51 38.1)
@@ -4251,6 +4269,12 @@
 		(uuid "79ec4351-139b-4cc3-819d-b013e2eacbb5")
 	)
 	(junction
+		(at 152.4 111.76)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "7c98b671-97cb-4960-96a0-3da899af0af6")
+	)
+	(junction
 		(at 21.59 115.57)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4261,12 +4285,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7e0d6d0f-00d4-4efc-8308-5befe566a391")
-	)
-	(junction
-		(at 170.18 162.56)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "7ee8b8a6-e091-449e-963c-183f441af674")
 	)
 	(junction
 		(at 31.75 87.63)
@@ -4323,16 +4341,10 @@
 		(uuid "8e7f0547-f344-48c4-9dc1-a4372edd7cee")
 	)
 	(junction
-		(at 170.18 144.78)
+		(at 170.18 147.32)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "8ec1e53a-3da3-4826-ad68-4e3acb1979d8")
-	)
-	(junction
-		(at 152.4 93.98)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "9404a44b-18e0-492c-ab7b-08a08ef5fbda")
+		(uuid "8f28ea91-4840-49e3-b122-99b63e8e1541")
 	)
 	(junction
 		(at 201.93 48.26)
@@ -4377,6 +4389,12 @@
 		(uuid "a8ecd363-82db-46e1-a94c-7e3676b7cdac")
 	)
 	(junction
+		(at 170.18 111.76)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "abb9881c-22b4-42a0-8bed-3aea01b52b42")
+	)
+	(junction
 		(at 64.77 36.83)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -4419,22 +4437,10 @@
 		(uuid "c1c45770-ebb0-45a5-8188-3bafd291683b")
 	)
 	(junction
-		(at 152.4 144.78)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c45bd226-df43-4f50-b1b2-36de5bdbefc3")
-	)
-	(junction
 		(at 36.83 123.19)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "c5bb8682-d73b-4cfb-8788-ee68a8ff92fb")
-	)
-	(junction
-		(at 152.4 109.22)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "c65c652d-5bce-4a49-8f5f-ae62c36f1fe5")
 	)
 	(junction
 		(at 24.13 113.03)
@@ -4473,16 +4479,16 @@
 		(uuid "ce56fa42-5802-4fd5-b05e-bc35b689e21a")
 	)
 	(junction
+		(at 152.4 109.22)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d0816849-edaa-4280-a7cc-0759b46f94af")
+	)
+	(junction
 		(at 31.75 120.65)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d10bef83-5f1c-4600-9f19-a87f962d0079")
-	)
-	(junction
-		(at 170.18 109.22)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d260f155-3503-4476-b7d2-b76931b83f65")
 	)
 	(junction
 		(at 158.75 50.8)
@@ -4507,12 +4513,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d8d10ceb-a566-4156-a5f3-6e2218cd37e1")
-	)
-	(junction
-		(at 170.18 127)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "d8e49268-bd20-4613-933f-479d65e32afd")
 	)
 	(junction
 		(at 223.52 93.98)
@@ -4563,16 +4563,16 @@
 		(uuid "eaa8de9e-5416-4fb8-9a26-98cf30cb7a4d")
 	)
 	(junction
+		(at 152.4 129.54)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "edd5c431-cbc1-4215-940a-d41b98582e13")
+	)
+	(junction
 		(at 187.96 111.76)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "ee93bbc8-889b-4b1e-a582-76ba20fe4bb4")
-	)
-	(junction
-		(at 170.18 111.76)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "efd3d6b7-8b57-451f-8def-ea2672bffcea")
 	)
 	(junction
 		(at 187.96 162.56)
@@ -4587,16 +4587,16 @@
 		(uuid "f2a7bb1b-02d9-4215-8be3-7fdd515aea11")
 	)
 	(junction
+		(at 170.18 162.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f2afb444-e644-4018-9d26-6f871a3578c6")
+	)
+	(junction
 		(at 156.21 48.26)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "f2c07a2a-cc55-4aaa-9efd-675234d85e0c")
-	)
-	(junction
-		(at 170.18 129.54)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "f79e6820-61b2-4017-b9ef-ee00ee56e19f")
 	)
 	(no_connect
 		(at 41.91 48.26)
@@ -4716,6 +4716,16 @@
 	)
 	(wire
 		(pts
+			(xy 248.92 154.94) (xy 248.92 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "050b061f-46a2-4ca6-a17d-c10855e95356")
+	)
+	(wire
+		(pts
 			(xy 31.75 120.65) (xy 43.18 120.65)
 		)
 		(stroke
@@ -4726,13 +4736,13 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 99.06) (xy 215.9 101.6)
+			(xy 231.14 101.6) (xy 231.14 119.38)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "055805fa-a8d1-427b-84db-98f861606499")
+		(uuid "06b534d3-4a21-4774-a1dc-e1e2a83264ad")
 	)
 	(wire
 		(pts
@@ -4746,23 +4756,13 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 154.94) (xy 215.9 154.94)
+			(xy 162.56 119.38) (xy 162.56 137.16)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0765ab4c-34a9-4904-a0a2-6a9add36f01c")
-	)
-	(wire
-		(pts
-			(xy 177.8 99.06) (xy 144.78 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "08ad106b-6172-498f-98eb-26eee41d8196")
+		(uuid "0927d5b4-a76c-424f-a830-052e37267121")
 	)
 	(wire
 		(pts
@@ -4786,16 +4786,6 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 119.38) (xy 144.78 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0a8ef6a1-0fb5-48ce-8d74-53d2b19ffcca")
-	)
-	(wire
-		(pts
 			(xy 105.41 105.41) (xy 86.36 105.41)
 		)
 		(stroke
@@ -4803,6 +4793,16 @@
 			(type default)
 		)
 		(uuid "0b4896a2-f052-49f6-8f3f-d5acda52f56b")
+	)
+	(wire
+		(pts
+			(xy 144.78 137.16) (xy 144.78 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0b8aee1d-6b53-42a8-8e82-db301ecbb078")
 	)
 	(wire
 		(pts
@@ -4826,13 +4826,13 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 101.6) (xy 213.36 99.06)
+			(xy 152.4 147.32) (xy 170.18 147.32)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "0e6fc134-e420-48d3-99e1-d0506b219bf5")
+		(uuid "0edcb1e8-5bb3-4c2b-bd85-fe9469fe98cd")
 	)
 	(wire
 		(pts
@@ -4853,16 +4853,6 @@
 			(type default)
 		)
 		(uuid "11e4d546-fa1a-44d1-bccf-d7c23d8b67b7")
-	)
-	(wire
-		(pts
-			(xy 170.18 109.22) (xy 187.96 109.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "11f41475-9d80-4237-b0a5-8fc6d96613e9")
 	)
 	(wire
 		(pts
@@ -4916,16 +4906,6 @@
 	)
 	(wire
 		(pts
-			(xy 233.68 101.6) (xy 233.68 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "160d2993-214c-4baa-bc28-b5d582af59cf")
-	)
-	(wire
-		(pts
 			(xy 205.74 147.32) (xy 223.52 147.32)
 		)
 		(stroke
@@ -4953,6 +4933,16 @@
 			(type default)
 		)
 		(uuid "1715ba47-f0e6-4a91-a4f7-d3d6519f92cb")
+	)
+	(wire
+		(pts
+			(xy 152.4 129.54) (xy 170.18 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1870138f-5b6b-4d3c-8a4a-5d7d0681113c")
 	)
 	(wire
 		(pts
@@ -4986,6 +4976,16 @@
 	)
 	(wire
 		(pts
+			(xy 160.02 119.38) (xy 160.02 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1c84c4be-e945-43e6-ae7e-9e015f43edd9")
+	)
+	(wire
+		(pts
 			(xy 100.33 87.63) (xy 102.87 87.63)
 		)
 		(stroke
@@ -4993,16 +4993,6 @@
 			(type default)
 		)
 		(uuid "1d6c1c76-9ecf-4779-9d0e-55c626f6ae8d")
-	)
-	(wire
-		(pts
-			(xy 170.18 111.76) (xy 187.96 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1db13837-4753-4caf-a63f-1651f784415f")
 	)
 	(wire
 		(pts
@@ -5056,6 +5046,16 @@
 	)
 	(wire
 		(pts
+			(xy 152.4 162.56) (xy 170.18 162.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "20ac8793-a35a-43a1-8b11-a0652728ff7a")
+	)
+	(wire
+		(pts
 			(xy 198.12 101.6) (xy 198.12 119.38)
 		)
 		(stroke
@@ -5066,13 +5066,13 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 162.56) (xy 187.96 162.56)
+			(xy 177.8 137.16) (xy 177.8 154.94)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "236f9a12-f836-4998-af65-c4dcf6aa38e3")
+		(uuid "22b9ae85-48d3-41c5-b348-12c97b6cb8cc")
 	)
 	(wire
 		(pts
@@ -5106,16 +5106,6 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 99.06) (xy 215.9 99.06)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "263254f2-1cbc-45f8-8b7d-a2b4a092c1a6")
-	)
-	(wire
-		(pts
 			(xy 26.67 97.79) (xy 26.67 118.11)
 		)
 		(stroke
@@ -5146,16 +5136,6 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 147.32) (xy 170.18 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2caf7c1c-8776-43d7-82c3-f48c8dffae6b")
-	)
-	(wire
-		(pts
 			(xy 191.77 63.5) (xy 189.23 63.5)
 		)
 		(stroke
@@ -5183,16 +5163,6 @@
 			(type default)
 		)
 		(uuid "2db32204-80fa-44d7-a2d4-1924e2957f21")
-	)
-	(wire
-		(pts
-			(xy 160.02 137.16) (xy 160.02 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "2f093f36-5266-49a4-b014-65c1f2da291c")
 	)
 	(wire
 		(pts
@@ -5236,6 +5206,16 @@
 	)
 	(wire
 		(pts
+			(xy 170.18 129.54) (xy 187.96 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "33a32749-067b-4ae1-a485-d049a028369d")
+	)
+	(wire
+		(pts
 			(xy 107.95 105.41) (xy 105.41 105.41)
 		)
 		(stroke
@@ -5266,16 +5246,6 @@
 	)
 	(wire
 		(pts
-			(xy 162.56 101.6) (xy 162.56 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3918807a-057c-45a3-ae01-d13b5df69b27")
-	)
-	(wire
-		(pts
 			(xy 232.41 73.66) (xy 247.65 73.66)
 		)
 		(stroke
@@ -5303,16 +5273,6 @@
 			(type default)
 		)
 		(uuid "40002322-f983-47fe-9328-cd68ce68708a")
-	)
-	(wire
-		(pts
-			(xy 177.8 119.38) (xy 177.8 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "40ecaa27-4f6d-4321-a2fa-da73c43f2323")
 	)
 	(wire
 		(pts
@@ -5366,13 +5326,23 @@
 	)
 	(wire
 		(pts
-			(xy 160.02 101.6) (xy 160.02 119.38)
+			(xy 215.9 152.4) (xy 215.9 154.94)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "4b5eb552-90ea-43fd-b14f-e8b57eacd162")
+		(uuid "491f4920-b511-4c29-aa50-d299b5e7cf94")
+	)
+	(wire
+		(pts
+			(xy 213.36 101.6) (xy 215.9 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "49ea090a-6ee1-4a3a-917f-e6b61b4ef8c3")
 	)
 	(wire
 		(pts
@@ -5406,13 +5376,23 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 154.94) (xy 144.78 154.94)
+			(xy 170.18 127) (xy 187.96 127)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "52c536bf-9ca0-4d3e-afe8-2f2d274fc90a")
+		(uuid "52758662-204c-4024-8a6f-f44893964766")
+	)
+	(wire
+		(pts
+			(xy 233.68 137.16) (xy 233.68 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "535ad48c-3038-4d2e-a43a-8f91351f3011")
 	)
 	(wire
 		(pts
@@ -5436,13 +5416,33 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 157.48) (xy 251.46 157.48)
+			(xy 215.9 119.38) (xy 215.9 137.16)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "552f3b4e-5033-492d-8ddc-ad8c5d00812b")
+		(uuid "550c2f14-59b2-486f-a73f-292079154310")
+	)
+	(wire
+		(pts
+			(xy 170.18 147.32) (xy 187.96 147.32)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "556dcba3-051b-4d7e-a8dd-a7e3796f0641")
+	)
+	(wire
+		(pts
+			(xy 198.12 137.16) (xy 198.12 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "55993044-0927-4007-b703-c4dda74e6dec")
 	)
 	(wire
 		(pts
@@ -5466,16 +5466,6 @@
 	)
 	(wire
 		(pts
-			(xy 144.78 99.06) (xy 144.78 101.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "583e772e-2a0b-4dac-9296-8ec052e05028")
-	)
-	(wire
-		(pts
 			(xy 232.41 33.02) (xy 232.41 35.56)
 		)
 		(stroke
@@ -5496,13 +5486,13 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 154.94) (xy 180.34 154.94)
+			(xy 213.36 154.94) (xy 213.36 152.4)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "59bb94dd-5dc7-441d-b0f1-0dd10c4e2dfc")
+		(uuid "5ae0ed08-09ba-4a30-8bb7-409e9deca3e1")
 	)
 	(wire
 		(pts
@@ -5513,6 +5503,16 @@
 			(type default)
 		)
 		(uuid "5c31797d-9e50-468e-b331-a6d7fd8fbe7a")
+	)
+	(wire
+		(pts
+			(xy 248.92 152.4) (xy 215.9 152.4)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5d7eaf9c-7689-4d0c-bc40-0113c4ff078e")
 	)
 	(wire
 		(pts
@@ -5533,16 +5533,6 @@
 			(type default)
 		)
 		(uuid "5e3f5449-9554-4232-8fed-6d8867a617b4")
-	)
-	(wire
-		(pts
-			(xy 170.18 93.98) (xy 187.96 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "61067fb6-44ca-4958-9409-63ef64fe9a65")
 	)
 	(wire
 		(pts
@@ -5696,16 +5686,6 @@
 	)
 	(wire
 		(pts
-			(xy 215.9 119.38) (xy 215.9 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6bc02937-f858-4ac8-af37-69a71386ce53")
-	)
-	(wire
-		(pts
 			(xy 92.71 87.63) (xy 95.25 87.63)
 		)
 		(stroke
@@ -5716,23 +5696,13 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 144.78) (xy 187.96 144.78)
+			(xy 180.34 152.4) (xy 180.34 154.94)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "6da2460a-c86a-42d1-9a1b-563356b6a853")
-	)
-	(wire
-		(pts
-			(xy 195.58 137.16) (xy 195.58 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6e92f513-4bc0-4294-ab67-8e6ba686d079")
+		(uuid "6e9527f1-621a-4afe-b4fe-2998ab350436")
 	)
 	(wire
 		(pts
@@ -5796,6 +5766,16 @@
 	)
 	(wire
 		(pts
+			(xy 152.4 111.76) (xy 170.18 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77da67e3-1284-4d95-98b4-09b0f9f5d27f")
+	)
+	(wire
+		(pts
 			(xy 217.17 48.26) (xy 201.93 48.26)
 		)
 		(stroke
@@ -5816,23 +5796,13 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 129.54) (xy 170.18 129.54)
+			(xy 213.36 152.4) (xy 180.34 152.4)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "7b04ddb6-3b80-4c79-bf83-53cb9142ceac")
-	)
-	(wire
-		(pts
-			(xy 170.18 147.32) (xy 187.96 147.32)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "7ca9dd35-2594-4a3a-b1fe-9acbb4d69452")
+		(uuid "7bb22e44-0023-4fed-bace-8161fe679700")
 	)
 	(wire
 		(pts
@@ -5863,16 +5833,6 @@
 			(type default)
 		)
 		(uuid "7f4bad35-ce76-4a92-96a3-8277226273d7")
-	)
-	(wire
-		(pts
-			(xy 248.92 144.78) (xy 248.92 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "811134c3-1d41-48c0-8d29-62e4f0a6df70")
 	)
 	(wire
 		(pts
@@ -5956,13 +5916,13 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 99.06) (xy 180.34 99.06)
+			(xy 170.18 109.22) (xy 187.96 109.22)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "88b42e45-d743-45ca-a535-df7682a7ef21")
+		(uuid "88b79293-fa36-4ecc-bae7-dac96c0e924e")
 	)
 	(wire
 		(pts
@@ -6006,16 +5966,6 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 162.56) (xy 170.18 162.56)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "90f8e66f-a6b9-4133-9dad-be078ac70d40")
-	)
-	(wire
-		(pts
 			(xy 107.95 113.03) (xy 90.17 113.03)
 		)
 		(stroke
@@ -6023,6 +5973,16 @@
 			(type default)
 		)
 		(uuid "90fe7a8e-f301-4fa1-8c0f-55e45c79276e")
+	)
+	(wire
+		(pts
+			(xy 152.4 109.22) (xy 170.18 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "918a886d-b777-4a5e-8ead-1b65e4a7f965")
 	)
 	(wire
 		(pts
@@ -6106,16 +6066,6 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 109.22) (xy 170.18 109.22)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "993c5736-7ea8-4ac2-bf7d-d8055958e790")
-	)
-	(wire
-		(pts
 			(xy 207.01 63.5) (xy 204.47 63.5)
 		)
 		(stroke
@@ -6143,16 +6093,6 @@
 			(type default)
 		)
 		(uuid "9d3d3044-c881-4b24-b193-cdd6230eb060")
-	)
-	(wire
-		(pts
-			(xy 231.14 101.6) (xy 231.14 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a090f3b1-55d6-4fc2-a245-9782bec2bdda")
 	)
 	(wire
 		(pts
@@ -6216,13 +6156,23 @@
 	)
 	(wire
 		(pts
-			(xy 198.12 137.16) (xy 198.12 154.94)
+			(xy 170.18 144.78) (xy 187.96 144.78)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "a4d16a8f-58aa-4548-af6d-094b83a447da")
+		(uuid "a3bd2001-fbd9-4dfd-b5b1-6f1a3c52c108")
+	)
+	(wire
+		(pts
+			(xy 248.92 119.38) (xy 248.92 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a3fe8064-17f3-4611-9693-19ce47cec139")
 	)
 	(wire
 		(pts
@@ -6243,6 +6193,16 @@
 			(type default)
 		)
 		(uuid "a59ef5b7-a00f-4222-aa15-8d5a5bcc8ed5")
+	)
+	(wire
+		(pts
+			(xy 180.34 99.06) (xy 162.56 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a5b04b95-8011-47b2-82f3-2c689128924a")
 	)
 	(wire
 		(pts
@@ -6396,13 +6356,33 @@
 	)
 	(wire
 		(pts
-			(xy 177.8 101.6) (xy 177.8 99.06)
+			(xy 152.4 93.98) (xy 170.18 93.98)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "add69373-4e84-4bd8-960b-b1d6701ffb74")
+		(uuid "adea8ff1-c167-4c6f-bd3e-3ff84ce77064")
+	)
+	(wire
+		(pts
+			(xy 231.14 137.16) (xy 231.14 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b05ba60b-8ebc-4d97-863e-465b09751cb9")
+	)
+	(wire
+		(pts
+			(xy 170.18 111.76) (xy 187.96 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b0c44eb7-a553-4014-a874-5005fef2b43a")
 	)
 	(wire
 		(pts
@@ -6423,6 +6403,16 @@
 			(type default)
 		)
 		(uuid "b191af96-d75f-41d1-92f5-02ea1778394a")
+	)
+	(wire
+		(pts
+			(xy 162.56 99.06) (xy 162.56 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b19d0ef5-dc87-457c-917c-b7ea325d5de5")
 	)
 	(wire
 		(pts
@@ -6486,23 +6476,13 @@
 	)
 	(wire
 		(pts
-			(xy 213.36 119.38) (xy 213.36 137.16)
+			(xy 233.68 101.6) (xy 233.68 119.38)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "b64a299a-c9b7-4584-b994-b8e8ac804ac8")
-	)
-	(wire
-		(pts
-			(xy 233.68 137.16) (xy 233.68 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b6c5f013-c3f6-466d-b309-127cb6462be9")
+		(uuid "b5d86439-8b60-4099-bc0f-acdcf9fcce54")
 	)
 	(wire
 		(pts
@@ -6523,6 +6503,26 @@
 			(type default)
 		)
 		(uuid "b8261a8e-bb54-4209-95f9-82798bdb7cbf")
+	)
+	(wire
+		(pts
+			(xy 170.18 93.98) (xy 187.96 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b85dd84e-9f1f-4fd7-a464-ed83909d3e4c")
+	)
+	(wire
+		(pts
+			(xy 177.8 101.6) (xy 177.8 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b92eb26d-8f5c-4a3c-8e45-4856e4cb971f")
 	)
 	(wire
 		(pts
@@ -6586,26 +6586,6 @@
 	)
 	(wire
 		(pts
-			(xy 152.4 93.98) (xy 170.18 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bfab7327-59c0-4300-bf8e-7961a713f36d")
-	)
-	(wire
-		(pts
-			(xy 152.4 127) (xy 170.18 127)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bfbb2b90-0033-4eb2-a757-4517d1e35e12")
-	)
-	(wire
-		(pts
 			(xy 232.41 71.12) (xy 232.41 73.66)
 		)
 		(stroke
@@ -6636,6 +6616,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.29 101.6) (xy 161.29 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c280e2fd-bb00-4c5c-bdd3-7d206fa35a06")
+	)
+	(wire
+		(pts
 			(xy 143.51 38.1) (xy 143.51 25.4)
 		)
 		(stroke
@@ -6643,6 +6633,16 @@
 			(type default)
 		)
 		(uuid "c39e578f-69e0-415a-8b9c-bc729d417f58")
+	)
+	(wire
+		(pts
+			(xy 248.92 101.6) (xy 251.46 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c4249965-879a-4701-bacc-139381e3faf1")
 	)
 	(wire
 		(pts
@@ -6666,6 +6666,16 @@
 	)
 	(wire
 		(pts
+			(xy 152.4 144.78) (xy 170.18 144.78)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c9366c91-b395-4e8a-8299-ea71b2edcd35")
+	)
+	(wire
+		(pts
 			(xy 223.52 111.76) (xy 241.3 111.76)
 		)
 		(stroke
@@ -6673,26 +6683,6 @@
 			(type default)
 		)
 		(uuid "c9919fa5-9ffc-49e4-ac50-729d19dfb899")
-	)
-	(wire
-		(pts
-			(xy 162.56 137.16) (xy 162.56 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c9a7c440-7376-4828-842c-3147589b6d0f")
-	)
-	(wire
-		(pts
-			(xy 180.34 119.38) (xy 180.34 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cb60df3e-f75d-417e-b62c-b8f9d802c257")
 	)
 	(wire
 		(pts
@@ -6736,16 +6726,6 @@
 	)
 	(wire
 		(pts
-			(xy 231.14 137.16) (xy 231.14 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cc00931e-1a87-4768-9086-b3b3d3bcd741")
-	)
-	(wire
-		(pts
 			(xy 234.95 50.8) (xy 234.95 25.4)
 		)
 		(stroke
@@ -6763,6 +6743,16 @@
 			(type default)
 		)
 		(uuid "ccae29b1-bf7e-4b25-98a9-5ff31182994c")
+	)
+	(wire
+		(pts
+			(xy 144.78 101.6) (xy 144.78 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cd6aebdd-28db-484f-9fb0-963d10b27d0e")
 	)
 	(wire
 		(pts
@@ -6796,16 +6786,6 @@
 	)
 	(wire
 		(pts
-			(xy 251.46 144.78) (xy 248.92 144.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d18f8df1-62ff-4e10-9cb8-01fc0eb3f73c")
-	)
-	(wire
-		(pts
 			(xy 259.08 147.32) (xy 274.32 147.32)
 		)
 		(stroke
@@ -6836,26 +6816,6 @@
 	)
 	(wire
 		(pts
-			(xy 170.18 127) (xy 187.96 127)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d58891bf-52cb-4cde-9646-b4e5098f2a87")
-	)
-	(wire
-		(pts
-			(xy 152.4 144.78) (xy 170.18 144.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d6fac317-38a7-452a-bf35-92f010869f60")
-	)
-	(wire
-		(pts
 			(xy 189.23 38.1) (xy 189.23 25.4)
 		)
 		(stroke
@@ -6866,23 +6826,13 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 119.38) (xy 248.92 137.16)
+			(xy 195.58 137.16) (xy 195.58 154.94)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "dacfb1cd-e778-4355-b58a-93890b442fa0")
-	)
-	(wire
-		(pts
-			(xy 170.18 129.54) (xy 187.96 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "db425036-835d-4842-a92a-824fbbae43a8")
+		(uuid "dcc3ce07-5bee-4843-9c5c-2516e3555209")
 	)
 	(wire
 		(pts
@@ -6893,6 +6843,26 @@
 			(type default)
 		)
 		(uuid "dd961efa-eeab-4698-918b-4349779d63f3")
+	)
+	(wire
+		(pts
+			(xy 180.34 119.38) (xy 180.34 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "de184d25-a10c-468c-afd0-4abea2b183a3")
+	)
+	(wire
+		(pts
+			(xy 213.36 119.38) (xy 213.36 137.16)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "df6fcfed-7312-41a3-885f-1356132011ed")
 	)
 	(wire
 		(pts
@@ -6926,6 +6896,16 @@
 	)
 	(wire
 		(pts
+			(xy 160.02 101.6) (xy 161.29 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e1f91b75-7051-44d7-968d-abb2d6ff88bf")
+	)
+	(wire
+		(pts
 			(xy 90.17 97.79) (xy 90.17 113.03)
 		)
 		(stroke
@@ -6946,13 +6926,13 @@
 	)
 	(wire
 		(pts
-			(xy 248.92 101.6) (xy 248.92 99.06)
+			(xy 170.18 162.56) (xy 187.96 162.56)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "e5ffb85c-3852-405c-9692-a53474289356")
+		(uuid "e68e8874-bcab-4ca0-b074-c88667300b1c")
 	)
 	(wire
 		(pts
@@ -6996,16 +6976,6 @@
 	)
 	(wire
 		(pts
-			(xy 142.24 154.94) (xy 142.24 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ed61d119-801c-4a20-bfe3-c71f57c08830")
-	)
-	(wire
-		(pts
 			(xy 142.24 129.54) (xy 152.4 129.54)
 		)
 		(stroke
@@ -7013,6 +6983,16 @@
 			(type default)
 		)
 		(uuid "ed6a9b54-38d1-42a5-80df-d3facf23f888")
+	)
+	(wire
+		(pts
+			(xy 160.02 154.94) (xy 162.56 154.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "edb40433-2615-46b2-9eaa-57311a64ebb0")
 	)
 	(wire
 		(pts
@@ -7033,6 +7013,16 @@
 			(type default)
 		)
 		(uuid "eef7228d-ca9a-4ac0-87dd-06fad2006f89")
+	)
+	(wire
+		(pts
+			(xy 152.4 127) (xy 170.18 127)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "efbc9f99-e10e-4293-8b70-6f4cebc2c496")
 	)
 	(wire
 		(pts
@@ -7096,16 +7086,6 @@
 	)
 	(wire
 		(pts
-			(xy 251.46 101.6) (xy 251.46 144.78)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f6159ba0-a427-4cef-9cc9-4f52e2982fa4")
-	)
-	(wire
-		(pts
 			(xy 186.69 48.26) (xy 186.69 45.72)
 		)
 		(stroke
@@ -7156,6 +7136,16 @@
 	)
 	(wire
 		(pts
+			(xy 161.29 157.48) (xy 251.46 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fd09cfaf-539c-4076-865d-626d12039409")
+	)
+	(wire
+		(pts
 			(xy 107.95 128.27) (xy 86.36 128.27)
 		)
 		(stroke
@@ -7183,16 +7173,6 @@
 			(type default)
 		)
 		(uuid "fe1f98b0-3f37-448f-a0f0-784795979603")
-	)
-	(wire
-		(pts
-			(xy 152.4 111.76) (xy 170.18 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fe381cfc-a4ae-4583-b833-6eb0ab7ff30b")
 	)
 	(wire
 		(pts
@@ -7356,28 +7336,6 @@
 			)
 		)
 	)
-	(global_label "COL0"
-		(shape input)
-		(at 86.36 105.41 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "126dc26d-9768-4d1c-bdeb-f39ca5ce9aef")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 78.5367 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "SCK0"
 		(shape input)
 		(at 64.77 162.56 0)
@@ -7400,9 +7358,9 @@
 			)
 		)
 	)
-	(global_label "COL5"
+	(global_label "COL0"
 		(shape input)
-		(at 86.36 118.11 180)
+		(at 86.36 110.49 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -7410,31 +7368,9 @@
 			)
 			(justify right)
 		)
-		(uuid "1f33669e-2ed5-4e81-8f22-0b259628c67a")
+		(uuid "1d94c1ab-4907-46b9-9873-5f4327fdc65e")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 78.5367 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "COL3"
-		(shape input)
-		(at 86.36 113.03 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "1f57f3e1-0d92-4ea0-8453-1e2195279e68")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 78.5367 113.03 0)
+			(at 78.5367 110.49 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7466,7 +7402,7 @@
 			)
 		)
 	)
-	(global_label "COL4"
+	(global_label "COL6"
 		(shape input)
 		(at 20.32 115.57 180)
 		(fields_autoplaced yes)
@@ -7554,28 +7490,6 @@
 			)
 		)
 	)
-	(global_label "COL2"
-		(shape input)
-		(at 86.36 110.49 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "33291bdd-9101-4ee7-8b94-9ce798bf3270")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 78.5367 110.49 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "ROW2"
 		(shape input)
 		(at 52.07 160.02 180)
@@ -7620,6 +7534,28 @@
 			)
 		)
 	)
+	(global_label "COL5"
+		(shape input)
+		(at 86.36 123.19 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "4102673b-c069-441b-b1ad-62ca8da23afa")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 78.5367 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "SCK0"
 		(shape input)
 		(at 109.22 162.56 0)
@@ -7642,7 +7578,7 @@
 			)
 		)
 	)
-	(global_label "COL2"
+	(global_label "COL0"
 		(shape input)
 		(at 20.32 110.49 180)
 		(fields_autoplaced yes)
@@ -7688,28 +7624,6 @@
 	)
 	(global_label "COL7"
 		(shape input)
-		(at 86.36 123.19 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "4c673c0d-ee21-43d3-b3b5-182ed1b7365b")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 78.5367 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "COL3"
-		(shape input)
 		(at 20.32 113.03 180)
 		(fields_autoplaced yes)
 		(effects
@@ -7730,7 +7644,7 @@
 			)
 		)
 	)
-	(global_label "COL0"
+	(global_label "COL4"
 		(shape input)
 		(at 20.32 105.41 180)
 		(fields_autoplaced yes)
@@ -7743,28 +7657,6 @@
 		(uuid "4f0697b5-e0fa-4791-879b-362c4b9d35fd")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 12.4967 105.41 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "COL4"
-		(shape input)
-		(at 86.36 115.57 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "50052be5-8af4-421e-919a-d262473bb1dd")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 78.5367 115.57 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7792,6 +7684,28 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "COL4"
+		(shape input)
+		(at 86.36 105.41 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "552aad83-a7a2-43c7-a530-9201cdcd4407")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 78.5367 105.41 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -7906,6 +7820,50 @@
 			)
 		)
 	)
+	(global_label "COL1"
+		(shape input)
+		(at 86.36 118.11 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "69c91336-c1da-468e-bbf6-78b772c783d8")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 78.5367 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "COL2"
+		(shape input)
+		(at 86.36 107.95 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "6b31f97d-8a6b-43ca-9cf6-edd139b4106c")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 78.5367 107.95 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "ROW3"
 		(shape input)
 		(at 139.7 73.66 180)
@@ -8016,6 +7974,28 @@
 			)
 		)
 	)
+	(global_label "COL3"
+		(shape input)
+		(at 86.36 120.65 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "82836abe-5090-4011-9450-8717dffc7b13")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 78.5367 120.65 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "LED_R"
 		(shape input)
 		(at 52.07 177.8 180)
@@ -8104,7 +8084,29 @@
 			)
 		)
 	)
-	(global_label "COL6"
+	(global_label "COL7"
+		(shape input)
+		(at 86.36 113.03 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "98c593aa-0c0b-4783-bdce-4063496284a1")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 78.5367 113.03 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "COL3"
 		(shape input)
 		(at 20.32 120.65 180)
 		(fields_autoplaced yes)
@@ -8258,7 +8260,7 @@
 			)
 		)
 	)
-	(global_label "COL5"
+	(global_label "COL1"
 		(shape input)
 		(at 20.32 118.11 180)
 		(fields_autoplaced yes)
@@ -8346,7 +8348,7 @@
 			)
 		)
 	)
-	(global_label "COL7"
+	(global_label "COL5"
 		(shape input)
 		(at 20.32 123.19 180)
 		(fields_autoplaced yes)
@@ -8500,7 +8502,29 @@
 			)
 		)
 	)
-	(global_label "COL1"
+	(global_label "COL6"
+		(shape input)
+		(at 86.36 115.57 180)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "cd3a0a9a-d3ca-4143-9a0c-10968b3af9f9")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 78.5367 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "COL2"
 		(shape input)
 		(at 20.32 107.95 180)
 		(fields_autoplaced yes)
@@ -8694,28 +8718,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "COL1"
-		(shape input)
-		(at 86.36 107.95 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "def48296-0887-45f0-99dd-9e129736d382")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 78.5367 107.95 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)
@@ -8940,28 +8942,6 @@
 			)
 		)
 	)
-	(global_label "COL6"
-		(shape input)
-		(at 86.36 120.65 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "fe6ae32a-7fe5-481a-bb4d-edceaae08308")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 78.5367 120.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(symbol
 		(lib_id "power:+3V3")
 		(at 109.22 175.26 270)
@@ -9033,7 +9013,6 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 223.52 154.94 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9057,7 +9036,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 222.25 162.56 0)
+			(at 224.79 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9067,7 +9046,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 220.98 164.465 0)
+			(at 226.06 164.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9175,6 +9154,7 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 187.96 137.16 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9198,7 +9178,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 189.23 144.78 0)
+			(at 186.69 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9208,7 +9188,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 190.5 146.685 0)
+			(at 185.42 146.685 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9470,7 +9450,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 176.53 54.61 90)
+		(at 176.53 67.31 90)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9479,7 +9459,7 @@
 		(fields_autoplaced yes)
 		(uuid "11263e32-8a59-446d-b7bd-78bd27ed287b")
 		(property "Reference" "D2"
-			(at 179.07 53.378 90)
+			(at 179.07 66.078 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9488,7 +9468,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 179.07 55.918 90)
+			(at 179.07 68.618 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9497,7 +9477,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 180.975 54.61 0)
+			(at 180.975 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9506,7 +9486,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 173.99 54.61 0)
+			(at 173.99 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9515,7 +9495,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 176.53 54.61 0)
+			(at 176.53 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9558,7 +9538,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 161.29 54.61 90)
+		(at 161.29 67.31 90)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9567,7 +9547,7 @@
 		(fields_autoplaced yes)
 		(uuid "1a6e42f2-11d1-4568-876d-31955e5dc76b")
 		(property "Reference" "D1"
-			(at 163.83 53.378 90)
+			(at 163.83 66.078 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9576,7 +9556,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 163.83 55.918 90)
+			(at 163.83 68.618 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9585,7 +9565,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 165.735 54.61 0)
+			(at 165.735 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9594,7 +9574,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 158.75 54.61 0)
+			(at 158.75 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9603,7 +9583,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 161.29 54.61 0)
+			(at 161.29 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9612,13 +9592,13 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e77")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e78")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb22")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb23")
 		)
 		(pin "3"
-			(uuid "5b9400c7-252e-425f-a1c3-f396bb803bad")
+			(uuid "5b9400c7-252e-425f-a1c3-f396bb803bae")
 		)
 		(pin "4"
 			(uuid "58c8941d-fcfd-48d3-a406-4b6c5331b16d")
@@ -9627,13 +9607,13 @@
 			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb0")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a002120")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a002121")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7a")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7b")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c618")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c619")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -9851,6 +9831,7 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 170.18 119.38 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -9874,7 +9855,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 171.45 127 0)
+			(at 168.91 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9884,7 +9865,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 172.72 128.905 0)
+			(at 167.64 128.905 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10262,7 +10243,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 222.25 54.61 90)
+		(at 222.25 67.31 90)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10271,7 +10252,7 @@
 		(fields_autoplaced yes)
 		(uuid "2fd86314-b138-4eaf-b827-f584fc86f91a")
 		(property "Reference" "D5"
-			(at 224.79 53.378 90)
+			(at 224.79 66.078 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10280,7 +10261,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 224.79 55.918 90)
+			(at 224.79 68.618 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10289,7 +10270,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 226.695 54.61 0)
+			(at 226.695 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10298,7 +10279,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 219.71 54.61 0)
+			(at 219.71 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10307,7 +10288,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 222.25 54.61 0)
+			(at 222.25 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10316,13 +10297,13 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e77")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e79")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb22")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb24")
 		)
 		(pin "3"
-			(uuid "5b9400c7-252e-425f-a1c3-f396bb803bad")
+			(uuid "5b9400c7-252e-425f-a1c3-f396bb803baf")
 		)
 		(pin "4"
 			(uuid "2cd3aa91-37e2-4cef-825f-ee04b70130bd")
@@ -10331,13 +10312,13 @@
 			(uuid "05fa3f8e-94ca-4ac4-9bcd-74bbc85a03b2")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a002120")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a002122")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7a")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7c")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c618")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c61a")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -10351,6 +10332,7 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 152.4 119.38 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10374,7 +10356,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 153.67 127 0)
+			(at 151.13 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10384,7 +10366,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 154.94 128.905 0)
+			(at 149.86 128.905 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10694,6 +10676,7 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 187.96 101.6 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10717,7 +10700,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 189.23 109.22 0)
+			(at 186.69 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10727,7 +10710,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 190.5 111.125 0)
+			(at 185.42 111.125 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -10959,22 +10942,22 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e76")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e7a")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb21")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb25")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9edf")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee0")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e84")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e85")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeaf")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb1")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a00211f")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a002123")
 		)
 		(pin "2"
 			(uuid "eb55c478-37aa-4015-8305-8c6097b00d79")
@@ -11128,6 +11111,7 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 205.74 101.6 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11135,7 +11119,7 @@
 		(dnp no)
 		(uuid "4917b090-d650-47f3-b4b7-924a596e79ff")
 		(property "Reference" "LED03"
-			(at 205.486 95.25 0)
+			(at 205.994 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11143,7 +11127,7 @@
 			)
 		)
 		(property "Value" "SK6812MINI"
-			(at 205.486 97.79 0)
+			(at 205.994 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11151,7 +11135,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 207.01 109.22 0)
+			(at 204.47 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11161,7 +11145,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 208.28 111.125 0)
+			(at 203.2 111.125 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11259,25 +11243,25 @@
 			(uuid "e4262c2a-069e-40e2-b974-14762dc6aaf5")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb21")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb26")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9edf")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee1")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e84")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e86")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeaf")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb2")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a00211f")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a002124")
 		)
 		(pin "2"
 			(uuid "052f08d7-9460-4664-85f8-0048f916fc4d")
 		)
 		(pin "6"
-			(uuid "9a89bcf7-de0a-430f-92af-5248324ac995")
+			(uuid "9a89bcf7-de0a-430f-92af-5248324ac996")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -11413,25 +11397,25 @@
 			(uuid "34c17c18-dd0e-44cd-bc84-089548157b96")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb21")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb27")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9edf")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee2")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e84")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e87")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeaf")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb3")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a00211f")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a002125")
 		)
 		(pin "2"
 			(uuid "29a7890f-0842-4db2-9f7c-3cb2a5f70f13")
 		)
 		(pin "6"
-			(uuid "9a89bcf7-de0a-430f-92af-5248324ac995")
+			(uuid "9a89bcf7-de0a-430f-92af-5248324ac997")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -11765,7 +11749,6 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 187.96 119.38 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11789,7 +11772,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 186.69 127 0)
+			(at 189.23 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11799,7 +11782,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 185.42 128.905 0)
+			(at 190.5 128.905 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11841,6 +11824,7 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 223.52 101.6 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -11848,7 +11832,7 @@
 		(dnp no)
 		(uuid "5076ec66-75c3-498d-b987-96788be38285")
 		(property "Reference" "LED04"
-			(at 223.266 95.25 0)
+			(at 223.774 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11856,7 +11840,7 @@
 			)
 		)
 		(property "Value" "SK6812MINI"
-			(at 223.266 97.79 0)
+			(at 223.774 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11864,7 +11848,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 224.79 109.22 0)
+			(at 222.25 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -11874,7 +11858,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 226.06 111.125 0)
+			(at 220.98 111.125 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12039,25 +12023,25 @@
 			(uuid "b9bede64-f65e-4c0c-9b7b-b754313a53a0")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb21")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb28")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9edf")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee3")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e84")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e88")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeaf")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb4")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a00211f")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a002126")
 		)
 		(pin "2"
 			(uuid "e516953f-40e6-4b6a-b249-057d2026801a")
 		)
 		(pin "6"
-			(uuid "9a89bcf7-de0a-430f-92af-5248324ac995")
+			(uuid "9a89bcf7-de0a-430f-92af-5248324ac998")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -12070,7 +12054,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 191.77 54.61 90)
+		(at 191.77 67.31 90)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12079,7 +12063,7 @@
 		(fields_autoplaced yes)
 		(uuid "51d6cc43-a056-4c32-a232-0e4b5ba94b6c")
 		(property "Reference" "D3"
-			(at 194.31 53.378 90)
+			(at 194.31 66.078 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12088,7 +12072,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 194.31 55.918 90)
+			(at 194.31 68.618 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12097,7 +12081,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 196.215 54.61 0)
+			(at 196.215 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12106,7 +12090,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 189.23 54.61 0)
+			(at 189.23 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12115,7 +12099,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 191.77 54.61 0)
+			(at 191.77 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12124,13 +12108,13 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e77")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e7b")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb22")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb29")
 		)
 		(pin "3"
-			(uuid "5b9400c7-252e-425f-a1c3-f396bb803bad")
+			(uuid "5b9400c7-252e-425f-a1c3-f396bb803bb0")
 		)
 		(pin "4"
 			(uuid "f1bbbb7c-0766-4001-995b-6db5599e49da")
@@ -12139,13 +12123,13 @@
 			(uuid "9b7d9cc0-b04f-4e44-bdec-1dcd76d1bcce")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a002120")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a002127")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7a")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7d")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c618")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c61b")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -12348,25 +12332,25 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e78")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e7c")
 		)
 		(pin "1"
 			(uuid "063458ce-e87a-4d8b-b225-5eb644c14777")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee1")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee4")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e86")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e89")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb1")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb5")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a002121")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a002128")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7b")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7e")
 		)
 		(pin "6"
 			(uuid "bb436b13-c300-4ff9-9a36-9f593df1f00b")
@@ -12523,7 +12507,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 146.05 54.61 90)
+		(at 146.05 67.31 90)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12532,7 +12516,7 @@
 		(fields_autoplaced yes)
 		(uuid "5d6dc47f-8a12-4192-969e-f9893424cb22")
 		(property "Reference" "D0"
-			(at 148.59 53.378 90)
+			(at 148.59 66.078 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12541,7 +12525,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 148.59 55.918 90)
+			(at 148.59 68.618 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12550,7 +12534,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 150.495 54.61 0)
+			(at 150.495 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12559,7 +12543,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 143.51 54.61 0)
+			(at 143.51 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12568,7 +12552,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 146.05 54.61 0)
+			(at 146.05 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12577,28 +12561,28 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e76")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e7d")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb21")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb2a")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9edf")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee5")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e84")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e8a")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeaf")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb6")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a00211f")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a002129")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d79")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7f")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c617")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c61c")
 		)
 		(instances
 			(project ""
@@ -12878,7 +12862,6 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 170.18 137.16 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -12902,7 +12885,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 168.91 144.78 0)
+			(at 171.45 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -12912,7 +12895,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 167.64 146.685 0)
+			(at 172.72 146.685 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13278,22 +13261,22 @@
 			(uuid "7c3ad86c-e423-4313-8652-9f7f049e79dc")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee1")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee6")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e86")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e8b")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb1")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb7")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a002121")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a00212a")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7b")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d80")
 		)
 		(pin "6"
-			(uuid "bb436b13-c300-4ff9-9a36-9f593df1f00b")
+			(uuid "bb436b13-c300-4ff9-9a36-9f593df1f00c")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -13307,6 +13290,7 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 241.3 137.16 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13330,7 +13314,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 242.57 144.78 0)
+			(at 240.03 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13340,7 +13324,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 243.84 146.685 0)
+			(at 238.76 146.685 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13561,7 +13545,6 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 223.52 119.38 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13585,7 +13568,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 222.25 127 0)
+			(at 224.79 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13595,7 +13578,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 220.98 128.905 0)
+			(at 226.06 128.905 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13757,25 +13740,25 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e78")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e7e")
 		)
 		(pin "1"
 			(uuid "be803df1-5e86-495f-a511-ca1d93f11dee")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee1")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee7")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e86")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e8c")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb1")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb8")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a002121")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a00212b")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7b")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d81")
 		)
 		(pin "6"
 			(uuid "88abf126-1a4c-4d91-9d42-eafc6d3b7588")
@@ -13792,7 +13775,6 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 170.18 101.6 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -13800,7 +13782,7 @@
 		(dnp no)
 		(uuid "783b0111-9a73-4dea-a09d-10126625ece1")
 		(property "Reference" "LED01"
-			(at 173.99 95.25 0)
+			(at 166.37 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13808,7 +13790,7 @@
 			)
 		)
 		(property "Value" "SK6812MINI"
-			(at 172.466 97.536 0)
+			(at 167.894 97.536 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13816,7 +13798,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 168.91 109.22 0)
+			(at 171.45 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -13826,7 +13808,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 167.64 111.125 0)
+			(at 172.72 111.125 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14069,7 +14051,6 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 152.4 137.16 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14093,7 +14074,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 151.13 144.78 0)
+			(at 153.67 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14103,7 +14084,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 149.86 146.685 0)
+			(at 154.94 146.685 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14144,7 +14125,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 237.49 67.31 90)
+		(at 237.49 54.61 90)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14153,7 +14134,7 @@
 		(fields_autoplaced yes)
 		(uuid "8778ff20-ebc8-4d51-8baf-855de0215628")
 		(property "Reference" "D6"
-			(at 240.03 66.078 90)
+			(at 240.03 53.378 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14162,7 +14143,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 240.03 68.618 90)
+			(at 240.03 55.918 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14171,7 +14152,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 241.935 67.31 0)
+			(at 241.935 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14180,7 +14161,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 234.95 67.31 0)
+			(at 234.95 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14189,7 +14170,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 237.49 67.31 0)
+			(at 237.49 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14198,16 +14179,16 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e79")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e7f")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb24")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb2b")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee2")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee8")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e87")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e8d")
 		)
 		(pin "3"
 			(uuid "47872fd1-727f-4688-a98b-5b1f3ff88af2")
@@ -14216,10 +14197,10 @@
 			(uuid "940d3867-6a2e-4398-aa26-dacd99906e6b")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7c")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d82")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c61a")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c61d")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -14366,6 +14347,7 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 205.74 137.16 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14389,7 +14371,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 207.01 144.78 0)
+			(at 204.47 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14399,7 +14381,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 208.28 146.685 0)
+			(at 203.2 146.685 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14574,7 +14556,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 191.77 67.31 90)
+		(at 191.77 54.61 90)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14583,7 +14565,7 @@
 		(fields_autoplaced yes)
 		(uuid "913bf000-b369-4cb6-8b6a-452fc0abf0b2")
 		(property "Reference" "D3"
-			(at 194.31 66.078 90)
+			(at 194.31 53.378 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14592,7 +14574,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 194.31 68.618 90)
+			(at 194.31 55.918 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14601,7 +14583,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 196.215 67.31 0)
+			(at 196.215 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14610,7 +14592,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 189.23 67.31 0)
+			(at 189.23 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14619,7 +14601,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 191.77 67.31 0)
+			(at 191.77 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14628,16 +14610,16 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e79")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e80")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb24")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb2c")
 		)
 		(pin "3"
 			(uuid "038e1fa2-f48c-421c-b4b3-cec334605381")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e87")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e8e")
 		)
 		(pin "3"
 			(uuid "e2bd86ed-47e5-4bd8-9e34-50a214e4f746")
@@ -14646,10 +14628,10 @@
 			(uuid "fa4b8f5d-751b-42cf-8507-2a2403fdb1cf")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7c")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d83")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c61a")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c61e")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -14731,6 +14713,7 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 170.18 154.94 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -14754,7 +14737,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 171.45 162.56 0)
+			(at 168.91 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14764,7 +14747,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 172.72 164.465 0)
+			(at 167.64 164.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -14926,28 +14909,28 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e76")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e81")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb21")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb2d")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9edf")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee9")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e84")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e8f")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeaf")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb9")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a00211f")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a00212c")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d79")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d84")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c617")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c61f")
 		)
 		(instances
 			(project ""
@@ -15028,7 +15011,6 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 152.4 101.6 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15036,7 +15018,7 @@
 		(dnp no)
 		(uuid "a42cc910-c5dc-4793-b391-62f6b9bbba83")
 		(property "Reference" "LED00"
-			(at 155.702 95.504 0)
+			(at 149.098 95.504 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15044,7 +15026,7 @@
 			)
 		)
 		(property "Value" "SK6812MINI"
-			(at 156.21 97.79 0)
+			(at 148.59 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15052,7 +15034,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 151.13 109.22 0)
+			(at 153.67 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15062,7 +15044,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 149.86 111.125 0)
+			(at 154.94 111.125 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15103,7 +15085,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 222.25 67.31 90)
+		(at 222.25 54.61 90)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15112,7 +15094,7 @@
 		(fields_autoplaced yes)
 		(uuid "a449b834-5a95-444a-b03c-cc1b279cd766")
 		(property "Reference" "D5"
-			(at 224.79 66.078 90)
+			(at 224.79 53.378 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15121,7 +15103,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 224.79 68.618 90)
+			(at 224.79 55.918 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15130,7 +15112,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 226.695 67.31 0)
+			(at 226.695 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15139,7 +15121,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 219.71 67.31 0)
+			(at 219.71 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15148,7 +15130,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 222.25 67.31 0)
+			(at 222.25 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15157,16 +15139,16 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e79")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e82")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb24")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb2e")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee2")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9eea")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e87")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e90")
 		)
 		(pin "3"
 			(uuid "f6a9b4ed-b40a-483d-b530-922c193b9c68")
@@ -15175,10 +15157,10 @@
 			(uuid "3136cd23-facf-4b22-89ca-b46f75c16c3d")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7c")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d85")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c61a")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c620")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -15192,7 +15174,6 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 205.74 119.38 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15216,7 +15197,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 204.47 127 0)
+			(at 207.01 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15226,7 +15207,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 203.2 128.905 0)
+			(at 208.28 128.905 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15267,7 +15248,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 237.49 54.61 90)
+		(at 237.49 67.31 90)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15276,7 +15257,7 @@
 		(fields_autoplaced yes)
 		(uuid "a51bdfae-e31c-4496-baf5-7e51a0c55a53")
 		(property "Reference" "D6"
-			(at 240.03 53.378 90)
+			(at 240.03 66.078 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15285,7 +15266,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 240.03 55.918 90)
+			(at 240.03 68.618 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15294,7 +15275,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 241.935 54.61 0)
+			(at 241.935 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15303,7 +15284,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 234.95 54.61 0)
+			(at 234.95 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15312,7 +15293,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 237.49 54.61 0)
+			(at 237.49 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15321,13 +15302,13 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e77")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e83")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb22")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb2f")
 		)
 		(pin "3"
-			(uuid "5b9400c7-252e-425f-a1c3-f396bb803bad")
+			(uuid "5b9400c7-252e-425f-a1c3-f396bb803bb1")
 		)
 		(pin "4"
 			(uuid "e39f86b1-af77-4cc5-9f3b-eea39eb81bbc")
@@ -15336,13 +15317,13 @@
 			(uuid "733be26e-6824-4eae-a258-cb39796cef77")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a002120")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a00212d")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7a")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d86")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c618")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c621")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -15534,6 +15515,7 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 152.4 154.94 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15557,7 +15539,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 153.67 162.56 0)
+			(at 151.13 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15567,7 +15549,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 154.94 164.465 0)
+			(at 149.86 164.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15728,25 +15710,25 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e78")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e84")
 		)
 		(pin "1"
 			(uuid "e5668f9c-5a10-42b9-8984-12b70a1b326c")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee1")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9eeb")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e86")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e91")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb1")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eeba")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a002121")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a00212e")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7b")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d87")
 		)
 		(pin "6"
 			(uuid "661eb66a-5c14-45d5-ab31-871be13cd721")
@@ -15819,25 +15801,25 @@
 			(uuid "eaea2f7c-f61e-4f6c-8e55-332d47038a31")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb21")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb30")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9edf")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9eec")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e84")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e92")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeaf")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eebb")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a00211f")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a00212f")
 		)
 		(pin "2"
 			(uuid "cc8e67b8-2160-4222-8f02-02be0713c075")
 		)
 		(pin "6"
-			(uuid "9a89bcf7-de0a-430f-92af-5248324ac995")
+			(uuid "9a89bcf7-de0a-430f-92af-5248324ac999")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -15851,7 +15833,6 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 187.96 154.94 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15875,7 +15856,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 186.69 162.56 0)
+			(at 189.23 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15885,7 +15866,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 185.42 164.465 0)
+			(at 190.5 164.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15927,7 +15908,6 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 241.3 154.94 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -15951,7 +15931,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 240.03 162.56 0)
+			(at 242.57 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -15961,7 +15941,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 238.76 164.465 0)
+			(at 243.84 164.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16681,7 +16661,6 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 205.74 154.94 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16705,7 +16684,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 204.47 162.56 0)
+			(at 207.01 162.56 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16715,7 +16694,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 203.2 164.465 0)
+			(at 208.28 164.465 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16756,7 +16735,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 207.01 67.31 90)
+		(at 207.01 54.61 90)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -16765,7 +16744,7 @@
 		(fields_autoplaced yes)
 		(uuid "c7e57743-b2d5-4347-b36a-125330468d7f")
 		(property "Reference" "D4"
-			(at 209.55 66.078 90)
+			(at 209.55 53.378 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16774,7 +16753,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 209.55 68.618 90)
+			(at 209.55 55.918 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16783,7 +16762,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 211.455 67.31 0)
+			(at 211.455 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16792,7 +16771,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 204.47 67.31 0)
+			(at 204.47 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16801,7 +16780,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 207.01 67.31 0)
+			(at 207.01 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -16810,16 +16789,16 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e79")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e85")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb24")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb31")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee2")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9eed")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e87")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e93")
 		)
 		(pin "3"
 			(uuid "b0865a10-7024-4558-8436-56219fa35585")
@@ -16828,10 +16807,10 @@
 			(uuid "4da78409-43c7-41b5-8cf6-0f3966b5aebd")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7c")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d88")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c61a")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c622")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -16978,6 +16957,7 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 223.52 137.16 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17001,7 +16981,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 224.79 144.78 0)
+			(at 222.25 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17011,7 +16991,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 226.06 146.685 0)
+			(at 220.98 146.685 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17119,6 +17099,7 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 241.3 101.6 0)
+		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17126,7 +17107,7 @@
 		(dnp no)
 		(uuid "d6607a74-e730-4c5f-9870-c1e4fe527375")
 		(property "Reference" "LED05"
-			(at 241.046 95.25 0)
+			(at 241.554 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17134,7 +17115,7 @@
 			)
 		)
 		(property "Value" "SK6812MINI"
-			(at 241.046 97.79 0)
+			(at 241.554 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17142,7 +17123,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 242.57 109.22 0)
+			(at 240.03 109.22 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17152,7 +17133,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 243.84 111.125 0)
+			(at 238.76 111.125 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17193,7 +17174,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 146.05 67.31 90)
+		(at 146.05 54.61 90)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17202,7 +17183,7 @@
 		(fields_autoplaced yes)
 		(uuid "d7b51ba7-ec2b-47aa-a3de-222de5a56e90")
 		(property "Reference" "D0"
-			(at 148.59 66.078 90)
+			(at 148.59 53.378 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17211,7 +17192,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 148.59 68.618 90)
+			(at 148.59 55.918 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17220,7 +17201,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 150.495 67.31 0)
+			(at 150.495 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17229,7 +17210,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 143.51 67.31 0)
+			(at 143.51 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17238,7 +17219,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 146.05 67.31 0)
+			(at 146.05 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17247,28 +17228,28 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e76")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e86")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb21")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb32")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9edf")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9eee")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e84")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e94")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeaf")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eebc")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a00211f")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a002130")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d79")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d89")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c617")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c623")
 		)
 		(instances
 			(project ""
@@ -17415,7 +17396,6 @@
 	(symbol
 		(lib_id "LED:SK6812MINI")
 		(at 241.3 119.38 0)
-		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17439,7 +17419,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:LED_SK6812MINI_E_REVERSIBLE"
-			(at 240.03 127 0)
+			(at 242.57 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17449,7 +17429,7 @@
 			)
 		)
 		(property "Datasheet" "https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf"
-			(at 238.76 128.905 0)
+			(at 243.84 128.905 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17669,7 +17649,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 207.01 54.61 90)
+		(at 207.01 67.31 90)
 		(unit 3)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17678,7 +17658,7 @@
 		(fields_autoplaced yes)
 		(uuid "e02a813a-a189-4179-a31b-3f658661aec7")
 		(property "Reference" "D4"
-			(at 209.55 53.378 90)
+			(at 209.55 66.078 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17687,7 +17667,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 209.55 55.918 90)
+			(at 209.55 68.618 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17696,7 +17676,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 211.455 54.61 0)
+			(at 211.455 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17705,7 +17685,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 204.47 54.61 0)
+			(at 204.47 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17714,7 +17694,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 207.01 54.61 0)
+			(at 207.01 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17723,13 +17703,13 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e77")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e87")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb22")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb33")
 		)
 		(pin "3"
-			(uuid "5b9400c7-252e-425f-a1c3-f396bb803bad")
+			(uuid "5b9400c7-252e-425f-a1c3-f396bb803bb2")
 		)
 		(pin "4"
 			(uuid "265de02f-ad60-43b6-8f62-ea194f0ed09c")
@@ -17738,13 +17718,13 @@
 			(uuid "7b937dc8-a8b1-4ed6-bf92-51a4f6f87df6")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a002120")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a002131")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7a")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d8a")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c618")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c624")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -17891,7 +17871,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 176.53 67.31 90)
+		(at 176.53 54.61 90)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -17900,7 +17880,7 @@
 		(fields_autoplaced yes)
 		(uuid "ebd723af-3c09-4c81-9b30-c04a26b5fdac")
 		(property "Reference" "D2"
-			(at 179.07 66.078 90)
+			(at 179.07 53.378 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17909,7 +17889,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 179.07 68.618 90)
+			(at 179.07 55.918 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17918,7 +17898,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 180.975 67.31 0)
+			(at 180.975 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17927,7 +17907,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 173.99 67.31 0)
+			(at 173.99 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17936,7 +17916,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 176.53 67.31 0)
+			(at 176.53 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -17945,16 +17925,16 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e79")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e88")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb24")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb34")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee2")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9eef")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e87")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e95")
 		)
 		(pin "3"
 			(uuid "afc1d0a2-0bb2-44ac-8863-c80d073f37b3")
@@ -17963,10 +17943,10 @@
 			(uuid "a128061b-8b47-4e1a-ab89-dcc262a385e9")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7c")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d8b")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c61a")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c625")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
@@ -18033,25 +18013,25 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e78")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e89")
 		)
 		(pin "1"
 			(uuid "a5851d65-5035-49c2-a304-9a332ea6119d")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee1")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ef0")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e86")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e96")
 		)
 		(pin "3"
-			(uuid "5107edfd-cea7-41a2-8995-0d185922eeb1")
+			(uuid "5107edfd-cea7-41a2-8995-0d185922eebd")
 		)
 		(pin "5"
-			(uuid "844c21e0-bb79-4b2f-8466-3a608a002121")
+			(uuid "844c21e0-bb79-4b2f-8466-3a608a002132")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7b")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d8c")
 		)
 		(pin "6"
 			(uuid "2549fafe-1f63-4a69-9806-91ceaa9d781b")
@@ -18134,7 +18114,7 @@
 	)
 	(symbol
 		(lib_id "Diode:BAW56DW")
-		(at 161.29 67.31 90)
+		(at 161.29 54.61 90)
 		(unit 4)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -18143,7 +18123,7 @@
 		(fields_autoplaced yes)
 		(uuid "f3ee6fa6-3207-433f-8979-20b2979fb8e7")
 		(property "Reference" "D1"
-			(at 163.83 66.078 90)
+			(at 163.83 53.378 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18152,7 +18132,7 @@
 			)
 		)
 		(property "Value" "BAW56DW"
-			(at 163.83 68.618 90)
+			(at 163.83 55.918 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18161,7 +18141,7 @@
 			)
 		)
 		(property "Footprint" "reversible_kbd:BAW70DW_reversible"
-			(at 165.735 67.31 0)
+			(at 165.735 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18170,7 +18150,7 @@
 			)
 		)
 		(property "Datasheet" "http://www.diodes.com/datasheets/ds30146.pdf"
-			(at 158.75 67.31 0)
+			(at 158.75 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18179,7 +18159,7 @@
 			)
 		)
 		(property "Description" "Switching diode array 2 pair Com A"
-			(at 161.29 67.31 0)
+			(at 161.29 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -18188,28 +18168,28 @@
 			)
 		)
 		(pin "6"
-			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e79")
+			(uuid "c8fc650d-f0ba-496e-8d11-7c4906d56e8a")
 		)
 		(pin "1"
-			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb24")
+			(uuid "224f6ad1-1414-4800-a3c8-837b38aedb35")
 		)
 		(pin "3"
-			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ee2")
+			(uuid "1bfa3987-9403-4ef1-b634-9b79bc1c9ef1")
 		)
 		(pin "4"
-			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e87")
+			(uuid "9d470539-3af5-48ef-a228-1fdce8f27e97")
 		)
 		(pin "3"
-			(uuid "e2bd86ed-47e5-4bd8-9e34-50a214e4f746")
+			(uuid "e2bd86ed-47e5-4bd8-9e34-50a214e4f747")
 		)
 		(pin "5"
 			(uuid "04219ad3-2ceb-4a0a-8581-cca0d59d9a77")
 		)
 		(pin "2"
-			(uuid "eb55c478-37aa-4015-8305-8c6097b00d7c")
+			(uuid "eb55c478-37aa-4015-8305-8c6097b00d8d")
 		)
 		(pin "6"
-			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c61a")
+			(uuid "acbae5c8-c63a-41ee-b9cf-a7005730c626")
 		)
 		(instances
 			(project "choc_v1_socket_reversible_165_595"
