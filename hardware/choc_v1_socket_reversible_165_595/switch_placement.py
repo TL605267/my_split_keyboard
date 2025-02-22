@@ -2,6 +2,18 @@
 from os import listdir
 from math import sin, cos, radians
 from pcbnew import *
+from dataclasses import dataclass,field
+
+@dataclass
+class FOOTPRINT:
+	fp: FOOTPRINT
+	ref: str
+	val: str
+	pos: VECTOR2I
+	ori: int
+	ref_inst: PCB_FIELD
+	padF: dict[str, VECTOR2I]
+	padB: dict[str, VECTOR2I]
 
 class kbd_place_n_route(ActionPlugin):
 	def __init__(self):
@@ -11,7 +23,6 @@ class kbd_place_n_route(ActionPlugin):
 		self.sw_x_spc = 19 # 17.5 #19.05
 		self.sw_y_spc = 17 #19.05
 		self.fp_dict = {} # footpint dictionary
-		self.d_dict = {}
 
 	def load_board(self):
 		# Load the board file
@@ -19,27 +30,25 @@ class kbd_place_n_route(ActionPlugin):
 			self.filename = [file for file in listdir('.') if file.endswith('.kicad_pcb') and 'auto' not in file][0]
 			self.board = LoadBoard(self.filename)
 		for fp in self.board.GetFootprints():
-			self.fp_dict[fp.GetReference()]= {
-				'fp': fp,
-				'ref': fp.GetReference(),
-				'val': fp.GetValue(),
-				'pos': VECTOR2I_MM(0,0), # can't get shallow copy from fp.GetPosition()
-				'ori': 0, # orientation is not updated after placement
-				'ref_inst': fp.Reference(),
-				'pad':{
-					'F.Cu':{},
-					'B.Cu':{}
-				}
-			}
+			ref = fp.GetReference()
+			self.fp_dict[ref]= FOOTPRINT(
+				fp = fp,
+				ref = ref,
+				val = fp.GetValue(),
+				pos = VECTOR2I_MM(0,0),  # can't get shallow copy from fp.GetPosition()
+				ori = 0, # orientation is not updated after placement
+				ref_inst = fp.Reference(),
+				padF = {},
+				padB = {}
+			)
 
 	def update_pad_pos(self):
 		for pad in self.board.GetPads():
 			if pad.GetNumber() != '': # skip mounting pad
 				if pad.IsOnLayer(F_Cu):
-					self.fp_dict[pad.GetParentAsString()]['pad']['F.Cu'][pad.GetNumber()] = pad.GetCenter()
+					self.fp_dict[pad.GetParentAsString()].padF[pad.GetNumber()] = pad.GetCenter()
 				elif pad.IsOnLayer(B_Cu):	
-					self.fp_dict[pad.GetParentAsString()]['pad']['B.Cu'][pad.GetNumber()] = pad.GetCenter()
-		#print(self.fp_dict)
+					self.fp_dict[pad.GetParentAsString()].padB[pad.GetNumber()] = pad.GetCenter()
 
 	def remove_old_tracks(self):
 		# Remove all existing tracks from the board
@@ -101,7 +110,7 @@ class kbd_place_n_route(ActionPlugin):
 	
 	def get_fp(self, fp_val):
 		# Get a list of footprint references with a specific value
-		return [value for value in self.fp_dict.values() if value['val'] == fp_val]
+		return [value for value in self.fp_dict.values() if value.val == fp_val]
 
 	def gen_led_track(self, netname, s_offset = VECTOR2I_MM(0,0)): #TODO put the start point track at top
 		# Generate LED track code
@@ -123,8 +132,8 @@ class kbd_place_n_route(ActionPlugin):
 	def gen_fp_placement(self):
 		# Place switches on the board
 		for sw in self.get_fp('SW_Push'): 
-			sw_row = int(sw['ref'][2])
-			sw_col = int(sw['ref'][3])
+			sw_row = int(sw.ref[2])
+			sw_col = int(sw.ref[3])
 			sw_orienation = 0
 			if(sw_col < 6): # 4 fingers
 				sw_offset = VECTOR2I_MM(self.sw_x_spc*sw_col, self.sw_y_spc*sw_row + self.col_offsets[sw_col])
@@ -137,121 +146,97 @@ class kbd_place_n_route(ActionPlugin):
 				elif sw_row == 3: # thumb cluster
 					sw_offset = VECTOR2I_MM(self.sw_x_spc*5+23.8, self.sw_y_spc*3+19.8)
 					sw_orienation = -30
-			sw['pos'] = self.sw0_pos+sw_offset
-			sw['ori'] = sw_orienation
-			led_ref = 'LED'+sw['ref'][-2:]
-			self.fp_dict[led_ref]['pos'] = self.rotate(sw['pos'], sw['pos'] + VECTOR2I_MM(0,-4.7), sw['ori'])
-			self.fp_dict[led_ref]['ori'] = sw_orienation
+			sw.pos = self.sw0_pos+sw_offset
+			sw.ori = sw_orienation
+			led_ref = 'LED'+sw.ref[-2:]
+			self.fp_dict[led_ref].pos = self.rotate(sw.pos, sw.pos + VECTOR2I_MM(0,-4.7), sw.ori)
+			self.fp_dict[led_ref].ori = sw_orienation
 
 	def place_sw(self):
 		# Place switches on the board
 		for sw in self.get_fp('SW_Push'): 
 			# place switches
-			self.place_fp(sw['pos'], sw['fp'], sw['ori'])
+			self.place_fp(sw.pos, sw.fp, sw.ori)
 			# Move text
-			sw['ref_inst'].SetTextPos(sw['pos'] + VECTOR2I_MM(4.4, 7.1))
-			for item in sw['fp'].GraphicalItems(): #TODO store graphical items in dict
+			sw.ref_inst.SetTextPos(sw.pos + VECTOR2I_MM(4.4, 7.1))
+			for item in sw.fp.GraphicalItems(): #TODO store graphical items in dict
 				if type(item) == PCB_TEXT:
-					item.SetPosition(sw['pos']+VECTOR2I_MM(-4.4,7.1))
+					item.SetPosition(sw.pos+VECTOR2I_MM(-4.4,7.1))
 
 	def place_led(self):
 		# Place LEDs on the board
 		for led in self.get_fp('SK6812MINI'):
-			self.place_fp(led['pos'], led['fp'], led['ori'])
+			self.place_fp(led.pos, led.fp, led.ori)
 
 	def place_diode(self):
 		# Place diodes on the board
 		for diode in self.get_fp('BAW56DW'):
-			if not self.is_thumb_cluster(diode['ref']):
+			if not self.is_thumb_cluster(diode.ref):
 				# get top switch position
-				sw_ref_t = 'SW3'+diode['ref'][1:3]
-				sw_pos_t = self.fp_dict[sw_ref_t]['pos']
+				sw_ref_t = 'SW3'+diode.ref[1:3]
+				sw_pos_t = self.fp_dict[sw_ref_t].pos
 				# place diode in between switches
 				d_pos = sw_pos_t + VECTOR2I_MM(-7.5, 8.2)
-				diode['pos'] = d_pos
-				self.place_fp(diode['pos'], diode['fp'], 180)
-				diode['fp'].Flip(d_pos, False)
-				diode['ref_inst'].SetTextPos(d_pos + VECTOR2I_MM(0, 2.4))
-				diode['ref_inst'].SetTextAngleDegrees(180)
+				diode.pos = d_pos
+				self.place_fp(diode.pos, diode.fp, 180)
+				diode.fp.Flip(d_pos, False)
+				diode.ref_inst.SetTextPos(d_pos + VECTOR2I_MM(0, 2.4))
+				diode.ref_inst.SetTextAngleDegrees(180)
 
 	def place_via_for_led(self): 
 		# Place vias on the board
-		via_pad_offset = 0.3
 		for led in self.get_fp('SK6812MINI'):
-			#if not self.is_thumb_cluster(led_ref): # skip thumb cluster
-			led_pos = led['fp'].GetPosition()
-			led_orientation = led['fp'].GetOrientation().AsDegrees()
-			pad_pos = {
-				'F_Cu': {'1': VECTOR2I_MM(0,0), '3': VECTOR2I_MM(0,0), '4': VECTOR2I_MM(0,0)},
-				'B_Cu': {'1': VECTOR2I_MM(0,0), '3': VECTOR2I_MM(0,0), '4': VECTOR2I_MM(0,0)}
-			}
-			for pad in led['fp'].Pads():
-				if pad.GetNumber() != '2': # SKIP GND
-					if pad.IsOnLayer(F_Cu):
-						pad_pos['F_Cu'][pad.GetNumber()] = pad.GetCenter()
-					if pad.IsOnLayer(B_Cu):
-						pad_pos['B_Cu'][pad.GetNumber()] = pad.GetCenter()
-			for num, pos in pad_pos['F_Cu'].items():
-				#print(led_ref, pad.GetNumber(), pad.GetLayer(), pad.IsOnLayer(F_Cu), pad.GetNetname())
-				#skip GND net since it will be connected by copper pour
-				if   num == '1':
-					via_pos = self.rotate(led_pos, led_pos + VECTOR2I_MM(3.3,0), led_orientation)
-				elif num == '3':
-					# place via in a bit left
-					via_pos = self.rotate(led_pos, led_pos + VECTOR2I_MM(-3,0), led_orientation)
-				elif num == '4': # +5V Net
-					# place via in a bit right
-					via_pos = self.rotate(led_pos, led_pos + VECTOR2I_MM(-3.6,0), led_orientation)
-
-				track_start = pos
-				track_end   = pad_pos['B_Cu'][num]
-				self.add_track(track_start, via_pos, F_Cu)
+			#skip GND net since it will be connected by copper pour
+			via_offset = {'1': 3.3, '3': -3, '4': -3.6}
+			for i in ['1', '3', '4']:
+				via_pos = self.rotate(led.pos, led.pos + VECTOR2I_MM(via_offset[i],0), led.ori)
+				self.add_track(led.padF[i], via_pos, F_Cu)
 				self.add_via(via_pos, 0.3, 0.4)
-				self.add_track(track_end  , via_pos, B_Cu)
+				self.add_track(led.padB[i], via_pos, B_Cu)
 
 	def place_via_for_diode(self):
 		for diode in self.get_fp('BAW56DW'):
 			# place via
 			for i in range(-2, 3):
-				self.add_via(diode['pos']+VECTOR2I_MM(0,i*0.65), 0.3, 0.4)
+				self.add_via(diode.pos+VECTOR2I_MM(0,i*0.65), 0.3, 0.4)
 			# connect 
 			for i in ['1', '2', '3']:
-				self.add_track(diode['pad']['F.Cu'][i], diode['pad']['F.Cu'][i]+VECTOR2I_MM( 0.95,-0.65), F_Cu)	
-				self.add_track(diode['pad']['F.Cu'][i], diode['pad']['F.Cu'][i]+VECTOR2I_MM( 0.95, 0.65), B_Cu)	
+				self.add_track(diode.padF[i], diode.padF[i]+VECTOR2I_MM( 0.95,-0.65), F_Cu)	
+				self.add_track(diode.padF[i], diode.padF[i]+VECTOR2I_MM( 0.95, 0.65), B_Cu)	
 			for i in ['4', '5', '6']:
-				self.add_track(diode['pad']['F.Cu'][i], diode['pad']['F.Cu'][i]+VECTOR2I_MM(-0.95, 0.65), F_Cu)	
-				self.add_track(diode['pad']['F.Cu'][i], diode['pad']['F.Cu'][i]+VECTOR2I_MM(-0.95,-0.65), B_Cu)	
+				self.add_track(diode.padF[i], diode.padF[i]+VECTOR2I_MM(-0.95, 0.65), F_Cu)	
+				self.add_track(diode.padF[i], diode.padF[i]+VECTOR2I_MM(-0.95,-0.65), B_Cu)	
 
 	#TODO def connect_thumb_cluster(self):
 	#rotate thumb keys and connect
 	def place_mcu(self):
 		for mcu in self.get_fp('CH582'):
-			self.place_fp(VECTOR2I_MM(168, 48), mcu['fp'], 0)
+			self.place_fp(VECTOR2I_MM(168, 48), mcu.fp, 0)
 			
 	def place_misc(self):
 		# Place misc components on the board
-		self.place_fp(VECTOR2I_MM(175.6, 50), self.fp_dict['R1']['fp'], 180)
-		self.fp_dict['R1']['fp'].Flip(self.fp_dict['R1']['fp'].GetPosition(), False)
-		self.place_fp(VECTOR2I_MM(175.6, 58), self.fp_dict['R2']['fp'], 0)
-		self.fp_dict['R2']['fp'].Flip(self.fp_dict['R2']['fp'].GetPosition(), False)
-		self.place_fp(VECTOR2I_MM(175.6, 54), self.fp_dict['JP1']['fp'], 0)
-		self.fp_dict['JP1']['fp'].Flip(self.fp_dict['JP1']['fp'].GetPosition(), False)
-		self.place_fp(VECTOR2I_MM(183.7, 131.6), self.fp_dict['JP2']['fp'], 180)
+		self.place_fp(VECTOR2I_MM(175.6, 50), self.fp_dict['R1'].fp, 180)
+		self.fp_dict['R1'].fp.Flip(self.fp_dict['R1'].fp.GetPosition(), False)
+		self.place_fp(VECTOR2I_MM(175.6, 58), self.fp_dict['R2'].fp, 0)
+		self.fp_dict['R2'].fp.Flip(self.fp_dict['R2'].fp.GetPosition(), False)
+		self.place_fp(VECTOR2I_MM(175.6, 54), self.fp_dict['JP1'].fp, 0)
+		self.fp_dict['JP1'].fp.Flip(self.fp_dict['JP1'].fp.GetPosition(), False)
+		self.place_fp(VECTOR2I_MM(183.7, 131.6), self.fp_dict['JP2'].fp, 180)
 
 	def place_connector(self):
 		# Place connectors on the board
 		for conn in self.get_fp('Conn_02x12_Odd_Even_MountingPin'):
-			if 'LEFT' in conn['ref']: # place and flip the left connector back
-				conn['fp'].Flip(conn['fp'].GetPosition(), False)
-				self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), conn['fp'], -45)
+			if 'LEFT' in conn.ref: # place and flip the left connector back
+				conn.fp.Flip(conn.fp.GetPosition(), False)
+				self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), conn.fp, -45)
 			else: # place the right connector
-				self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), conn['fp'], 135)
+				self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), conn.fp, 135)
 
 	def place_via_for_connector(self):
 		# Place vias on the board
 		for conn in self.get_fp('Conn_02x12_Odd_Even_MountingPin'):
-			if 'RIGHT' in conn['ref']: # doesn't metter left or right, just pick one to get the pad position
-				for pad in conn['fp'].Pads():
+			if 'RIGHT' in conn.ref: # doesn't metter left or right, just pick one to get the pad position
+				for pad in conn.fp.Pads():
 					# skip mounting pad, GND and unconnected pad
 					if pad.GetNetname() != 'GND' and 'unconnected' not in pad.GetNetname() and pad.GetNumber().isdigit() and int(pad.GetNumber()) %2 :
 						self.add_tracks([
@@ -263,51 +248,41 @@ class kbd_place_n_route(ActionPlugin):
 						])
 
 	def place_shift_register_and_resistor(self):
-		for sr in self.get_fp('74HC165'):
-			if 'LEFT' in sr['ref']:
-				sr['fp'].Flip(sr['fp'].GetPosition(), False) # flip back
-				self.place_fp(self.sw0_pos + VECTOR2I_MM(119, 52), sr['fp'], 0)
-			else:
-				self.place_fp(self.sw0_pos + VECTOR2I_MM(114, 52), sr['fp'], 180)
-		for r in self.get_fp('R_Pack08'):
-			if 'LEFT' in r['ref']:
-				r['fp'].Flip(r['fp'].GetPosition(), False)
-				self.place_fp(self.sw0_pos + VECTOR2I_MM(127.8  , 52), r['fp'], 0)
-			else:
-				self.place_fp(self.sw0_pos + VECTOR2I_MM(126, 52), r['fp'], 180)
+		# shift register
+		self.fp_dict['SR_LEFT1'].fp.Flip(self.fp_dict['SR_LEFT1'].fp.GetPosition(), False)
+		self.place_fp(self.sw0_pos + VECTOR2I_MM(119, 52), self.fp_dict['SR_LEFT1'].fp, 0)
+		self.place_fp(self.sw0_pos + VECTOR2I_MM(114, 52), self.fp_dict['SR_RIGHT1'].fp, 180)
+		# resistor network
+		self.fp_dict['RN_LEFT1'].fp.Flip(self.fp_dict['RN_LEFT1'].fp.GetPosition(), False)
+		self.place_fp(self.sw0_pos + VECTOR2I_MM(127.8, 52), self.fp_dict['RN_LEFT1'].fp, 0)
+		self.place_fp(self.sw0_pos + VECTOR2I_MM(126  , 52), self.fp_dict['RN_RIGHT1'].fp, 180)
 
 	def connect_pad1(self):
 		# Connect switch pad1 on both F_Cu and B_Cu layer
-		for ref in self.fp_dict.values():
-			if ref['val'] == 'SW_Push':
-				p1 = self.rotate(ref['pos'], ref['pos'] + VECTOR2I_MM( 3.3, 6.0), ref['ori'])
-				p2 = self.rotate(ref['pos'], ref['pos'] + VECTOR2I_MM( 1.5, 4.0), ref['ori'])
-				p3 = self.rotate(ref['pos'], ref['pos'] + VECTOR2I_MM(-2.7, 4.0), ref['ori'])
-				p4 = self.rotate(ref['pos'], ref['pos'] + VECTOR2I_MM(-4.1, 5.4), ref['ori'])
-				self.add_tracks([
-					(p1, B_Cu),
-					(p2, B_Cu),
-					(p3, -1), #via
-					(p4, F_Cu)
-				])
+		for sw in self.get_fp('SW_Push'):
+			self.add_tracks([
+				(self.rotate(sw.pos, sw.pos + VECTOR2I_MM( 3.3, 6.0), sw.ori), B_Cu),
+				(self.rotate(sw.pos, sw.pos + VECTOR2I_MM( 1.5, 4.0), sw.ori), B_Cu),
+				(self.rotate(sw.pos, sw.pos + VECTOR2I_MM(-2.7, 4.0), sw.ori), -1),
+				(self.rotate(sw.pos, sw.pos + VECTOR2I_MM(-4.1, 5.4), sw.ori), F_Cu)
+			])
 
 	def connect_pad2(self):
 		# Connect switch pad2 on both F_Cu and B_Cu layer
-		for ref, fp in self.fp_dict.items():
-			if fp['val'] == 'SW_Push':
+		for sw in self.get_fp('SW_Push'):
+			self.add_tracks([
+				(self.rotate(sw.pos, sw.pos + VECTOR2I_MM(-8.2, 3.6), sw.ori), B_Cu),
+				(self.rotate(sw.pos, sw.pos + VECTOR2I_MM(-6.5, 2.0), sw.ori), B_Cu),
+				(self.rotate(sw.pos, sw.pos + VECTOR2I_MM( 7.5, 2.0), sw.ori),   -1), # via
+				(self.rotate(sw.pos, sw.pos + VECTOR2I_MM( 8.2, 3.6), sw.ori), F_Cu)
+			])
+			# connect via to sw on the right
+			if sw.ref[-1] != '5' and sw.ref[-1] != '6':
+				sw_r = sw.ref[:-1]+str(int(sw.ref[-1])+1)
 				self.add_tracks([
-					(self.rotate(fp['pos'], fp['pos'] + VECTOR2I_MM(-8.2, 3.6), fp['ori']), B_Cu),
-					(self.rotate(fp['pos'], fp['pos'] + VECTOR2I_MM(-6.5, 2.0), fp['ori']), B_Cu),
-					(self.rotate(fp['pos'], fp['pos'] + VECTOR2I_MM( 7.5, 2.0), fp['ori']),   -1), # via
-					(self.rotate(fp['pos'], fp['pos'] + VECTOR2I_MM( 8.2, 3.6), fp['ori']), F_Cu)
+					(sw.pos+VECTOR2I_MM( 7.5, 2.0),   B_Cu), # via
+					(self.fp_dict[sw_r].padB['2'], B_Cu)
 				])
-				# connect via to sw on the right
-				if ref[-1] != '5' and ref[-1] != '6':
-					sw_r = ref[:-1]+str(int(ref[-1])+1)
-					self.add_tracks([
-						(fp['pos']+VECTOR2I_MM( 7.5, 2.0),   B_Cu), # via
-						(self.fp_dict[sw_r]['pad']['B.Cu']['2'], B_Cu)
-					])
 				
 	def add_poly(self):
 		pts = [
@@ -332,37 +307,37 @@ class kbd_place_n_route(ActionPlugin):
 	def connect_diode_and_sw(self):
 		# Connect diode and switches pad1 on both F_cu and B_Cu layer
 		for diode in self.get_fp('BAW56DW'):
-			if not self.is_thumb_cluster(diode['ref']): # skip thumb cluster
+			if not self.is_thumb_cluster(diode.ref): # skip thumb cluster
 				# ROW0
-				sw_r0_ref = 'SW0'+diode['ref'][-1]
+				sw_r0_ref = 'SW0'+diode.ref[-1]
 				self.add_tracks([
-					(diode['pad']['F.Cu']['1']+VECTOR2I_MM(0.95,-0.65), F_Cu),
-					(diode['pad']['F.Cu']['1']+VECTOR2I_MM(0.95,-48.4), F_Cu),
-					(self.fp_dict[sw_r0_ref]['pad']['F.Cu']['1'], F_Cu)
+					(diode.padF['1']+VECTOR2I_MM(0.95,-0.65), F_Cu),
+					(diode.padF['1']+VECTOR2I_MM(0.95,-48.4), F_Cu),
+					(self.fp_dict[sw_r0_ref].padF['1'], F_Cu)
 				])
 				# ROW1
-				sw_r1_ref = 'SW1'+diode['ref'][-1]
+				sw_r1_ref = 'SW1'+diode.ref[-1]
 				self.add_tracks([
-					(diode['pad']['F.Cu']['1']+VECTOR2I_MM(0.95, 0), F_Cu),
-					(diode['pad']['F.Cu']['1']+VECTOR2I_MM(1.35,-0.4), F_Cu),
-					(diode['pad']['F.Cu']['1']+VECTOR2I_MM(1.35,-31.8), F_Cu),
-					(self.fp_dict[sw_r1_ref]['pad']['F.Cu']['1'], F_Cu)
+					(diode.padF['1']+VECTOR2I_MM(0.95, 0), F_Cu),
+					(diode.padF['1']+VECTOR2I_MM(1.35,-0.4), F_Cu),
+					(diode.padF['1']+VECTOR2I_MM(1.35,-31.8), F_Cu),
+					(self.fp_dict[sw_r1_ref].padF['1'], F_Cu)
 				])
 				# ROW2
-				sw_r2_ref = 'SW2'+diode['ref'][-1]
+				sw_r2_ref = 'SW2'+diode.ref[-1]
 				self.add_tracks([
-					(diode['pad']['F.Cu']['5'], F_Cu),
-					(diode['pad']['F.Cu']['5']+VECTOR2I_MM( 0.6,-0.2), F_Cu),
-					(diode['pad']['F.Cu']['5']+VECTOR2I_MM( 0.6,-2.8), F_Cu),
-					(diode['pad']['F.Cu']['5']+VECTOR2I_MM(-0.2,-3.4), F_Cu),
-					(diode['pad']['F.Cu']['5']+VECTOR2I_MM(-0.2,-15.7), F_Cu),
-					(self.fp_dict[sw_r2_ref]['pad']['F.Cu']['1'], F_Cu)
+					(diode.padF['5'], F_Cu),
+					(diode.padF['5']+VECTOR2I_MM( 0.6,-0.2), F_Cu),
+					(diode.padF['5']+VECTOR2I_MM( 0.6,-2.8), F_Cu),
+					(diode.padF['5']+VECTOR2I_MM(-0.2,-3.4), F_Cu),
+					(diode.padF['5']+VECTOR2I_MM(-0.2,-15.7), F_Cu),
+					(self.fp_dict[sw_r2_ref].padF['1'], F_Cu)
 				])
 				# ROW3
-				sw_r3_ref = 'SW3'+diode['ref'][-1]
+				sw_r3_ref = 'SW3'+diode.ref[-1]
 				self.add_tracks([
-					(diode['pad']['F.Cu']['4']+VECTOR2I_MM(0.2,0), F_Cu),
-					(self.fp_dict[sw_r3_ref]['pad']['F.Cu']['1'], F_Cu)
+					(diode.padF['4']+VECTOR2I_MM(0.2,0), F_Cu),
+					(self.fp_dict[sw_r3_ref].padF['1'], F_Cu)
 				])
 
 	def connect_sw_col(self):
@@ -375,8 +350,8 @@ class kbd_place_n_route(ActionPlugin):
 	def connect_rows(self):
 		# Connect rows
 		for diode in self.get_fp('BAV70'): 
-			if diode['ref'].endswith('1'): # left most col
-				padk_pos = diode['ref']['fp'].FindPadByNumber('3').GetCenter() # offset
+			if diode.ref.endswith('1'): # left most col
+				padk_pos = diode.ref.fp.FindPadByNumber('3').GetCenter() # offset
 				# the following code is auto generated by gen_led_track
 				self.add_track(padk_pos + VECTOR2I_MM(  0.0,   0.0), padk_pos + VECTOR2I_MM(  1.0,  -1.0), B_Cu)
 				self.add_track(padk_pos + VECTOR2I_MM(  1.0,  -1.0), padk_pos + VECTOR2I_MM( 13.9,  -1.0), B_Cu)
@@ -391,10 +366,10 @@ class kbd_place_n_route(ActionPlugin):
 	def connect_leds_by_col(self):
 		# Connect LEDs by column
 		for sw in self.get_fp('SW_Push'):
-			if not self.is_thumb_cluster(sw['ref']): # skip thumb cluster
-				sw_col = int(sw['ref'][-1])
-				sw_row = int(sw['ref'][-2])
-				offset = sw['pos']
+			if not self.is_thumb_cluster(sw.ref): # skip thumb cluster
+				sw_col = int(sw.ref[-1])
+				sw_row = int(sw.ref[-2])
+				offset = sw.pos
 				if sw_row != 0: # top row
 					# power rail - left
 					self.add_tracks([
@@ -426,16 +401,16 @@ class kbd_place_n_route(ActionPlugin):
 						])
 				
 	def connect_shift_register_and_resistor(self):
-		self.add_track(self.fp_dict['RN_LEFT1']['pad']['B.Cu']['9'], self.fp_dict['RN_LEFT1']['pad']['B.Cu']['16'], B_Cu)
-		self.add_track(self.fp_dict['RN_RIGHT1']['pad']['F.Cu']['9'], self.fp_dict['RN_RIGHT1']['pad']['F.Cu']['16'], F_Cu)
+		self.add_track(self.fp_dict['RN_LEFT1'].padB['9'], self.fp_dict['RN_LEFT1'].padB['16'], B_Cu)
+		self.add_track(self.fp_dict['RN_RIGHT1'].padF['9'], self.fp_dict['RN_RIGHT1'].padF['16'], F_Cu)
 		# also connects left and right
 		for i in ['1', '3', '5', '7']:
-			pad_pos = self.fp_dict['RN_RIGHT1']['pad']['F.Cu'][i]
+			pad_pos = self.fp_dict['RN_RIGHT1'].padF[i]
 			self.add_track(pad_pos, pad_pos + VECTOR2I_MM(0.9, 0), B_Cu)
 			self.add_via(pad_pos + VECTOR2I_MM(0.9, 0), 0.3, 0.4)
 			self.add_track(pad_pos + VECTOR2I_MM(0.9, 0), pad_pos, F_Cu)
 		for i in ['2', '4', '6', '8']:
-			pad_pos = self.fp_dict['RN_RIGHT1']['pad']['F.Cu'][i]
+			pad_pos = self.fp_dict['RN_RIGHT1'].padF[i]
 			self.add_track(pad_pos, pad_pos + VECTOR2I_MM(-0.9, 0), B_Cu)
 			self.add_via(pad_pos + VECTOR2I_MM(-0.9, 0), 0.3, 0.4)
 			self.add_track(pad_pos + VECTOR2I_MM(-0.9, 0), pad_pos, F_Cu)
@@ -443,15 +418,15 @@ class kbd_place_n_route(ActionPlugin):
 	def place_edge_cut(self): 
 		# Place edge cuts on the board
 		# get highest y coordinate (column 3)
-		upper_edge_y = self.fp_dict['SW03']['fp'].GetPosition().y - FromMM(10)
+		upper_edge_y = self.fp_dict['SW03'].fp.GetPosition().y - FromMM(10)
 		# get top right corner
-		right_edge_x = self.fp_dict['SW36']['fp'].GetPosition().x + FromMM(15)
+		right_edge_x = self.fp_dict['SW36'].fp.GetPosition().x + FromMM(15)
 		# get bottom left corner x coordinate (column 0)
 		left_edge_x = self.sw0_pos.x - FromMM(10)
 		# get bottom left corner x coordinate (column 0)
-		lower_left_y = self.fp_dict['SW30']['fp'].GetPosition().y + FromMM(15)
+		lower_left_y = self.fp_dict['SW30'].fp.GetPosition().y + FromMM(15)
 		# get lower right y coordinate (column 7)
-		lower_right_y = self.fp_dict['SW36']['fp'].GetPosition().y + FromMM(15)
+		lower_right_y = self.fp_dict['SW36'].fp.GetPosition().y + FromMM(15)
 		edge_cut_tracks = [
 			VECTOR2I(right_edge_x, upper_edge_y ),
 			VECTOR2I( left_edge_x, upper_edge_y ),
