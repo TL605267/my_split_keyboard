@@ -225,12 +225,9 @@ class kbd_place_n_route(ActionPlugin):
 
 	def place_connector(self):
 		# Place connectors on the board
-		for conn in self.get_fp('Conn_02x12_Odd_Even_MountingPin'):
-			if 'LEFT' in conn.ref: # place and flip the left connector back
-				conn.fp.Flip(conn.fp.GetPosition(), False)
-				self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), conn.fp, -45)
-			else: # place the right connector
-				self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), conn.fp, 135)
+		self.fp_dict['J_LEFT1'].fp.Flip(self.fp_dict['J_LEFT1'].fp.GetPosition(), False)
+		self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), self.fp_dict['J_LEFT1'].fp, -45)
+		self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), self.fp_dict['J_RIGHT1'].fp, 135)
 
 	def place_via_for_connector(self):
 		# Place vias on the board
@@ -238,14 +235,21 @@ class kbd_place_n_route(ActionPlugin):
 			if 'RIGHT' in conn.ref: # doesn't metter left or right, just pick one to get the pad position
 				for pad in conn.fp.Pads():
 					# skip mounting pad, GND and unconnected pad
-					if pad.GetNetname() != 'GND' and 'unconnected' not in pad.GetNetname() and pad.GetNumber().isdigit() and int(pad.GetNumber()) %2 :
-						self.add_tracks([
-							(pad.GetCenter()+VECTOR2I_MM(-0.3,-0.3), F_Cu),
-							(pad.GetCenter(), F_Cu),
-							(pad.GetCenter()+VECTOR2I_MM(1.6, -1.6), -1), #via
-							(pad.GetCenter(), B_Cu),
-							(pad.GetCenter()+VECTOR2I_MM(-0.3,-0.3), B_Cu),
-						])
+					if pad.GetNumber().isdigit() and int(pad.GetNumber()) %2 :
+						if pad.GetNetname() == 'GND':
+							self.add_tracks([
+								(pad.GetCenter()+VECTOR2I_MM(-0.3,-0.3), F_Cu),
+								(pad.GetCenter(), F_Cu),
+								(pad.GetCenter()+VECTOR2I_MM(-0.3,-0.3), B_Cu),
+							])
+						elif 'unconnected' not in pad.GetNetname():
+							self.add_tracks([
+								(pad.GetCenter()+VECTOR2I_MM(-0.3,-0.3), F_Cu),
+								(pad.GetCenter(), F_Cu),
+								(pad.GetCenter()+VECTOR2I_MM(1.6, -1.6), -1), #via
+								(pad.GetCenter(), B_Cu),
+								(pad.GetCenter()+VECTOR2I_MM(-0.3,-0.3), B_Cu),
+							])
 
 	def place_shift_register_and_resistor(self):
 		# shift register
