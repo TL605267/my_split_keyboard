@@ -171,17 +171,20 @@ class kbd_place_n_route(ActionPlugin):
 	def place_diode(self):
 		# Place diodes on the board
 		for diode in self.get_fp('BAW56DW'):
+			# get top switch position
+			sw_ref_t = 'SW3'+diode.ref[1:3]
+			sw_pos_t = self.fp_dict[sw_ref_t].pos
 			if not self.is_thumb_cluster(diode.ref):
-				# get top switch position
-				sw_ref_t = 'SW3'+diode.ref[1:3]
-				sw_pos_t = self.fp_dict[sw_ref_t].pos
 				# place diode in between switches
 				d_pos = sw_pos_t + VECTOR2I_MM(-7.5, 8.2)
-				diode.pos = d_pos
-				self.place_fp(diode.pos, diode.fp, 180)
-				diode.fp.Flip(d_pos, False)
-				diode.ref_inst.SetTextPos(d_pos + VECTOR2I_MM(0, 2.4))
-				diode.ref_inst.SetTextAngleDegrees(180)
+			else :
+				d_pos = sw_pos_t + VECTOR2I_MM(-10, 5)
+			diode.pos = d_pos
+			self.place_fp(diode.pos, diode.fp, 180)
+			diode.fp.Flip(d_pos, False)
+			diode.ref_inst.SetTextPos(d_pos + VECTOR2I_MM(0, 2.4))
+			diode.ref_inst.SetTextAngleDegrees(180)
+				
 
 	def place_via_for_led(self): 
 		# Place vias on the board
@@ -410,14 +413,45 @@ class kbd_place_n_route(ActionPlugin):
 		# also connects left and right
 		for i in ['1', '3', '5', '7']:
 			pad_pos = self.fp_dict['RN_RIGHT1'].padF[i]
-			self.add_track(pad_pos, pad_pos + VECTOR2I_MM(0.9, 0), B_Cu)
 			self.add_via(pad_pos + VECTOR2I_MM(0.9, 0), 0.3, 0.4)
 			self.add_track(pad_pos + VECTOR2I_MM(0.9, 0), pad_pos, F_Cu)
 		for i in ['2', '4', '6', '8']:
 			pad_pos = self.fp_dict['RN_RIGHT1'].padF[i]
-			self.add_track(pad_pos, pad_pos + VECTOR2I_MM(-0.9, 0), B_Cu)
 			self.add_via(pad_pos + VECTOR2I_MM(-0.9, 0), 0.3, 0.4)
 			self.add_track(pad_pos + VECTOR2I_MM(-0.9, 0), pad_pos, F_Cu)
+		for i in [str(n) for n in range(11,15)]: #pad 11-14
+			pad_pos = self.fp_dict['SR_RIGHT1'].padF[i]
+			via_pos = pad_pos +VECTOR2I_MM(-1.5,0)
+			self.add_via(via_pos, 0.3, 0.4)
+			self.add_track(pad_pos, via_pos, F_Cu)
+		for i in [str(n) for n in range(3,7)]: # pad 3-7
+			pad_pos = self.fp_dict['SR_RIGHT1'].padF[i]
+			via_pos = pad_pos +VECTOR2I_MM(1.5,0)
+			self.add_via(via_pos, 0.3, 0.4)
+			self.add_track(pad_pos, via_pos, F_Cu)
+
+		r_pack_pad1_track_end = (self.fp_dict['SR_LEFT1'].padB['15']+self.fp_dict['SR_LEFT1'].padB['14'])/2
+		r_pack_track_step = (self.fp_dict['SR_LEFT1'].padB['15'] - self.fp_dict['SR_LEFT1'].padB['14'])/2
+		for i in range(1,9): # iterate pad 1-8 of r_pack
+			r_pad_pos = self.fp_dict['RN_RIGHT1'].padF[str(i)]
+			p0 = r_pad_pos + VECTOR2I_MM(-0.9, 0)
+			p1 = r_pack_pad1_track_end - r_pack_track_step * (i-1) + VECTOR2I_MM(1,0)
+			p2 = p1 + VECTOR2I_MM(-2,0)
+			p3 = p2 + VECTOR2I(-r_pack_track_step.y, -r_pack_track_step.y)
+			p4 = VECTOR2I(self.fp_dict['SR_RIGHT1'].padF['9'].x - FromMM(0.7), p3.y)
+			p5 = VECTOR2I(p4.x - FromMM(0.8), p2.y)
+			p6 = p5 + VECTOR2I_MM(-2,0)
+			self.add_tracks([
+				(r_pad_pos, B_Cu),
+				(p0, B_Cu),
+				(p1, B_Cu),
+				(p2, B_Cu),
+				(p3, B_Cu),
+				(p4, B_Cu),
+				(p5, B_Cu),
+				(p6, B_Cu),
+			])
+
 			
 	def place_edge_cut(self): 
 		# Place edge cuts on the board
