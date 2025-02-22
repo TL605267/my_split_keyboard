@@ -419,12 +419,12 @@ class kbd_place_n_route(ActionPlugin):
 			pad_pos = self.fp_dict['RN_RIGHT1'].padF[i]
 			self.add_via(pad_pos + VECTOR2I_MM(-0.9, 0), 0.3, 0.4)
 			self.add_track(pad_pos + VECTOR2I_MM(-0.9, 0), pad_pos, F_Cu)
-		for i in [str(n) for n in range(11,15)]: #pad 11-14
+		for i in [str(n) for n in range(11,17)]: #pad 11-14
 			pad_pos = self.fp_dict['SR_RIGHT1'].padF[i]
 			via_pos = pad_pos +VECTOR2I_MM(-1.5,0)
 			self.add_via(via_pos, 0.3, 0.4)
 			self.add_track(pad_pos, via_pos, F_Cu)
-		for i in [str(n) for n in range(3,7)]: # pad 3-7
+		for i in [str(n) for n in range(1,7)]: # pad 3-7
 			pad_pos = self.fp_dict['SR_RIGHT1'].padF[i]
 			via_pos = pad_pos +VECTOR2I_MM(1.5,0)
 			self.add_via(via_pos, 0.3, 0.4)
@@ -437,10 +437,9 @@ class kbd_place_n_route(ActionPlugin):
 			p0 = r_pad_pos + VECTOR2I_MM(-0.9, 0)
 			p1 = r_pack_pad1_track_end - r_pack_track_step * (i-1) + VECTOR2I_MM(1,0)
 			p2 = p1 + VECTOR2I_MM(-2,0)
-			p3 = p2 + VECTOR2I(-r_pack_track_step.y, -r_pack_track_step.y)
+			p3 = p2 + VECTOR2I(FromMM(-2.2), -r_pack_track_step.y)
 			p4 = VECTOR2I(self.fp_dict['SR_RIGHT1'].padF['9'].x - FromMM(0.7), p3.y)
 			p5 = VECTOR2I(p4.x - FromMM(0.8), p2.y)
-			p6 = p5 + VECTOR2I_MM(-2,0)
 			self.add_tracks([
 				(r_pad_pos, B_Cu),
 				(p0, B_Cu),
@@ -449,7 +448,6 @@ class kbd_place_n_route(ActionPlugin):
 				(p3, B_Cu),
 				(p4, B_Cu),
 				(p5, B_Cu),
-				(p6, B_Cu),
 			])
 
 			
