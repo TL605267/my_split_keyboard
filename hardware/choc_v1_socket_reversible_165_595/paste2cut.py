@@ -26,23 +26,24 @@ class gen_vinyl_cut():
 
 	def process_svg(self):
 		with open(self.paste_svg, 'r') as paste_file, open('autogen_cut.svg', 'w') as output:
-				for line in paste_file.readlines():
-					if self.state == State.INIT:
-						if line.startswith('<title'):
-							output.write(self.style_template)
-							self.state = State.COPY
-						output.write(line)                             
-					elif self.state == State.COPY:
-						if line.startswith('<path style'):
-							if 'fill:none;' in line:
-								self.state = State.SKIP
-							else:
-								output.write(self.path_style)
-						else: 
-							output.write(line)
-					elif self.state == State.SKIP:
-						if '/>' in line:
-							self.state = State.COPY
+			for line in paste_file.readlines():
+				# TODO: change init to copy and add modify
+				if self.state == State.INIT:
+					if line.startswith('<title'):
+						output.write(self.style_template)
+						self.state = State.COPY
+					output.write(line)                             
+				elif self.state == State.COPY:
+					if line.startswith('<path style'):
+						if 'fill:none;' in line:
+							self.state = State.SKIP
+						else:
+							output.write(self.path_style)
+					else: 
+						output.write(line)
+				elif self.state == State.SKIP:
+					if '/>' in line:
+						self.state = State.COPY
 
 def main():
 	m = gen_vinyl_cut()                                              
