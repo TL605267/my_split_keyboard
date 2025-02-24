@@ -3,17 +3,14 @@ from os import listdir
 from enum import Enum, auto
 
 class State(Enum):
-	INIT = auto()
 	COPY = auto()
 	SKIP = auto()
-	MOD = auto()
 
 class gen_vinyl_cut():
 	def __init__(self):
 		# TODO select F/B_Paste svg file
 		self.paste_svg = [file for file in listdir('.') if file.endswith('F_Paste.svg')][0]
-		self.state = State.INIT
-		self.next_state = State.COPY
+		self.state = State.COPY
 		self.style_template = '''<style>
 	.outlineStyle {
 	  fill:none; 
@@ -30,22 +27,20 @@ class gen_vinyl_cut():
 	def process_svg(self):
 		with open(self.paste_svg, 'r') as paste_file, open('autogen_cut.svg', 'w') as output:
 			for line in paste_file.readlines():
-				# TODO: add MOD state
-				if self.state == State.INIT:
-					if line.startswith('<title'):
+				if self.state == State.COPY:
+					if line.startswith('<title'): # add style defnition before title
 						output.write(self.style_template)
-						self.state = State.COPY
-					output.write(line)                             
-				elif self.state == State.COPY:
-					if line.startswith('<path style'):
-						if 'fill:none;' in line:
+						output.write(line)                             
+					elif line.startswith('<path style'):
+						if 'fill:none;' in line: # existing edge cut paths
 							self.state = State.SKIP
-						else:
+						else: # pads that needs to be converted to stroke
 							output.write(self.path_style)
 					else: 
 						output.write(line)
-				elif self.state == State.SKIP:
-					if '/>' in line:
+
+				elif self.state == State.SKIP: 
+					if '/>' in line: # skip <path fill:none .../> block
 						self.state = State.COPY
 
 def main():
