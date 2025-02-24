@@ -1,9 +1,16 @@
 #!/usr/bin/env python3
 from os import listdir
+from enum import Enum, auto
 
-class paste():
+class State(Enum):
+	INIT = auto()
+	COPY = auto()
+	SKIP = auto()
+
+class gen_vinyl_cut():
 	def __init__(self):
 		self.paste_svg = [file for file in listdir('.') if file.endswith('B_Paste.svg')][0]
+		self.state = State.INIT
 		self.style_template = '''<style>
 	.outlineStyle {
 	  fill:none; 
@@ -16,39 +23,30 @@ class paste():
 </style>
 '''
 		self.path_style = '<path class="outlineStyle"\n'
-		self.file_end = '''</g> 
-</svg>
-'''
 
 	def process_svg(self):
 		with open(self.paste_svg, 'r') as paste_file, open('autogen_cut.svg', 'w') as output:
-				outline_style_added = 0
 				for line in paste_file.readlines():
-					'''	
-					if line.startswith('<path style'):
-						if 'fill:none' in line:
-							output.write(self.file_end)                    
-							break                                          
-						elif outline_style_added == 0:
+					if self.state == State.INIT:
+						if line.startswith('<title'):
 							output.write(self.style_template)
-							outline_style_added = 1
-						output.write(self.path_style)
-					else:
+							self.state = State.COPY
 						output.write(line)                             
-					'''	
-					# remove led and board edge cuts
-					if outline_style_added == 1 and line.startswith('<path style="fill:none'):	
-						output.write(self.file_end)                    
-						break                                          
-					# change paste style from filled to non
-					elif line.startswith('<path style'):
-						if outline_style_added == 0:
-							output.write(self.style_template)
-							outline_style_added = 1
-						output.write(self.path_style)
-					else:	                                           
-						output.write(line)                             
-                                                           
+					elif self.state == State.COPY:
+						if line.startswith('<path style'):
+							if 'fill:none;' in line:
+								self.state = State.SKIP
+							else:
+								output.write(self.path_style)
+						else: 
+							output.write(line)
+					elif self.state == State.SKIP:
+						if '/>' in line:
+							self.state = State.COPY
+
+def main():
+	m = gen_vinyl_cut()                                              
+	m.process_svg()                                          
+	                                          
 if __name__ == "__main__":                                 
-	p = paste()                                              
-	p.process_svg()                                          
+	main()
