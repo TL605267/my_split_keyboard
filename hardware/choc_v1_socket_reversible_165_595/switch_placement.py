@@ -476,22 +476,29 @@ class kbd_place_n_route(ActionPlugin):
 		# Place copper pour on the board
 		points = [
 			VECTOR2I_MM( 30, 30),
-			VECTOR2I_MM(200, 30),
-			VECTOR2I_MM(200,150),
-			VECTOR2I_MM( 30,150)
+			VECTOR2I_MM(210, 30),
+			VECTOR2I_MM(210,160),
+			VECTOR2I_MM( 30,160)
 		]
 		chain = SHAPE_LINE_CHAIN()
-		for (x,y) in points:
-			chain.Append(x, y)
+		for point in points:
+			chain.Append(point)
 		chain.SetClosed(True)
+		# set pour on both F_Cu and B_Cu
 		layers = LSET()
 		layers.AddLayer(F_Cu)
 		layers.AddLayer(B_Cu)
 		zone = ZONE(self.board)
 		zone.AddPolygon(chain)  # Add the polygon points
-		net_code = self.board.GetNetcodeFromNetname('GND')
+		# pour on GND
+		net_code = self.board.GetNetcodeFromNetname('GND') 
 		zone.SetNetCode(net_code)
 		zone.SetLayerSet(layers)  # Set the layer
+		# fill it
+		zones = ZONES()
+		zones.append(zone)
+		filler = ZONE_FILLER(self.board)
+		filler.Fill(zones)
 		self.board.Add(zone)
 
 	# Do all the things
