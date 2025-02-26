@@ -67,8 +67,10 @@ class kbd_place_n_route(ActionPlugin):
 		track = PCB_TRACK(self.board)
 		track.SetStart(start)
 		track.SetEnd(end)
-		track.SetWidth(FromMM(width)) # default 0.2mm
-		track.SetLayer(layer)
+		if (width != 0.2):
+			track.SetWidth(FromMM(width)) # default 0.2mm
+		if (layer != F_Cu):
+			track.SetLayer(layer)
 		self.board.Add(track)
 
 	def add_tracks(self, points): 
@@ -291,26 +293,6 @@ class kbd_place_n_route(ActionPlugin):
 					(self.fp_dict[sw_r].padB['2'], B_Cu)
 				])
 				
-	def add_poly(self):
-		pts = [
-			# in mm
-			(0, 0),
-			(10, 10),
-			(10, -10),
-			(0, 0)
-		]
-		pts = [(FromMM(x), FromMM(y)) for (x,y) in pts]
-		sps = SHAPE_POLY_SET()
-		chain = SHAPE_LINE_CHAIN()
-		for (x,y) in pts:
-			chain.Append(x, y)
-		chain.SetClosed(True)
-		sps.AddOutline(chain)
-		ps = PCB_SHAPE(self.board, SHAPE_T_POLY)
-		ps.SetPolyShape(sps)
-		ps.SetFilled(False)
-		self.board.Add(ps)
-	
 	def connect_diode_and_sw(self):
 		# Connect diode and switches pad1 on both F_cu and B_Cu layer
 		for diode in self.get_fp('BAW56DW'):
@@ -415,16 +397,17 @@ class kbd_place_n_route(ActionPlugin):
 			pad_pos = self.fp_dict['RN_RIGHT1'].padF[i]
 			self.add_via(pad_pos + VECTOR2I_MM(0.9, 0), 0.3, 0.4)
 			self.add_track(pad_pos + VECTOR2I_MM(0.9, 0), pad_pos, F_Cu)
+			self.add_track(pad_pos + VECTOR2I_MM(0.9, 0), pad_pos, B_Cu)
 		for i in ['2', '4', '6', '8']:
 			pad_pos = self.fp_dict['RN_RIGHT1'].padF[i]
 			self.add_via(pad_pos + VECTOR2I_MM(-0.9, 0), 0.3, 0.4)
 			self.add_track(pad_pos + VECTOR2I_MM(-0.9, 0), pad_pos, F_Cu)
-		for i in [str(n) for n in range(11,17)]: #pad 11-14
+		for i in [str(n) for n in range(11,17)]: #pad 11-16
 			pad_pos = self.fp_dict['SR_RIGHT1'].padF[i]
 			via_pos = pad_pos +VECTOR2I_MM(-1.5,0)
 			self.add_via(via_pos, 0.3, 0.4)
 			self.add_track(pad_pos, via_pos, F_Cu)
-		for i in [str(n) for n in range(1,7)]: # pad 3-7
+		for i in [str(n) for n in range(1,7)]: # pad 3-6
 			pad_pos = self.fp_dict['SR_RIGHT1'].padF[i]
 			via_pos = pad_pos +VECTOR2I_MM(1.5,0)
 			self.add_via(via_pos, 0.3, 0.4)
@@ -478,7 +461,8 @@ class kbd_place_n_route(ActionPlugin):
 		track.SetStart(edge_cut_tracks[0])
 		track.SetPolyPoints(edge_cut_tracks)
 		self.board.Add(track)
-	
+
+	'''	
 	def place_mounting_hole(self): #TODO
 		# Place mounting holes on the board
 		mounting_hole = MODULE(self.board)
@@ -487,24 +471,6 @@ class kbd_place_n_route(ActionPlugin):
 		mounting_hole.SetFPID(FPID("MountingHole"))
 		self.board.Add(mounting_hole)
 	'''	
-	# Define a function to create and add a zone
-	def create_zone(self, points, layer, net_name):
-    # Create the zone container
-		zone = ZONE(self.board)
-		zone.SetLayer(layer)  # Set the layer
-    # Create the polygon and add points to it
-		polygon = SHAPE_POLY_SET()
-		for point in points:
-			polygon.Append(point)
-		zone.Outline().AddPolygon(polygon)  # Add the polygon points
-		zone.SetIsFilled(True)  # Set the zone as filled
-		
-		# Set the net (GND in this case)
-		net_code = self.board.GetNetcodeFromNetname(net_name)
-		zone.SetNetCode(net_code)
-		
-		# Add the zone to the board
-		self.board.Add(zone)
 		
 	def place_copper_pour(self): #TODO
 		# Place copper pour on the board
@@ -514,9 +480,20 @@ class kbd_place_n_route(ActionPlugin):
 			VECTOR2I_MM(200,150),
 			VECTOR2I_MM( 30,150)
 		]
-		self.create_zone(points, F_Cu, 'GND')
-		self.create_zone(points, B_Cu, 'GND')
-	'''
+		chain = SHAPE_LINE_CHAIN()
+		for (x,y) in points:
+			chain.Append(x, y)
+		chain.SetClosed(True)
+		layers = LSET()
+		layers.AddLayer(F_Cu)
+		layers.AddLayer(B_Cu)
+		zone = ZONE(self.board)
+		zone.AddPolygon(chain)  # Add the polygon points
+		net_code = self.board.GetNetcodeFromNetname('GND')
+		zone.SetNetCode(net_code)
+		zone.SetLayerSet(layers)  # Set the layer
+		self.board.Add(zone)
+
 	# Do all the things
 	def Run(self):
 		# Execute the plugin
@@ -544,11 +521,15 @@ class kbd_place_n_route(ActionPlugin):
 		self.connect_leds_by_col()
 		self.connect_shift_register_and_resistor()
 		self.place_edge_cut()
-		#self.place_copper_pour()
+		self.place_copper_pour()
 		Refresh()
 		#SaveBoard(self.filename, self.board)
 		SaveBoard('autogen.kicad_pcb', self.board)
 		
+	def unit_test(self):
+		self.place_copper_pour()
+		
+
 #kbd_place_n_route().register()
 
 def main():
