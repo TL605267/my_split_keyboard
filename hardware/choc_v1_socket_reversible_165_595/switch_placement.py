@@ -436,9 +436,8 @@ class kbd_place_n_route(ActionPlugin):
 	def connect_connector_and_mcu(self):
 		# Connect connector and MCU
 		#nets_to_connect = ['+5V', '+3V3', 'ROW0', 'ROW1', 'SCS', 'SCK0', 'ROW2', 'ROW3']
-		nets_to_connect = ['ROW3', 'ROW2', 'SCK0', 'SCS', 'ROW1', 'ROW0', '+3V3', '+5V']
+		nets_to_connect = ['ROW3', 'ROW2', 'SCK0', 'SCS', 'ROW1', 'ROW0', '+3V3', 'LED_R', '+5V']
 		c0 = VECTOR2I_MM(184.6,79)
-		#print(self.fp_dict['J_RIGHT1']['padF'])
 		for i, net in enumerate(nets_to_connect):
 			for padname,pad in self.fp_dict['J_RIGHT1']['padF'].items():
 				if pad['net'] == net and int(padname) %2 == 1:
@@ -447,29 +446,38 @@ class kbd_place_n_route(ActionPlugin):
 						(pad['pos']+VECTOR2I_MM(1.6, -1.6), F_Cu),
 						(p1, F_Cu),
 					])
-			for padname,pad in self.fp_dict['U1']['padF'].items():
-				if pad['net'] == net:
-					p2 = VECTOR2I(0,0)
-					p3 = VECTOR2I(0,0)
-					if int(padname) > 12: # right cloumn
-						p3.x = p1.x
-						p3.y = pad['pos'].y + (p1.x-pad['pos'].x) # 45deg
-						self.add_tracks([
-							(p1, F_Cu),
-							(p3, F_Cu),
-							(pad['pos'], F_Cu)
-						])
-					else :
-						p3.x = pad['pos'].x + FromMM(16)
-						p3.y = pad['pos'].y - FromMM(1.27)# in between two pads
-						p2.x = p1.x
-						p2.y = p3.y + (p1.x-p3.x) # 45deg
-						self.add_tracks([
-							(p1, F_Cu),
-							(p2, F_Cu),
-							(p3, F_Cu),
-							(pad['pos'], F_Cu)
-						])
+			if net == 'LED_R':
+				self.add_tracks([	
+					(p1, F_Cu),
+					(p1+VECTOR2I_MM(0,-24.3), F_Cu),
+					(p1+VECTOR2I_MM(-2.4,-26.7), F_Cu),
+					(self.fp_dict['JP1']['padB']['3']['pos']+VECTOR2I_MM(2.5,0), -1),
+					(self.fp_dict['JP1']['padB']['3']['pos'], B_Cu),
+				])
+			else: 
+				for padname,pad in self.fp_dict['U1']['padF'].items():
+					if pad['net'] == net:
+						p2 = VECTOR2I(0,0)
+						p3 = VECTOR2I(0,0)
+						if int(padname) > 12: # right cloumn
+							p3.x = p1.x
+							p3.y = pad['pos'].y + (p1.x-pad['pos'].x) # 45deg
+							self.add_tracks([
+								(p1, F_Cu),
+								(p3, F_Cu),
+								(pad['pos'], F_Cu)
+							])
+						else :
+							p3.x = pad['pos'].x + FromMM(16)
+							p3.y = pad['pos'].y - FromMM(1.27)# in between two pads
+							p2.x = p1.x
+							p2.y = p3.y + (p1.x-p3.x) # 45deg
+							self.add_tracks([
+								(p1, F_Cu),
+								(p2, F_Cu),
+								(p3, F_Cu),
+								(pad['pos'], F_Cu)
+							])
 
 	def place_edge_cut(self): 
 		# Place edge cuts on the board
