@@ -2,15 +2,17 @@
 from os import listdir
 from math import sin, cos, radians
 from pcbnew import *
+import sys
 
 class kbd_place_n_route(ActionPlugin):
-	def __init__(self):
+	def __init__(self, is_fast_mode=False):
 		# Initialize column offsets and switch positions
 		self.col_offsets = [0, 0, -9, -11.5, -9, -6.5]
 		self.sw0_pos = VECTOR2I_MM(60,60)
 		self.sw_x_spc = 19 # 17.5 #19.05
 		self.sw_y_spc = 17 #19.05
 		self.fp_dict = {} # footpint dictionary
+		self.is_fast_mode = is_fast_mode
 
 	def load_board(self):
 		# Load the board file
@@ -93,6 +95,9 @@ class kbd_place_n_route(ActionPlugin):
 		# Place a footprint on the board
 		fp.SetPosition(pos) 
 		fp.SetOrientationDegrees(orientation)
+		# update fp_dict
+		self.fp_dict[fp.GetReference()]['pos'] = pos
+		self.fp_dict[fp.GetReference()]['ori'] = orientation
 	
 	def rotate(self, origin, point, angle): 
 		# Rotate a point counterclockwise by a given angle around a given origin
@@ -106,7 +111,10 @@ class kbd_place_n_route(ActionPlugin):
 	
 	def get_fp(self, fp_val):
 		# Get a list of footprint references with a specific value
-		return [value for value in self.fp_dict.values() if value['val'] == fp_val]
+			results = [value for value in self.fp_dict.values() if fp_val in value['val']]
+			if not results:
+				raise ValueError(f"No matching footprints found for value: {fp_val}")
+			return results
 
 	def gen_led_track(self, netname, s_offset = VECTOR2I_MM(0,0)): #TODO put the start point track at top
 		# Generate LED track code
@@ -229,29 +237,23 @@ class kbd_place_n_route(ActionPlugin):
 	def place_connector(self):
 		# Place connectors on the board
 		self.fp_dict['J_LEFT1']['fp'].Flip(self.fp_dict['J_LEFT1']['fp'].GetPosition(), False)
-		self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), self.fp_dict['J_LEFT1']['fp'], -45)
-		self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), self.fp_dict['J_RIGHT1']['fp'], 135)
+		self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), self.fp_dict['J_LEFT1']['fp'], 135)
+		self.place_fp(self.sw0_pos + VECTOR2I_MM(116, 35), self.fp_dict['J_RIGHT1']['fp'], -45)
 
 	def place_via_for_connector(self):
 		# Place vias on the board
-		for conn in self.get_fp('Conn_02x12_Odd_Even_MountingPin'):
+		for conn in self.get_fp('FPC'):
 			if 'RIGHT' in conn['ref']: # doesn't metter left or right, just pick one to get the pad position
 				for pad in conn['fp'].Pads():
 					# skip mounting pad, GND and unconnected pad
-					if pad.GetNumber().isdigit() and int(pad.GetNumber()) %2 :
-						if pad.GetNetname() == 'GND':
-							self.add_tracks([
-								(pad.GetCenter()+VECTOR2I_MM(-0.3,-0.3), F_Cu),
-								(pad.GetCenter(), F_Cu),
-								(pad.GetCenter()+VECTOR2I_MM(-0.3,-0.3), B_Cu),
-							])
+					if pad.GetNumber().isdigit(): # and int(pad.GetNumber()) %2:
+						if pad.GetNetname() == 'GND': # handled by copper pour
+							pass
 						elif 'unconnected' not in pad.GetNetname():
 							self.add_tracks([
-								(pad.GetCenter()+VECTOR2I_MM(-0.3,-0.3), F_Cu),
 								(pad.GetCenter(), F_Cu),
 								(pad.GetCenter()+VECTOR2I_MM(1.6, -1.6), -1), #via
 								(pad.GetCenter(), B_Cu),
-								(pad.GetCenter()+VECTOR2I_MM(-0.3,-0.3), B_Cu),
 							])
 
 	def place_shift_register_and_resistor(self):
@@ -260,9 +262,21 @@ class kbd_place_n_route(ActionPlugin):
 		self.place_fp(self.sw0_pos + VECTOR2I_MM(119, 52), self.fp_dict['SR_LEFT1']['fp'], 0)
 		self.place_fp(self.sw0_pos + VECTOR2I_MM(114, 52), self.fp_dict['SR_RIGHT1']['fp'], 180)
 		# resistor network
-		self.fp_dict['RN_LEFT1']['fp'].Flip(self.fp_dict['RN_LEFT1']['fp'].GetPosition(), False)
-		self.place_fp(self.sw0_pos + VECTOR2I_MM(127.8, 52), self.fp_dict['RN_LEFT1']['fp'], 0)
-		self.place_fp(self.sw0_pos + VECTOR2I_MM(126  , 52), self.fp_dict['RN_RIGHT1']['fp'], 180)
+		for k, v in enumerate(['5', '4', '3', '2', '1', '0', '6', '7']):
+			rl_ref = 'R_L' + v
+			self.fp_dict[rl_ref]['fp'].Flip(self.fp_dict[rl_ref]['fp'].GetPosition(), False)
+			rr_ref = 'R_R' + v
+			self.place_fp(self.fp_dict['SR_LEFT1']['pos'] + VECTOR2I_MM(11, (k-3.5)*3), self.fp_dict[rl_ref]['fp'], 180)
+			self.place_fp(self.fp_dict['SR_LEFT1']['pos'] + VECTOR2I_MM( 9, (k-3.5)*3), self.fp_dict[rr_ref]['fp'], 0)
+			''' TODO move silkscreen text
+			for item in self.fp_dict[rl_ref]['fp'].GraphicalItems():
+				if type(item) == PCB_TEXT:
+					item.SetPosition(self.fp_dict[rl_ref]['pos']+VECTOR2I_MM(-3.9, 0))
+			for item in self.fp_dict[rr_ref]['fp'].GraphicalItems():
+				print(item)
+				if type(item) == PCB_TEXT:
+					item.SetPosition(self.fp_dict[rr_ref]['pos']+VECTOR2I_MM( 3.9, 0))
+			'''
 
 	def connect_pad1(self):
 		# Connect switch pad1 on both F_Cu and B_Cu layer
@@ -390,41 +404,47 @@ class kbd_place_n_route(ActionPlugin):
 						])
 				
 	def connect_shift_register_and_resistor(self):
-		self.add_track(self.fp_dict['RN_LEFT1']['padB']['9']['pos'], self.fp_dict['RN_LEFT1']['padB']['16']['pos'], B_Cu)
-		self.add_track(self.fp_dict['RN_RIGHT1']['padF']['9']['pos'], self.fp_dict['RN_RIGHT1']['padF']['16']['pos'], F_Cu)
+		# connect 3V3 net
+		self.add_track(self.fp_dict['R_R5']['padF']['1']['pos'], self.fp_dict['R_R7']['padF']['1']['pos'], F_Cu)
+		self.add_track(self.fp_dict['R_L5']['padB']['1']['pos'], self.fp_dict['R_L7']['padB']['1']['pos'], B_Cu)
 		# also connects left and right
-		for i in ['1', '3', '5', '7']:
-			pad_pos = self.fp_dict['RN_RIGHT1']['padF'][i]['pos']
-			self.add_via(pad_pos + VECTOR2I_MM(0.9, 0), 0.3, 0.4)
-			self.add_track(pad_pos + VECTOR2I_MM(0.9, 0), pad_pos, F_Cu)
-			self.add_track(pad_pos + VECTOR2I_MM(0.9, 0), pad_pos, B_Cu)
-		for i in ['2', '4', '6', '8']:
-			pad_pos = self.fp_dict['RN_RIGHT1']['padF'][i]['pos']
-			self.add_via(pad_pos + VECTOR2I_MM(-0.9, 0), 0.3, 0.4)
-			self.add_track(pad_pos + VECTOR2I_MM(-0.9, 0), pad_pos, F_Cu)
+		for i in range(8):
+			rl_pv = self.fp_dict['R_L' + str(i)]['padB']['2']['pos']
+			self.add_via(rl_pv + VECTOR2I_MM(1,0), 0.3, 0.4)
+			self.add_track(rl_pv, rl_pv + VECTOR2I_MM(1,0), B_Cu)
+			self.add_track(rl_pv, rl_pv + VECTOR2I_MM(1,0), F_Cu)
+		# connect shift register left and right
 		for i in [str(n) for n in range(11,17)]: #pad 11-16
 			pad_pos = self.fp_dict['SR_RIGHT1']['padF'][i]['pos']
-			via_pos = pad_pos +VECTOR2I_MM(-1.5,0)
+			via_pos = pad_pos +VECTOR2I_MM(-1.9,0)
 			self.add_via(via_pos, 0.3, 0.4)
 			self.add_track(pad_pos, via_pos, F_Cu)
-		for i in [str(n) for n in range(1,7)]: # pad 3-6
+		for i in [str(n) for n in range(1,7)]: # pad 1-6
 			pad_pos = self.fp_dict['SR_RIGHT1']['padF'][i]['pos']
 			via_pos = pad_pos +VECTOR2I_MM(1.5,0)
 			self.add_via(via_pos, 0.3, 0.4)
 			self.add_track(pad_pos, via_pos, F_Cu)
-
-		r_pack_pad1_track_end = (self.fp_dict['SR_LEFT1']['padB']['15']['pos']+self.fp_dict['SR_LEFT1']['padB']['14']['pos'])/2
+			self.add_track(pad_pos, via_pos, B_Cu)
+		# R - SR: COL net
 		r_pack_track_step = (self.fp_dict['SR_LEFT1']['padB']['15']['pos'] - self.fp_dict['SR_LEFT1']['padB']['14']['pos'])/2
-		for i in range(1,9): # iterate pad 1-8 of r_pack
-			r_pad_pos = self.fp_dict['RN_RIGHT1']['padF'][str(i)]['pos']
-			p0 = r_pad_pos + VECTOR2I_MM(-0.9, 0)
-			p1 = r_pack_pad1_track_end - r_pack_track_step * (i-1) + VECTOR2I_MM(1,0)
-			p2 = p1 + VECTOR2I_MM(-2,0)
-			p3 = p2 + VECTOR2I(FromMM(-2.2), -r_pack_track_step.y)
-			p4 = VECTOR2I(self.fp_dict['SR_RIGHT1']['padF']['9']['pos'].x - FromMM(0.7), p3.y)
-			p5 = VECTOR2I(p4.x - FromMM(0.8), p2.y)
+		for i in range(8):
+			net_name = 'COL'+str(i)
+			for rl in self.get_fp('R_US'):
+				if '2' in rl['padB'] and rl['padB']['2']['net'] == net_name:
+					p0 = rl['padB']['2']['pos']
+					break
+			for v in self.fp_dict['SR_LEFT1']['padB'].values(): # shift register pads
+				if v['net']	== net_name:
+					if v['pos'].x < self.fp_dict['SR_LEFT1']['pos'].x: # left side pads
+						p1 = v['pos'] + VECTOR2I_MM(6, 0) + r_pack_track_step
+					else: # right side pads
+						p1 = v['pos'] + VECTOR2I_MM(1, 0)
+					p2 = p1 + VECTOR2I_MM(-2, 0)
+					p3 = p2 + VECTOR2I(FromMM(-2.2), -r_pack_track_step.y)
+					p4 = VECTOR2I(self.fp_dict['SR_RIGHT1']['padF']['9']['pos'].x - FromMM(1.2), p3.y)
+					p5 = VECTOR2I(p4.x - FromMM(0.7), p2.y)
+					break
 			self.add_tracks([
-				(r_pad_pos, B_Cu),
 				(p0, B_Cu),
 				(p1, B_Cu),
 				(p2, B_Cu),
@@ -432,7 +452,7 @@ class kbd_place_n_route(ActionPlugin):
 				(p4, B_Cu),
 				(p5, B_Cu),
 			])
-	
+				
 	def connect_connector_and_mcu(self):
 		# Connect connector and MCU
 		#nets_to_connect = ['+5V', '+3V3', 'ROW0', 'ROW1', 'SCS', 'SCK0', 'ROW2', 'ROW3']
@@ -440,13 +460,13 @@ class kbd_place_n_route(ActionPlugin):
 		c0 = VECTOR2I_MM(184.6,79)
 		for i, net in enumerate(nets_to_connect):
 			for padname,pad in self.fp_dict['J_RIGHT1']['padF'].items():
-				if pad['net'] == net and int(padname) %2 == 1:
+				if pad['net'] == net: # and int(padname) %2 == 1:
 					p1 = c0 + VECTOR2I_MM(0.3*i, 0.3*i)
 					self.add_tracks([
 						(pad['pos']+VECTOR2I_MM(1.6, -1.6), F_Cu),
 						(p1, F_Cu),
 					])
-			if net == 'LED_R':
+			if net == 'LED_R': # 1 extra track for LED_R
 				self.add_tracks([	
 					(p1, F_Cu),
 					(p1+VECTOR2I_MM(0,-24.3), F_Cu),
@@ -459,7 +479,7 @@ class kbd_place_n_route(ActionPlugin):
 					if pad['net'] == net:
 						p2 = VECTOR2I(0,0)
 						p3 = VECTOR2I(0,0)
-						if int(padname) > 12: # right cloumn
+						if int(padname) > 12: # right cloumn of MCU pin
 							p3.x = p1.x
 							p3.y = pad['pos'].y + (p1.x-pad['pos'].x) # 45deg
 							self.add_tracks([
@@ -578,7 +598,7 @@ class kbd_place_n_route(ActionPlugin):
 		self.place_via_for_diode()
 		self.place_via_for_connector()
 		#self.connect_thumb_cluster()
-		self.connect_rows()
+		#self.connect_rows()
 		self.connect_pad1()
 		self.connect_pad2()
 		self.connect_diode_and_sw()
@@ -587,7 +607,8 @@ class kbd_place_n_route(ActionPlugin):
 		self.connect_shift_register_and_resistor()
 		self.connect_connector_and_mcu()
 		self.place_edge_cut()
-		self.place_copper_pour()
+		if (self.is_fast_mode == False): # copper pour is slow
+			self.place_copper_pour()
 		Refresh()
 		#SaveBoard(self.filename, self.board)
 		SaveBoard('autogen.kicad_pcb', self.board)
@@ -599,7 +620,13 @@ class kbd_place_n_route(ActionPlugin):
 #kbd_place_n_route().register()
 
 def main():
-	plugin = kbd_place_n_route()
+	if len(sys.argv) > 1:
+		if sys.argv[1] == '-q':
+			# run in fast mode, ie no copper pour
+			is_fast_mode = True
+	else:
+		is_fast_mode = False
+	plugin = kbd_place_n_route(is_fast_mode)
 	'''
 	print('# POWER RAIL TOP PAD')
 	plugin.gen_led_track('+5V')
