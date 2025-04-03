@@ -344,11 +344,34 @@ class kbd_place_n_route(ActionPlugin):
 				])
 
 	def connect_sw_col(self):
-		# Connect column pads from top to bottom
-		for col in range(6): # 6 column
-			start = self.sw0_pos + VECTOR2I_MM(-2.2, 4.0) + VECTOR2I_MM(self.sw_x_spc*col, self.col_offsets[col])
-			end   = self.sw0_pos + VECTOR2I_MM(-2.2, 5.2) + VECTOR2I_MM(self.sw_x_spc*col, self.col_offsets[col]+ self.sw_y_spc*3)
-			self.add_track(start, end, F_Cu)
+		# Connect column pads (anode of diode) to shift register
+		p1_offset = VECTOR2I_MM(165.6, 114.1)
+		for i in range(5,-1,-1): # index finger to ring finger
+			p0 = self.fp_dict['SR_RIGHT1']['padF']['11']['pos'] + VECTOR2I_MM(-1.9, 0.635*(5-i))
+			p1 = p1_offset + VECTOR2I_MM((5-i)*0.3, (5-i)*0.3)
+			d_ref = 'D' + str(i) # diode connected to SR
+			p2 = VECTOR2I(0,0)
+			p2.y = p1.y
+			if i <= 1: # pinky finger
+				p2.x = FromMM(92-0.2*i)
+				# FIXME p3
+				# TODO p4 p5
+				# TODO p6 = 	self.fp_dict[d_ref]['padB']['3']['pos']
+				self.add_tracks([
+					(p0, B_Cu),
+					(p1, B_Cu),
+					(p2, B_Cu),
+					# FIXME (p3, B_Cu),
+				])
+			else:
+				p2.x = self.fp_dict[d_ref]['pos'].x + FromMM(5)
+				p3 = 	self.fp_dict[d_ref]['padB']['3']['pos']
+				self.add_tracks([
+					(p0, B_Cu),
+					(p1, B_Cu),
+					(p2, B_Cu),
+					(p3, B_Cu),
+				])
 
 	def connect_rows(self):
 		# Connect rows
@@ -444,6 +467,7 @@ class kbd_place_n_route(ActionPlugin):
 					p4 = VECTOR2I(self.fp_dict['SR_RIGHT1']['padF']['9']['pos'].x - FromMM(1.2), p3.y)
 					p5 = VECTOR2I(p4.x - FromMM(0.7), p2.y)
 					break
+			# FIXME if i == 7: 
 			self.add_tracks([
 				(p0, B_Cu),
 				(p1, B_Cu),
@@ -602,7 +626,7 @@ class kbd_place_n_route(ActionPlugin):
 		self.connect_pad1()
 		self.connect_pad2()
 		self.connect_diode_and_sw()
-		#self.connect_sw_col()
+		self.connect_sw_col()
 		self.connect_leds_by_col()
 		self.connect_shift_register_and_resistor()
 		self.connect_connector_and_mcu()
