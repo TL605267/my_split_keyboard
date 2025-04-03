@@ -463,19 +463,26 @@ class kbd_place_n_route(ActionPlugin):
 					else: # right side pads
 						p1 = v['pos'] + VECTOR2I_MM(1, 0)
 					p2 = p1 + VECTOR2I_MM(-2, 0)
-					p3 = p2 + VECTOR2I(FromMM(-2.2), -r_pack_track_step.y)
+					p3 = p2 + VECTOR2I(FromMM(-2.5), -r_pack_track_step.y)
 					p4 = VECTOR2I(self.fp_dict['SR_RIGHT1']['padF']['9']['pos'].x - FromMM(1.2), p3.y)
 					p5 = VECTOR2I(p4.x - FromMM(0.7), p2.y)
 					break
-			# FIXME if i == 7: 
-			self.add_tracks([
-				(p0, B_Cu),
-				(p1, B_Cu),
-				(p2, B_Cu),
-				(p3, B_Cu),
-				(p4, B_Cu),
-				(p5, B_Cu),
-			])
+			if i == 7: 
+				self.add_tracks([
+					(p0, B_Cu),
+					(p1, B_Cu),
+					(p2, B_Cu),
+					(p3, B_Cu),
+				])
+			else:
+				self.add_tracks([
+					(p0, B_Cu),
+					(p1, B_Cu),
+					(p2, B_Cu),
+					(p3, B_Cu),
+					(p4, B_Cu),
+					(p5, B_Cu),
+				])
 				
 	def connect_connector_and_mcu(self):
 		# Connect connector and MCU
