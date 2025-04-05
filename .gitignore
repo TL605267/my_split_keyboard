@@ -32,3 +32,9 @@ fp-info-cache
 
 #gerber zip file
 gerber.zip
+
+#firmware folder
+firmware/Examples
+firmware/build
+firmware/ch5xx-riscv-ble-part-list.txt
+
