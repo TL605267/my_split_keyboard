@@ -3501,10 +3501,6 @@
 		(uuid "9000d7d7-1d6f-4352-a279-6d3de4a88dcf")
 	)
 	(no_connect
-		(at 107.95 102.87)
-		(uuid "9446db66-3b8d-4acb-b85b-73b6204fb034")
-	)
-	(no_connect
 		(at 72.39 45.72)
 		(uuid "9999079d-d7ce-48e9-94f4-96789580d947")
 	)
@@ -8059,6 +8055,72 @@
 			(project "choc_v1_socket_reversible_165_595"
 				(path "/1dbf748e-8163-44a2-a238-31b19fe70046"
 					(reference "R_L5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 107.95 102.87 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "1239ef74-bc36-40b0-9eac-1ee58e9a147e")
+		(property "Reference" "#PWR22"
+			(at 107.95 106.68 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+3V3"
+			(at 107.95 97.79 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 107.95 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 107.95 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"+3V3\""
+			(at 107.95 102.87 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "4e30292a-a5f3-454e-906b-01ec367241b1")
+		)
+		(instances
+			(project "choc_v1_socket_reversible_165_595"
+				(path "/1dbf748e-8163-44a2-a238-31b19fe70046"
+					(reference "#PWR22")
 					(unit 1)
 				)
 			)

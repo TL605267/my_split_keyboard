@@ -159,19 +159,18 @@
 	(net 77 "unconnected-(SR_LEFT1-~{Q7}-Pad7)")
 	(net 78 "MISO")
 	(net 79 "unconnected-(SR_RIGHT1-~{Q7}-Pad7)")
-	(net 80 "unconnected-(SR_RIGHT1-DS-Pad10)")
-	(net 81 "unconnected-(U1-B10-Pad8)")
-	(net 82 "unconnected-(U1-B15-Pad3)")
-	(net 83 "unconnected-(U1-A4-Pad13)")
-	(net 84 "unconnected-(U1-A10-Pad20)")
-	(net 85 "unconnected-(U1-A14-Pad16)")
-	(net 86 "unconnected-(U1-B11-Pad7)")
-	(net 87 "unconnected-(U1-A8-Pad1)")
-	(net 88 "unconnected-(U1-A5-Pad14)")
-	(net 89 "unconnected-(U1-B23-Pad11)")
-	(net 90 "unconnected-(U1-B22-Pad12)")
-	(net 91 "unconnected-(U1-A11-Pad19)")
-	(net 92 "unconnected-(U1-A9-Pad2)")
+	(net 80 "unconnected-(U1-B10-Pad8)")
+	(net 81 "unconnected-(U1-B15-Pad3)")
+	(net 82 "unconnected-(U1-A4-Pad13)")
+	(net 83 "unconnected-(U1-A10-Pad20)")
+	(net 84 "unconnected-(U1-A14-Pad16)")
+	(net 85 "unconnected-(U1-B11-Pad7)")
+	(net 86 "unconnected-(U1-A8-Pad1)")
+	(net 87 "unconnected-(U1-A5-Pad14)")
+	(net 88 "unconnected-(U1-B23-Pad11)")
+	(net 89 "unconnected-(U1-B22-Pad12)")
+	(net 90 "unconnected-(U1-A11-Pad19)")
+	(net 91 "unconnected-(U1-A9-Pad2)")
 	(footprint "keyswitches:Kailh_socket_PG1350_reversible"
 		(layer "F.Cu")
 		(uuid "0258ea0b-5f69-48d6-892c-a8a65d1b71b4")
@@ -7500,7 +7499,7 @@
 			(pintype "unspecified")
 			(uuid "8c9bcf69-a25a-4250-a758-a79d706eb2f6")
 		)
-		(model "/home/tong/Documents/kicad/easyeda2kicad/easyeda2kicad.3dshapes/FPC-SMD_12P-P1.00_XYECONN_FPC10-S1.0-12AH2.5.wrl"
+		(model "{$EASYEDA2KICAD}/easyeda2kicad.3dshapes/FPC-SMD_12P-P1.00_XYECONN_FPC10-S1.0-12AH2.5.wrl"
 			(offset
 				(xyz 0 1.65 -0)
 			)
@@ -14022,9 +14021,9 @@
 			(size 2 0.6)
 			(layers "F.Cu" "F.Paste" "F.Mask")
 			(roundrect_rratio 0.25)
-			(net 80 "unconnected-(SR_RIGHT1-DS-Pad10)")
+			(net 38 "+3V3")
 			(pinfunction "DS")
-			(pintype "input+no_connect")
+			(pintype "input")
 			(uuid "a254c3ba-749f-4624-964f-c11109dee117")
 		)
 		(pad "11" smd roundrect
@@ -20106,7 +20105,7 @@
 				"In29.Cu" "In30.Cu"
 			)
 			(remove_unused_layers no)
-			(net 87 "unconnected-(U1-A8-Pad1)")
+			(net 86 "unconnected-(U1-A8-Pad1)")
 			(pinfunction "A8")
 			(pintype "bidirectional+no_connect")
 			(uuid "b53dcc21-21c6-4296-9a21-9de1784f6179")
@@ -20122,7 +20121,7 @@
 				"In29.Cu" "In30.Cu"
 			)
 			(remove_unused_layers no)
-			(net 92 "unconnected-(U1-A9-Pad2)")
+			(net 91 "unconnected-(U1-A9-Pad2)")
 			(pinfunction "A9")
 			(pintype "bidirectional+no_connect")
 			(uuid "f8126fb4-271f-46be-b43b-f0bf6ed84751")
@@ -20138,7 +20137,7 @@
 				"In29.Cu" "In30.Cu"
 			)
 			(remove_unused_layers no)
-			(net 82 "unconnected-(U1-B15-Pad3)")
+			(net 81 "unconnected-(U1-B15-Pad3)")
 			(pinfunction "B15")
 			(pintype "bidirectional+no_connect")
 			(uuid "280a2a6c-23a8-4208-8034-ee6a95d33edd")
@@ -20202,7 +20201,7 @@
 				"In29.Cu" "In30.Cu"
 			)
 			(remove_unused_layers no)
-			(net 86 "unconnected-(U1-B11-Pad7)")
+			(net 85 "unconnected-(U1-B11-Pad7)")
 			(pinfunction "B11")
 			(pintype "bidirectional+no_connect")
 			(uuid "a92f02bf-2c54-4eeb-8105-5ffead2c79dd")
@@ -20218,7 +20217,7 @@
 				"In29.Cu" "In30.Cu"
 			)
 			(remove_unused_layers no)
-			(net 81 "unconnected-(U1-B10-Pad8)")
+			(net 80 "unconnected-(U1-B10-Pad8)")
 			(pinfunction "B10")
 			(pintype "bidirectional+no_connect")
 			(uuid "13fea2d3-a08b-4a7a-b69a-7d971bf69f05")
@@ -20266,7 +20265,7 @@
 				"In29.Cu" "In30.Cu"
 			)
 			(remove_unused_layers no)
-			(net 89 "unconnected-(U1-B23-Pad11)")
+			(net 88 "unconnected-(U1-B23-Pad11)")
 			(pinfunction "B23")
 			(pintype "bidirectional+no_connect")
 			(uuid "cdb4b23a-20af-4d12-8834-4f53af4c38c8")
@@ -20282,7 +20281,7 @@
 				"In29.Cu" "In30.Cu"
 			)
 			(remove_unused_layers no)
-			(net 90 "unconnected-(U1-B22-Pad12)")
+			(net 89 "unconnected-(U1-B22-Pad12)")
 			(pinfunction "B22")
 			(pintype "bidirectional+no_connect")
 			(uuid "ce0b45a2-e899-425d-8d68-d069d3323ff1")
@@ -20298,7 +20297,7 @@
 				"In29.Cu" "In30.Cu"
 			)
 			(remove_unused_layers no)
-			(net 83 "unconnected-(U1-A4-Pad13)")
+			(net 82 "unconnected-(U1-A4-Pad13)")
 			(pinfunction "A4")
 			(pintype "bidirectional+no_connect")
 			(uuid "444473e2-b72c-48ea-bf56-9dce9404c9e5")
@@ -20314,7 +20313,7 @@
 				"In29.Cu" "In30.Cu"
 			)
 			(remove_unused_layers no)
-			(net 88 "unconnected-(U1-A5-Pad14)")
+			(net 87 "unconnected-(U1-A5-Pad14)")
 			(pinfunction "A5")
 			(pintype "bidirectional+no_connect")
 			(uuid "c4c7d86f-8cd6-4b21-8a63-94051314a392")
@@ -20346,7 +20345,7 @@
 				"In29.Cu" "In30.Cu"
 			)
 			(remove_unused_layers no)
-			(net 85 "unconnected-(U1-A14-Pad16)")
+			(net 84 "unconnected-(U1-A14-Pad16)")
 			(pinfunction "A14")
 			(pintype "bidirectional+no_connect")
 			(uuid "94e8df7f-515e-4726-b1d2-6a001e467622")
@@ -20394,7 +20393,7 @@
 				"In29.Cu" "In30.Cu"
 			)
 			(remove_unused_layers no)
-			(net 91 "unconnected-(U1-A11-Pad19)")
+			(net 90 "unconnected-(U1-A11-Pad19)")
 			(pinfunction "A11")
 			(pintype "bidirectional+no_connect")
 			(uuid "d6183070-70aa-4b2d-a937-394c79d1c9b4")
@@ -20410,7 +20409,7 @@
 				"In29.Cu" "In30.Cu"
 			)
 			(remove_unused_layers no)
-			(net 84 "unconnected-(U1-A10-Pad20)")
+			(net 83 "unconnected-(U1-A10-Pad20)")
 			(pinfunction "A10")
 			(pintype "bidirectional+no_connect")
 			(uuid "61d32175-9a9b-4420-8716-f446ab564cac")
@@ -32801,7 +32800,7 @@
 			(pintype "unspecified")
 			(uuid "e78e657d-f2a2-4d4d-b15d-d92b9baba20f")
 		)
-		(model "/home/tong/Documents/kicad/easyeda2kicad/easyeda2kicad.3dshapes/FPC-SMD_12P-P1.00_XYECONN_FPC10-S1.0-12AH2.5.wrl"
+		(model "${EASYEDA2KICAD}/easyeda2kicad.3dshapes/FPC-SMD_12P-P1.00_XYECONN_FPC10-S1.0-12AH2.5.wrl"
 			(offset
 				(xyz 0 1.65 -0)
 			)

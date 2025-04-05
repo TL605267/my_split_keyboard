@@ -329,8 +329,6 @@ class kbd_place_n_route(ActionPlugin):
 				self.add_tracks([
 					(diode['padF']['5']['pos'], F_Cu),
 					(diode['padF']['5']['pos']+VECTOR2I_MM( 0.6,-0.2), F_Cu),
-					#(diode['padF']['5']['pos']+VECTOR2I_MM( 0.6,-2.8), F_Cu),
-					#(diode['padF']['5']['pos']+VECTOR2I_MM(-0.2,-3.4), F_Cu),
 					(diode['padF']['5']['pos']+VECTOR2I_MM( 0.6,-0.9), F_Cu),
 					(diode['padF']['5']['pos']+VECTOR2I_MM(-0.2,-1.6), F_Cu),
 					(diode['padF']['5']['pos']+VECTOR2I_MM(-0.2,-15.7), F_Cu),
@@ -427,27 +425,29 @@ class kbd_place_n_route(ActionPlugin):
 						])
 				
 	def connect_shift_register_and_resistor(self):
-		# connect 3V3 net
+		# connect resistor array 3V3 net
 		self.add_track(self.fp_dict['R_R5']['padF']['1']['pos'], self.fp_dict['R_R7']['padF']['1']['pos'], F_Cu)
 		self.add_track(self.fp_dict['R_L5']['padB']['1']['pos'], self.fp_dict['R_L7']['padB']['1']['pos'], B_Cu)
-		# also connects left and right
+		# connect resistor array col pad
 		for i in range(8):
 			rl_pv = self.fp_dict['R_L' + str(i)]['padB']['2']['pos']
 			self.add_via(rl_pv + VECTOR2I_MM(1,0), 0.3, 0.4)
 			self.add_track(rl_pv, rl_pv + VECTOR2I_MM(1,0), B_Cu)
 			self.add_track(rl_pv, rl_pv + VECTOR2I_MM(1,0), F_Cu)
 		# connect shift register left and right
-		for i in [str(n) for n in range(11,17)]: #pad 11-16
-			pad_pos = self.fp_dict['SR_RIGHT1']['padF'][i]['pos']
-			via_pos = pad_pos +VECTOR2I_MM(-1.9,0)
-			self.add_via(via_pos, 0.3, 0.4)
-			self.add_track(pad_pos, via_pos, F_Cu)
-		for i in [str(n) for n in range(1,7)]: # pad 1-6
-			pad_pos = self.fp_dict['SR_RIGHT1']['padF'][i]['pos']
-			via_pos = pad_pos +VECTOR2I_MM(1.5,0)
-			self.add_via(via_pos, 0.3, 0.4)
-			self.add_track(pad_pos, via_pos, F_Cu)
-			self.add_track(pad_pos, via_pos, B_Cu)
+		for i in [str(n) for n in range(9,17)]: #pad 9-16
+			if (i != '10'): # skip pad 10
+				pad_pos = self.fp_dict['SR_RIGHT1']['padF'][i]['pos']
+				via_pos = pad_pos +VECTOR2I_MM(-1.9,0)
+				self.add_via(via_pos, 0.3, 0.4)
+				self.add_track(pad_pos, via_pos, F_Cu)
+		for i in [str(n) for n in range(1,9)]: # pad 1-6
+			if (i != '7'): # skip pad 7
+				pad_pos = self.fp_dict['SR_RIGHT1']['padF'][i]['pos']
+				via_pos = pad_pos +VECTOR2I_MM(1.5,0)
+				self.add_via(via_pos, 0.3, 0.4)
+				self.add_track(pad_pos, via_pos, F_Cu)
+				self.add_track(pad_pos, via_pos, B_Cu)
 		# R - SR: COL net
 		r_pack_track_step = (self.fp_dict['SR_LEFT1']['padB']['15']['pos'] - self.fp_dict['SR_LEFT1']['padB']['14']['pos'])/2
 		for i in range(8):
@@ -483,6 +483,23 @@ class kbd_place_n_route(ActionPlugin):
 					(p4, B_Cu),
 					(p5, B_Cu),
 				])
+		for i in ['9', '10', '15', '16']:
+			p0 = self.fp_dict['SR_LEFT1']['padB'][i]['pos']
+			p1 = p0 + VECTOR2I_MM(-1, 0)
+			p2 = p1 + VECTOR2I_MM(-2.5, 0) - r_pack_track_step
+			p3 = VECTOR2I(self.fp_dict['SR_RIGHT1']['padF'][i]['pos'].x - FromMM(1.2), p2.y)
+			if i in ['9', '10']:
+				#p4 = VECTOR2I(p3.x - FromMM(0.7), p3.y-r_pack_track_step.y)
+				p4 = p3 + VECTOR2I_MM(-0.7, 0) - r_pack_track_step
+			else:
+				p4 = VECTOR2I(p3.x - FromMM(0.7), p1.y)
+			self.add_tracks([
+				(p0, B_Cu),
+				(p1, B_Cu),
+				(p2, B_Cu),
+				(p3, B_Cu),
+				(p4, B_Cu),
+			])
 				
 	def connect_connector_and_mcu(self):
 		# Connect connector and MCU
