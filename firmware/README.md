@@ -13,8 +13,14 @@ This folder contains the firmware for my split keyboard. The firmware is based o
 ### Prerequisites
 Before using this firmware, ensure you have the following installed:
 - riscv-none-embed-gcc toolchain
+- [wchisp](https://github.com/ch32-rs/wchisp)
 
 ### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/TL605267/my_split_keyboard.git
+```bash
+git clone https://github.com/TL605267/my_split_keyboard.git
+```
+
+### Program CH582
+```bash
+make isp
+```
