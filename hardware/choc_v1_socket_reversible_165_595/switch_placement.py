@@ -232,7 +232,7 @@ class kbd_place_n_route(ActionPlugin):
 		self.fp_dict['R2']['fp'].Flip(self.fp_dict['R2']['fp'].GetPosition(), False)
 		self.place_fp(VECTOR2I_MM(175.6, 54), self.fp_dict['JP1']['fp'], 0)
 		self.fp_dict['JP1']['fp'].Flip(self.fp_dict['JP1']['fp'].GetPosition(), False)
-		self.place_fp(VECTOR2I_MM(183.7, 131.6), self.fp_dict['JP2']['fp'], 180)
+		# self.place_fp(VECTOR2I_MM(183.7, 131.6), self.fp_dict['JP2']['fp'], 180) JP2 is removed
 
 	def place_connector(self):
 		# Place connectors on the board
@@ -424,6 +424,23 @@ class kbd_place_n_route(ActionPlugin):
 							(offset+VECTOR2I_MM( 3.3,-22.5), F_Cu),
 						])
 				
+	def connect_led_5v(self):
+		for i in range(6):
+			led_ref = 'LED0'+str(i) # first row
+			t = []
+			t.append((self.fp_dict[led_ref]['padB']['4']['pos'], B_Cu))
+			t.append((self.fp_dict[led_ref]['padB']['4']['pos']+VECTOR2I_MM(-1.2, -1.2), B_Cu))
+			t.append((self.fp_dict[led_ref]['padB']['4']['pos']+VECTOR2I_MM(-1.2, -2.7), B_Cu))
+			t.append((self.fp_dict[led_ref]['padB']['4']['pos']+VECTOR2I_MM(10.0, -2.7), B_Cu))
+			if i < 5:
+				next_led_ref = 'LED0'+str(i+1)
+				t.append((self.fp_dict[next_led_ref]['padB']['4']['pos']+VECTOR2I_MM(-1.2, -2.7), B_Cu))
+			else:
+				t.append((self.fp_dict[led_ref]['padB']['4']['pos']+VECTOR2I_MM(21.6, -2.7), B_Cu))
+				t.append((self.fp_dict['R1']['padB']['1']['pos'], B_Cu))
+			self.add_tracks(t)
+				
+			
 	def connect_shift_register_and_resistor(self):
 		# connect resistor array 3V3 net
 		self.add_track(self.fp_dict['R_R5']['padF']['1']['pos'], self.fp_dict['R_R7']['padF']['1']['pos'], F_Cu)
@@ -652,6 +669,7 @@ class kbd_place_n_route(ActionPlugin):
 		self.connect_diode_and_sw()
 		self.connect_sw_col()
 		self.connect_leds_by_col()
+		self.connect_led_5v()
 		self.connect_shift_register_and_resistor()
 		self.connect_connector_and_mcu()
 		self.place_edge_cut()
